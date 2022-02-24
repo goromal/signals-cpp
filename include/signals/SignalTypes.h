@@ -4,8 +4,35 @@
 #include <SO3.h>
 #include <SE3.h>
 
+#include "Signal.h"
+
 using namespace Eigen;
 
+template<typename T, size_t n>
+using VectorSignal = Signal<T, Matrix<T, n, 1>, n>;
+
+template<typename T>
+using SO3Signal = Signal<T, SO3<T>, 3>;
+
+template<typename T>
+using SE3Signal = Signal<T, SE3<T>, 6>;
+
+typedef VectorSignal<double, 1>  Vector1dSignal;
+typedef VectorSignal<double, 2>  Vector2dSignal;
+typedef VectorSignal<double, 3>  Vector3dSignal;
+typedef VectorSignal<double, 4>  Vector4dSignal;
+typedef VectorSignal<double, 5>  Vector5dSignal;
+typedef VectorSignal<double, 6>  Vector6dSignal;
+typedef VectorSignal<double, 7>  Vector7dSignal;
+typedef VectorSignal<double, 8>  Vector8dSignal;
+typedef VectorSignal<double, 9>  Vector9dSignal;
+typedef VectorSignal<double, 10> Vector10dSignal;
+
+typedef SO3Signal<double> SO3dSignal;
+typedef SE3Signal<double> SE3dSignal;
+
+
+/*
 template<typename T>
 class Signal
 {
@@ -55,6 +82,7 @@ public:
         v_ -= other.get();
         return *this;
     }
+    // TODO scalar (T) multiplication
 
 private:
     Vector<T, dim> v_;
@@ -98,6 +126,7 @@ public:
     {
         return TangentType(get() - other.get());
     }
+    // TODO scalar (T) multiplication
 
 protected:
     Base<T> X_;
@@ -126,4 +155,6 @@ public:
         return VectorSignal<T,3>(get() * v.get());
     }
 };
+
+*/
 
