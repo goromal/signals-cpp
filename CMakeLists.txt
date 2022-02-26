@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.16)
 
-set(PROJ_NAME example-cpp)
+set(PROJ_NAME signals-cpp)
 project(${PROJ_NAME})
 
 set(CMAKE_CXX_STANDARD 17)
@@ -8,19 +8,20 @@ set(CMAKE_CXX_STANDARD 17)
 option(BUILD_TESTS "Build Tests" ON)
 
 find_package(Eigen3 REQUIRED NO_MODULE)
+find_package(manif-geom-cpp REQUIRED)
 
 add_library(${PROJ_NAME} INTERFACE)
 target_include_directories(${PROJ_NAME} INTERFACE
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-target_link_libraries(${PROJ_NAME} INTERFACE Eigen3::Eigen)
+target_link_libraries(${PROJ_NAME} INTERFACE Eigen3::Eigen manif-geom-cpp)
 
 if (BUILD_TESTS)
     set(UNIT_TEST unit-tests)
     add_executable(${UNIT_TEST}
         tests/MainTest.cpp
-        tests/ExampleTest.cpp
+        tests/SignalsTest.cpp
     )
     target_link_libraries(${UNIT_TEST}
         ${PROJ_NAME}
