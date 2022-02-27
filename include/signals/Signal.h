@@ -32,6 +32,7 @@ public:
     enum Extrapolation
     {
         NANS,
+        ZEROS,
         CLOSEST
     } extrapolationMethod;
     enum Derivative
@@ -43,7 +44,7 @@ public:
     Signal()
     {
         interpolationMethod = Interpolation::LINEAR;
-        extrapolationMethod = Extrapolation::NANS;
+        extrapolationMethod = Extrapolation::ZEROS;
         derivativeMethod    = Derivative::DIRTY;
         reset();
     }
@@ -261,6 +262,7 @@ private:
             if (idx < 0 || idx > static_cast<int>(signalHistory_.size()))
             {
                 // TODO switch for extrapolation method
+                return SignalType();
             }
             else
             {
@@ -283,14 +285,64 @@ private:
             int idx = getInterpIndex(t);
             if (idx < 0 || idx > static_cast<int>(signalHistory_.size()))
             {
-                // TODO switch for extrapolation method
+                switch (extrapolationMethod)
+                {
+                case Extrapolation::NANS:
+                    return TangentType::Zero(); // TODO implement
+                    break;
+                case Extrapolation::CLOSEST:
+                    if (idx < 0)
+                    {
+                        return signalHistory_[0].xdot;
+                    }
+                    else
+                    {
+                        return signalHistory_[signalHistory_.size()-1].xdot;
+                    }
+                    break;
+                case Extrapolation::ZEROS:
+                default:
+                    return TangentType::Zero();
+                    break;
+                }
             }
             else
             {
-                // TODO
-                // switch for interpolation method
-                // get needed ts and ys for base and interp
-                // call one of the overloaded (TangentType and SignalType) interp methods
+                TangentType y = xdotAtIdx(idx);
+                TangentType dy;
+                switch (interpolationMethod)
+                {
+                case Interpolation::ZERO_ORDER_HOLD:
+                {
+                    dy = TangentType::Zero();
+                    break;
+                } 
+                case Interpolation::LINEAR:
+                {
+                    double t1 = tAtIdx(idx);
+                    double t2 = tAtIdx(idx+1);
+                    TangentType y1 = xdotAtIdx(idx);
+                    TangentType y2 = xdotAtIdx(idx+1);
+                    dy = (t-t1)/(t2-t1)*(y2-y1);
+                    break;
+                } 
+                case Interpolation::CUBIC_SPLINE:
+                {
+                    double t0 = tAtIdx(idx-1);
+                    double t1 = tAtIdx(idx);
+                    double t2 = tAtIdx(idx+1);
+                    double t3 = tAtIdx(idx+2);
+                    TangentType y0 = xdotAtIdx(idx-1);
+                    TangentType y1 = xdotAtIdx(idx);
+                    TangentType y2 = xdotAtIdx(idx+1);
+                    TangentType y3 = xdotAtIdx(idx+2);
+                    dy = (t-t1)/(t2-t1)*((y2-y1) + 
+             (t2-t)/(2.*(t2-t1)*(t2-t1))*(((t2-t)*(t2*(y1-y0)+t0*(y2-y1)-t1*(y2-y0)))/(t1-t0) + 
+             ((t-t1)*(t3*(y2-y1)+t2*(y3-y1)-t1*(y3-y2)))/(t3-t2)));
+                    break;
+                } 
+                }
+                return y + dy;
             }
         }
         else
@@ -331,17 +383,50 @@ private:
 
     double tAtIdx(const int& idx)
     {
-        // TODO
+        if (idx < 0)
+        {
+            return signalHistory_[0].t + static_cast<double>(idx);
+        }
+        else if (idx >= signalHistory_.size())
+        {
+            return signalHistory_[signalHistory_.size()-1].t + static_cast<double>(idx - static_cast<int>(signalHistory_.size()-1));
+        }
+        else
+        {
+            return signalHistory_[idx].t;
+        }
     }
 
     SignalType xAtIdx(const int& idx)
     {
-        // TODO
+        if (idx < 0)
+        {
+            return signalHistory_[0].x;
+        }
+        else if (idx >= signalHistory_.size())
+        {
+            return signalHistory_[signalHistory_.size()-1].x;
+        }
+        else
+        {
+            return signalHistory_[idx].x;
+        }
     }
 
     TangentType xDotAtIdx(const int& idx)
     {
-        // TODO
+        if (idx < 0)
+        {
+            return signalHistory_[0].xdot;
+        }
+        else if (idx >= signalHistory_.size())
+        {
+            return signalHistory_[signalHistory_.size()-1].xdot;
+        }
+        else
+        {
+            return signalHistory_[idx].xdot;
+        }
     }
 
     // Implementation note: should always be followed by a call to update()
