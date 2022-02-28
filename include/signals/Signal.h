@@ -1,7 +1,6 @@
 #pragma once
+#include <algorithm>
 #include <Eigen/Core>
-// TODO implement vector sorting, or maybe use different data structure?
-// https://en.cppreference.com/w/cpp/algorithm/sort
 
 using namespace Eigen;
 
@@ -22,6 +21,13 @@ public:
         SignalType  x;
         TangentType xdot;
     };
+    struct
+    {
+        bool operator()(SignalDP a, SignalDP b) const
+        {
+            return a.t < b.t;
+        }
+    } SignalDPComparator;
 
     enum Interpolation
     {
@@ -187,19 +193,45 @@ public:
         return *this;
     }
 
-    //   template<typename T2, typename ST2, size_t tDim2>
-    //   friend Signal<T2, ST2, tDim2> operator+(const Signal<T2, ST2, tDim2>&                                 l,
-    //                                           const Signal<T2, Signal<T2, ST2, tDim2>::TangentType, tDim2>& r)
-    //   {
-    //       // TODO don't forget histories! use l's time (what if l needs sort? This should be friend
-    //   }
+    template<typename T2, typename ST2, size_t tDim2>
+    friend Signal<T2, ST2, tDim2> operator+(const Signal<T2, ST2, tDim2>&                                 l,
+                                            const Signal<T2, Signal<T2, ST2, tDim2>::TangentType, tDim2>& r)
+    {
+        Signal<T2, ST2, tDim2> lpr = l;
+        lpr.x += r.x(l.t());
+        lpr.xdot += r.xdot(l.t());
+        for (auto signalDP : lpr.signalHistory_)
+        {
+            signalDP.x += r.x(signalDP.t);
+            signalDP.xdot += r.xdot(signalDP.t);
+        }
+        return lpr;
+    }
 
-    //  template<typename T2, typename ST2, size_t tDim2>
-    //  friend Signal<T2, Signal<T2, ST2, tDim2>::TangentType, tDim2> operator-(const Signal<T2, ST2, tDim2>& l,
-    //                                                                          const Signal<T2, ST2, tDim2>& r)
-    //  {
-    //      // TODO
-    //  }
+    template<typename T2, typename ST2, size_t tDim2>
+    friend Signal<T2, Signal<T2, ST2, tDim2>::TangentType, tDim2> operator-(const Signal<T2, ST2, tDim2>& l,
+                                                                            const Signal<T2, ST2, tDim2>& r)
+    {
+        Signal<T2, Signal<T2, ST2, tDim2>::TangentType, tDim2> lmr;
+        lmr.interpolationMethod = l.interpolationMethod;
+        lmr.extrapolationMethod = l.extrapolationMethod;
+        lmr.derivativeMethod    = l.derivativeMethod;
+        lmr.needsSort_          = l.needsSort_;
+        lmr.t_                  = l.t();
+        lmr.x_                  = l.x() - r.x(l.t());
+        lmr.xdot_               = l.dot() - r.dot(l.t());
+        std::vector<double>                                                              tHistory;
+        std::vector<Signal<T2, Signal<T2, ST2, tDim2>::TangentType, tDim2>::SignalType>  xHistory;
+        std::vector<Signal<T2, Signal<T2, ST2, tDim2>::TangentType, tDim2>::TangentType> xdotHistory;
+        for (auto signalDP : l.signalHistory_)
+        {
+            tHistory.push_back(signalDP.t);
+            xHistory.push_back(signalDP.x - r.x(signalDP.t));
+            xdotHistory.push_back(signalDP.xdot - r.xdot(signalDP.t));
+        }
+        lmr.update(tHistory, xHistory, xdotHistory);
+        return lmr;
+    }
 
     template<typename T2, typename ST2, size_t tDim2>
     friend Signal<T2, ST2, tDim2> operator*(const double& l, const Signal<T2, ST2, tDim2>& r)
@@ -229,7 +261,7 @@ public:
         return lr;
     }
 
-private:
+protected:
     double                t_;
     SignalType            x_;
     TangentType           xdot_;
@@ -261,15 +293,66 @@ private:
             int idx = getInterpIndex(t);
             if (idx < 0 || idx > static_cast<int>(signalHistory_.size()))
             {
-                // TODO switch for extrapolation method
-                return SignalType();
+                switch (extrapolationMethod)
+                {
+                case Extrapolation::NANS:
+                    return getNansSignal();
+                    break;
+                case Extrapolation::CLOSEST:
+                    if (idx < 0)
+                    {
+                        return signalHistory_[0].x;
+                    }
+                    else
+                    {
+                        return signalHistory_[signalHistory_.size() - 1].x;
+                    }
+                    break;
+                case Extrapolation::ZEROS:
+                default:
+                    return getZeroSignal();
+                    break;
+                }
             }
             else
             {
-                // TODO
-                // switch for interpolation method
-                // get needed ts and ys for base and interp
-                // call one of the overloaded (TangentType and SignalType) interp methods
+                SignalType  y = xAtIdx(idx);
+                TangentType dy;
+                switch (interpolationMethod)
+                {
+                case Interpolation::ZERO_ORDER_HOLD:
+                {
+                    dy = getZeroTangent();
+                    break;
+                }
+                case Interpolation::LINEAR:
+                {
+                    double     t1 = tAtIdx(idx);
+                    double     t2 = tAtIdx(idx + 1);
+                    SignalType y1 = xAtIdx(idx);
+                    SignalType y2 = xAtIdx(idx + 1);
+                    dy            = (t - t1) / (t2 - t1) * (y2 - y1);
+                    break;
+                }
+                case Interpolation::CUBIC_SPLINE:
+                {
+                    double     t0 = tAtIdx(idx - 1);
+                    double     t1 = tAtIdx(idx);
+                    double     t2 = tAtIdx(idx + 1);
+                    double     t3 = tAtIdx(idx + 2);
+                    SignalType y0 = xAtIdx(idx - 1);
+                    SignalType y1 = xAtIdx(idx);
+                    SignalType y2 = xAtIdx(idx + 1);
+                    SignalType y3 = xAtIdx(idx + 2);
+                    dy =
+                        (t - t1) / (t2 - t1) *
+                        ((y2 - y1) + (t2 - t) / (2. * (t2 - t1) * (t2 - t1)) *
+                                         (((t2 - t) * (t2 * (y1 - y0) + t0 * (y2 - y1) - t1 * (y2 - y0))) / (t1 - t0) +
+                                          ((t - t1) * (t3 * (y2 - y1) + t2 * (y3 - y1) - t1 * (y3 - y2))) / (t3 - t2)));
+                    break;
+                }
+                }
+                return y + dy;
             }
         }
         else
@@ -288,7 +371,7 @@ private:
                 switch (extrapolationMethod)
                 {
                 case Extrapolation::NANS:
-                    return TangentType::Zero(); // TODO implement
+                    return getNansTangent();
                     break;
                 case Extrapolation::CLOSEST:
                     if (idx < 0)
@@ -297,12 +380,12 @@ private:
                     }
                     else
                     {
-                        return signalHistory_[signalHistory_.size()-1].xdot;
+                        return signalHistory_[signalHistory_.size() - 1].xdot;
                     }
                     break;
                 case Extrapolation::ZEROS:
                 default:
-                    return TangentType::Zero();
+                    return getZeroTangent();
                     break;
                 }
             }
@@ -314,40 +397,42 @@ private:
                 {
                 case Interpolation::ZERO_ORDER_HOLD:
                 {
-                    dy = TangentType::Zero();
+                    dy = getZeroTangent();
                     break;
-                } 
+                }
                 case Interpolation::LINEAR:
                 {
-                    double t1 = tAtIdx(idx);
-                    double t2 = tAtIdx(idx+1);
+                    double      t1 = tAtIdx(idx);
+                    double      t2 = tAtIdx(idx + 1);
                     TangentType y1 = xdotAtIdx(idx);
-                    TangentType y2 = xdotAtIdx(idx+1);
-                    dy = (t-t1)/(t2-t1)*(y2-y1);
+                    TangentType y2 = xdotAtIdx(idx + 1);
+                    dy             = (t - t1) / (t2 - t1) * (y2 - y1);
                     break;
-                } 
+                }
                 case Interpolation::CUBIC_SPLINE:
                 {
-                    double t0 = tAtIdx(idx-1);
-                    double t1 = tAtIdx(idx);
-                    double t2 = tAtIdx(idx+1);
-                    double t3 = tAtIdx(idx+2);
-                    TangentType y0 = xdotAtIdx(idx-1);
+                    double      t0 = tAtIdx(idx - 1);
+                    double      t1 = tAtIdx(idx);
+                    double      t2 = tAtIdx(idx + 1);
+                    double      t3 = tAtIdx(idx + 2);
+                    TangentType y0 = xdotAtIdx(idx - 1);
                     TangentType y1 = xdotAtIdx(idx);
-                    TangentType y2 = xdotAtIdx(idx+1);
-                    TangentType y3 = xdotAtIdx(idx+2);
-                    dy = (t-t1)/(t2-t1)*((y2-y1) + 
-             (t2-t)/(2.*(t2-t1)*(t2-t1))*(((t2-t)*(t2*(y1-y0)+t0*(y2-y1)-t1*(y2-y0)))/(t1-t0) + 
-             ((t-t1)*(t3*(y2-y1)+t2*(y3-y1)-t1*(y3-y2)))/(t3-t2)));
+                    TangentType y2 = xdotAtIdx(idx + 1);
+                    TangentType y3 = xdotAtIdx(idx + 2);
+                    dy =
+                        (t - t1) / (t2 - t1) *
+                        ((y2 - y1) + (t2 - t) / (2. * (t2 - t1) * (t2 - t1)) *
+                                         (((t2 - t) * (t2 * (y1 - y0) + t0 * (y2 - y1) - t1 * (y2 - y0))) / (t1 - t0) +
+                                          ((t - t1) * (t3 * (y2 - y1) + t2 * (y3 - y1) - t1 * (y3 - y2))) / (t3 - t2)));
                     break;
-                } 
+                }
                 }
                 return y + dy;
             }
         }
         else
         {
-            return TangentType::Zero();
+            return getZeroTangent();
         }
     }
 
@@ -356,7 +441,7 @@ private:
     {
         if (needsSort_)
         {
-            // TODO sort vector by time
+            std::sort(signalHistory_.begin(), signalHistory_.end(), SignalDPComparator);
             needsSort_ = false;
         }
         if (t < signalHistory_[0].t)
@@ -389,7 +474,8 @@ private:
         }
         else if (idx >= signalHistory_.size())
         {
-            return signalHistory_[signalHistory_.size()-1].t + static_cast<double>(idx - static_cast<int>(signalHistory_.size()-1));
+            return signalHistory_[signalHistory_.size() - 1].t +
+                   static_cast<double>(idx - static_cast<int>(signalHistory_.size() - 1));
         }
         else
         {
@@ -405,7 +491,7 @@ private:
         }
         else if (idx >= signalHistory_.size())
         {
-            return signalHistory_[signalHistory_.size()-1].x;
+            return signalHistory_[signalHistory_.size() - 1].x;
         }
         else
         {
@@ -421,13 +507,18 @@ private:
         }
         else if (idx >= signalHistory_.size())
         {
-            return signalHistory_[signalHistory_.size()-1].xdot;
+            return signalHistory_[signalHistory_.size() - 1].xdot;
         }
         else
         {
             return signalHistory_[idx].xdot;
         }
     }
+
+    virtual SignalType  getZeroSignal()  = 0;
+    virtual SignalType  getNansSignal()  = 0;
+    virtual TangentType getZeroTangent() = 0;
+    virtual TangentType getNansTangent() = 0;
 
     // Implementation note: should always be followed by a call to update()
     bool calculateDerivative(const double& _t, const SignalType& _x, const TangentType& _xdot)
@@ -453,7 +544,7 @@ private:
         }
         else
         {
-            _xdot = TangentType::Zero();
+            _xdot = getZeroTangent();
         }
         return true;
     }
