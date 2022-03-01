@@ -549,3 +549,45 @@ protected:
         return true;
     }
 };
+
+template<typename T, size_t n>
+class VectorSignal : public Signal<T, Matrix<T, n, 1>, n>
+{
+    SignalType getZeroSignal() override
+    {
+        return SignalType::Zero();
+    }
+    SignalType getNansSignal() override
+    {
+        return SignalType::Zero(); // TODO fix
+    }
+    TangentType getZeroTangent() override
+    {
+        return TangentType::Zero();
+    }
+    TangentType getNansTangent() override
+    {
+        return TangentType::Zero(); // TODO fix
+    }
+};
+
+template<typename T, typename ManifType, size_t n>
+class ManifoldSignal : public Signal<T, ManifType, n>
+{
+    SignalType getZeroSignal() override
+    {
+        return SignalType::identity();
+    }
+    SignalType getNansSignal() override
+    {
+        return SignalType::identity(); // TODO fix
+    }
+    TangentType getZeroTangent() override
+    {
+        return TangentType::Zero();
+    }
+    TangentType getNansTangent() override
+    {
+        return TangentType::Zero(); // TODO fix
+    }
+};
