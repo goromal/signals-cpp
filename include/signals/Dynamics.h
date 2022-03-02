@@ -1,7 +1,6 @@
 #pragma once
 #include <Eigen/Core>
 #include "signals/Signal.h"
-#include "signals/SignalTypes.h"
 
 using namespace Eigen;
 
@@ -9,8 +8,8 @@ using namespace Eigen;
  * Pattern for AutoDiff:
  *  - All args are Signal Types, no returns
  *  - There's a Jacobian class that's associated with a Signal-type input and output
- * 
-*/
+ *
+ */
 
 struct SO3RigidBodyDynamics
 {
@@ -19,9 +18,9 @@ struct SO3RigidBodyDynamics
     typedef Vector3Signal InputType;
 
     template<typename T>
-    bool f(DeltaType<T> &xdot, const StateType<T> &x, const InputType<T> &u)
+    bool operator()(DeltaType<T>& xdot, const StateType<T>& x, const InputType<T>& u)
     {
-        // TODO
+        // TODO x holds the t for xdot
         return true;
     }
 };
@@ -33,7 +32,7 @@ struct SE3RigidBodyDynamics
     typedef Vector6Signal InputType;
 
     template<typename T>
-    bool f(DeltaType<T> &xdot, const StateType<T> &x, const InputType<T> &u)
+    bool operator()(DeltaType<T>& xdot, const StateType<T>& x, const InputType<T>& u)
     {
         // TODO
         return true;
