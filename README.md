@@ -34,29 +34,41 @@ SE3RigidBodyDynamics f;
 f(Vector6Signal<T> &xdot, SE3Signal<T> x, Vector6Signal<T> u);
 ```
 
+```cpp
+SO3RigidBodySimulateEuler f;
+f(SO3Signal<T> &x, Vector3Signal<T> u, double t);
+```
+```cpp
+SE3RigidBodySimulateEuler f;
+f(SE3Signal<T> &x, Vector6Signal<T> u, double t);
+```
+```cpp
+SO3RigidBodySimulateTrapezoidal f;
+f(SO3Signal<T> &x, Vector3Signal<T> u, double t);
+```
+```cpp
+SE3RigidBodySimulateTrapezoidal f;
+f(SE3Signal<T> &x, Vector6Signal<T> u, double t);
+```
+```cpp
+SO3RigidBodySimulateRK4 f;
+f(SO3Signal<T> &x, Vector3Signal<T> u, double t);
+```
+```cpp
+SE3RigidBodySimulateRK4 f;
+f(SE3Signal<T> &x, Vector6Signal<T> u, double t);
+```
+
 ### Integrators
 
 ```cpp
-SO3RigidBodyDynamicsIntegrateEuler f;
-f(SO3Signal<T> &x, Vector3Signal<T> u, double t);
+IntegrateEuler f;
+f(VectorSignal<T, n> &xInt, VectorSignal<T, n> x, double t);
+f(ManifoldSignal<T, ST, n> &xInt, VectorSignal<T, n> x, double t);
 ```
+
 ```cpp
-SE3RigidBodyDynamicsIntegrateEuler f;
-f(SE3Signal<T> &x, Vector6Signal<T> u, double t);
-```
-```cpp
-SO3RigidBodyDynamicsIntegrateTrapezoidal f;
-f(SO3Signal<T> &x, Vector3Signal<T> u, double t);
-```
-```cpp
-SE3RigidBodyDynamicsIntegrateTrapezoidal f;
-f(SE3Signal<T> &x, Vector6Signal<T> u, double t);
-```
-```cpp
-SO3RigidBodyDynamicsIntegrateRK4 f;
-f(SO3Signal<T> &x, Vector3Signal<T> u, double t);
-```
-```cpp
-SE3RigidBodyDynamicsIntegrateRK4 f;
-f(SE3Signal<T> &x, Vector6Signal<T> u, double t);
+IntegrateTrapezoidal f;
+f(VectorSignal<T, n> &xInt, VectorSignal<T, n> x, double t);
+f(ManifoldSignal<T, ST, n> &xInt, VectorSignal<T, n> x, double t);
 ```

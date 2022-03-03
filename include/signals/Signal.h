@@ -6,8 +6,6 @@
 
 using namespace Eigen;
 
-// TODO INTEGRATION SUPPORT (in separate file, for vector signals only)
-
 template<typename T, typename ST, size_t tDim>
 class Signal
 {
