@@ -63,12 +63,14 @@ struct SE3RigidBodyDynamics
     bool
     operator()(DeltaType<T>& xdot, const StateType<T>& x, const InputType<T>& u, const bool& insertIntoHistory = false)
     {
-        double          t = x.t();
-        Matrix<T, 3, 1> v = x.dot().block<3, 1>(0, 0);
-        Matrix<T, 3, 1> w = x().q() * x.dot().block<3, 1>(3, 0);
-        // Matrix<T, 3, 1> vdot = -g + 1.0 / m_ *
-        // TODO WHAT ARE THE CORRECT FRAMES FOR ROTATIONAL EULER INTEGRATIONS?
-        // FOR THE STATE ITSELF?
+        double          t    = x.t();
+        Matrix<T, 3, 1> v    = x.dot().block<3, 1>(0, 0);
+        Matrix<T, 3, 1> w    = x.dot().block<3, 1>(3, 0);
+        Matrix<T, 3, 1> vdot = -g + 1.0 / m_ * x().q() * u().block<3, 1>(0, 0);
+        Matrix<T, 3, 1> wdot = J_inv_ * (-w.cross(J_ * w) + u().block<3, 1>(3, 0));
+
+        xdot.update(t, (Matrix<T, 6, 1>() << v, w).finished(), (Matrix<T, 6, 1>() << vdot, wdot).finished());
+
         return true;
     }
 };
