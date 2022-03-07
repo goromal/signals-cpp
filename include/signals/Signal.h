@@ -559,7 +559,7 @@ class VectorSignal : public Signal<T, Matrix<T, n, 1>, n>
     }
     SignalType getNansSignal() override
     {
-        return SignalType::Zero(); // TODO fix
+        return SignalType::Zero(); // TODO implement
     }
     TangentType getZeroTangent() override
     {
@@ -567,7 +567,7 @@ class VectorSignal : public Signal<T, Matrix<T, n, 1>, n>
     }
     TangentType getNansTangent() override
     {
-        return TangentType::Zero(); // TODO fix
+        return TangentType::Zero(); // TODO implement
     }
 };
 
@@ -580,7 +580,7 @@ class ManifoldSignal : public Signal<T, ManifType, n>
     }
     SignalType getNansSignal() override
     {
-        return SignalType::identity(); // TODO fix
+        return SignalType::identity(); // TODO implement
     }
     TangentType getZeroTangent() override
     {
@@ -588,7 +588,7 @@ class ManifoldSignal : public Signal<T, ManifType, n>
     }
     TangentType getNansTangent() override
     {
-        return TangentType::Zero(); // TODO fix
+        return TangentType::Zero(); // TODO implement
     }
 };
 

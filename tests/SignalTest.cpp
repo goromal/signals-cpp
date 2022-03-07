@@ -4,7 +4,32 @@
 
 using namespace Eigen;
 
-BOOST_AUTO_TEST_SUITE(TestSignals)
+BOOST_AUTO_TEST_SUITE(TestSignal)
+
+BOOST_AUTO_TEST_CASE(TestLinearInterpolation)
+{
+    // TODO
+}
+
+BOOST_AUTO_TEST_CASE(TestDirtyDerivative)
+{
+    // TODO
+}
+
+BOOST_AUTO_TEST_CASE(TestSetEquality)
+{
+    // TODO
+}
+
+BOOST_AUTO_TEST_CASE(TestScaledPlus)
+{
+    // TODO
+}
+
+BOOST_AUTO_TEST_CASE(TestScaledMinus)
+{
+    // TODO
+}
 
 BOOST_AUTO_TEST_CASE(TestNothing)
 {

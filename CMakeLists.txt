@@ -21,7 +21,9 @@ if (BUILD_TESTS)
     set(UNIT_TEST unit-tests)
     add_executable(${UNIT_TEST}
         tests/MainTest.cpp
-        tests/SignalsTest.cpp
+        tests/SignalTest.cpp
+        tests/IntegrationTest.cpp
+        tests/DynamicsTest.cpp
     )
     target_link_libraries(${UNIT_TEST}
         ${PROJ_NAME}
