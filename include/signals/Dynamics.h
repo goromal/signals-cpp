@@ -13,9 +13,12 @@ using namespace Eigen;
 
 struct SO3RigidBodyDynamics
 {
-    typedef Vector3Signal DeltaType;
-    typedef SO3Signal     StateType;
-    typedef Vector3Signal InputType;
+    template<typename T>
+    using DeltaType = Vector3Signal<T>;
+    template<typename T>
+    using StateType = SO3Signal<T>;
+    template<typename T>
+    using InputType = Vector3Signal<T>;
 
     Matrix3d J_;
     Matrix3d J_inv_;
@@ -43,9 +46,12 @@ struct SO3RigidBodyDynamics
  */
 struct SE3RigidBodyDynamics
 {
-    typedef Vector6Signal DeltaType;
-    typedef SE3Signal     StateType;
-    typedef Vector6Signal InputType;
+    template<typename T>
+    using DeltaType = Vector6Signal<T>;
+    template<typename T>
+    using StateType = SE3Signal<T>;
+    template<typename T>
+    using InputType = Vector6Signal<T>;
 
     double   m_;
     Vector3d g_;
@@ -64,10 +70,10 @@ struct SE3RigidBodyDynamics
     operator()(DeltaType<T>& xdot, const StateType<T>& x, const InputType<T>& u, const bool& insertIntoHistory = false)
     {
         double          t    = x.t();
-        Matrix<T, 3, 1> v    = x.dot().block<3, 1>(0, 0);
-        Matrix<T, 3, 1> w    = x.dot().block<3, 1>(3, 0);
-        Matrix<T, 3, 1> vdot = -g + 1.0 / m_ * x().q() * u().block<3, 1>(0, 0);
-        Matrix<T, 3, 1> wdot = J_inv_ * (-w.cross(J_ * w) + u().block<3, 1>(3, 0));
+        Matrix<T, 3, 1> v    = x.dot().template block<3, 1>(0, 0);
+        Matrix<T, 3, 1> w    = x.dot().template block<3, 1>(3, 0);
+        Matrix<T, 3, 1> vdot = -g_ + 1.0 / m_ * x().q() * u().template block<3, 1>(0, 0);
+        Matrix<T, 3, 1> wdot = J_inv_ * (-w.cross(J_ * w) + u().template block<3, 1>(3, 0));
 
         xdot.update(t, (Matrix<T, 6, 1>() << v, w).finished(), (Matrix<T, 6, 1>() << vdot, wdot).finished());
 
@@ -78,16 +84,17 @@ struct SE3RigidBodyDynamics
 template<typename DynamicsType>
 struct SimulateEuler
 {
+    using typename DynamicsType::DeltaType;
+    using typename DynamicsType::InputType;
+    using typename DynamicsType::StateType;
+
     DynamicsType f;
-    template<typename T>
-    bool operator()(DynamicsType::StateType<T>&    x,
-                    const DynamicsType::InputType& u,
-                    const double&                  t,
-                    const bool&                    insertIntoHistory = false)
+
+    bool operator()(StateType& x, const InputType& u, const double& t, const bool& insertIntoHistory = false)
     {
         const double dt = t - x.t();
 
-        DynamicsType::DeltaType<T> k1, dx;
+        DeltaType k1, dx;
 
         f(k1, x, u);
 
@@ -101,16 +108,17 @@ struct SimulateEuler
 template<typename DynamicsType>
 struct SimulateTrapezoidal
 {
+    using typename DynamicsType::DeltaType;
+    using typename DynamicsType::InputType;
+    using typename DynamicsType::StateType;
+
     DynamicsType f;
-    template<typename T>
-    bool operator()(DynamicsType::StateType<T>&    x,
-                    const DynamicsType::InputType& u,
-                    const double&                  t,
-                    const bool&                    insertIntoHistory = false)
+
+    bool operator()(StateType& x, const InputType& u, const double& t, const bool& insertIntoHistory = false)
     {
         const double dt = t - x.t();
 
-        DynamicsType::DeltaType<T> k1, k2, dx;
+        DeltaType k1, k2, dx;
 
         f(k1, x, u);
         f(k2, x + k1 * dt, u);
@@ -125,16 +133,17 @@ struct SimulateTrapezoidal
 template<typename DynamicsType>
 struct SimulateRK4
 {
+    using typename DynamicsType::DeltaType;
+    using typename DynamicsType::InputType;
+    using typename DynamicsType::StateType;
+
     DynamicsType f;
-    template<typename T>
-    bool operator()(DynamicsType::StateType<T>&    x,
-                    const DynamicsType::InputType& u,
-                    const double&                  t,
-                    const bool&                    insertIntoHistory = false)
+
+    bool operator()(StateType& x, const InputType& u, const double& t, const bool& insertIntoHistory = false)
     {
         const double dt = t - x.t();
 
-        DynamicsType::DeltaType<T> k1, k2, k3, k4, dx;
+        DeltaType k1, k2, k3, k4, dx;
 
         f(k1, x, u);
         f(k2, x + k1 * dt / 2.0, u);
