@@ -4,44 +4,62 @@
 
 using namespace Eigen;
 
-using Vector1d = Matrix<double, 1, 1>;
-
 BOOST_AUTO_TEST_SUITE(TestIntegration)
 
 BOOST_AUTO_TEST_CASE(TestEulerIntegrator)
 {
     IntegrateEuler integrateEuler;
 
-    const double dt = 0.01;
+    const double dt = 0.001;
     double       t  = 0.;
+    double       tf = 5. * M_PI / 4.;
 
-    Vector1dSignal v_ref, v_int;
-    SO3dSignal     q_ref, q_int;
+    ScalardSignal v_ref, v_int;
 
-    while (t <= M_PI)
+    while (t <= tf)
     {
-        v_ref.update(t, Vector1d(sin(t)), true);
-        q_ref.update(t, SO3d::fromAxisAngle(Vector3d(0., 1., 0.), t), true);
+        v_ref.update(t, sin(t), cos(t), true);
         t += dt;
     }
 
-    Vector1dSignal v_ref_dot = v_ref.dotSignal();
-    Vector3dSignal q_ref_dot = q_ref.dotSignal();
+    ScalardSignal v_ref_dot = v_ref.dotSignal();
 
-    v_int.update(0., Vector1d(0.));
-    q_int.update(0., SO3d::identity());
+    v_int.update(0., 0.);
 
-    integrateEuler(v_int, v_ref_dot, t, dt);
-    integrateEuler(q_int, q_ref_dot, t, dt);
+    integrateEuler(v_int, v_ref_dot, t, dt, true);
 
-    // TODO
+    BOOST_CHECK_CLOSE(v_int(0.), v_ref(0.), 1.);
+    BOOST_CHECK_CLOSE(v_int(M_PI / 4.), v_ref(M_PI / 4.), 1.);
+    BOOST_CHECK_CLOSE(v_int(M_PI / 2.), v_ref(M_PI / 2.), 1.);
+    BOOST_CHECK_CLOSE(v_int(3. * M_PI / 4.), v_ref(3. * M_PI / 4.), 1.);
 }
 
 BOOST_AUTO_TEST_CASE(TestTrapezoidalIntegrator)
 {
     IntegrateTrapezoidal integrateTrapezoidal;
-    const double         dt = 0.01;
-    // TODO
+
+    const double dt = 0.001;
+    double       t  = 0.;
+    double       tf = 5. * M_PI / 4.;
+
+    ScalardSignal v_ref, v_int;
+
+    while (t <= tf)
+    {
+        v_ref.update(t, sin(t), cos(t), true);
+        t += dt;
+    }
+
+    ScalardSignal v_ref_dot = v_ref.dotSignal();
+
+    v_int.update(0., 0.);
+
+    integrateTrapezoidal(v_int, v_ref_dot, t, dt, true);
+
+    BOOST_CHECK_CLOSE(v_int(0.), v_ref(0.), 1.);
+    BOOST_CHECK_CLOSE(v_int(M_PI / 4.), v_ref(M_PI / 4.), 1.);
+    BOOST_CHECK_CLOSE(v_int(M_PI / 2.), v_ref(M_PI / 2.), 1.);
+    BOOST_CHECK_CLOSE(v_int(3. * M_PI / 4.), v_ref(3. * M_PI / 4.), 1.);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

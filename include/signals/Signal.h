@@ -27,7 +27,7 @@ enum DerivativeMethod
 };
 
 template<typename BaseSignalSpec, typename TangentSignalSpec>
-class SignalBase
+class Signal
 {
 public:
     using BaseType    = typename BaseSignalSpec::Type;
@@ -52,7 +52,7 @@ public:
     ExtrapolationMethod extrapolationMethod;
     DerivativeMethod    derivativeMethod;
 
-    SignalBase()
+    Signal()
     {
         interpolationMethod = InterpolationMethod::LINEAR;
         extrapolationMethod = ExtrapolationMethod::ZEROS;
@@ -60,7 +60,7 @@ public:
         reset();
     }
 
-    SignalBase(const SignalBase& other)
+    Signal(const Signal& other)
     {
         this->interpolationMethod = other.interpolationMethod;
         this->extrapolationMethod = other.extrapolationMethod;
@@ -72,9 +72,9 @@ public:
         this->needsSort_          = other.needsSort_;
     }
 
-    SignalBase<TangentSignalSpec, TangentSignalSpec> dotSignal()
+    Signal<TangentSignalSpec, TangentSignalSpec> dotSignal()
     {
-        SignalBase<TangentSignalSpec, TangentSignalSpec> signalDot;
+        Signal<TangentSignalSpec, TangentSignalSpec> signalDot;
         for (auto signalDP : signalHistory_)
         {
             signalDot.update(signalDP.t, signalDP.xdot, true);
@@ -84,16 +84,16 @@ public:
     }
 
     template<typename BSS, typename TSS>
-    friend SignalBase<BSS, TSS> operator+(const SignalBase<BSS, TSS>& l, const SignalBase<TSS, TSS>& r);
+    friend Signal<BSS, TSS> operator+(const Signal<BSS, TSS>& l, const Signal<TSS, TSS>& r);
 
     template<typename BSS, typename TSS>
-    friend SignalBase<TSS, TSS> operator-(const SignalBase<BSS, TSS>& l, const SignalBase<BSS, TSS>& r);
+    friend Signal<TSS, TSS> operator-(const Signal<BSS, TSS>& l, const Signal<BSS, TSS>& r);
 
     template<typename BSS, typename TSS>
-    friend SignalBase<BSS, TSS> operator*(const double& l, const SignalBase<BSS, TSS>& r);
+    friend Signal<BSS, TSS> operator*(const double& l, const Signal<BSS, TSS>& r);
 
     template<typename BSS, typename TSS>
-    friend SignalBase<BSS, TSS> operator*(const SignalBase<BSS, TSS>& l, const double& r);
+    friend Signal<BSS, TSS> operator*(const Signal<BSS, TSS>& l, const double& r);
 
     double t() const
     {
@@ -308,13 +308,11 @@ private:
                 TangentType dy;
                 switch (interpolationMethod)
                 {
-                case InterpolationMethod::ZERO_ORDER_HOLD:
-                {
+                case InterpolationMethod::ZERO_ORDER_HOLD: {
                     dy = TangentSignalSpec::ZeroType();
                     break;
                 }
-                case InterpolationMethod::LINEAR:
-                {
+                case InterpolationMethod::LINEAR: {
                     double   t1 = tAtIdx(idx);
                     double   t2 = tAtIdx(idx + 1);
                     BaseType y1 = xAtIdx(idx);
@@ -322,8 +320,7 @@ private:
                     dy          = (t - t1) / (t2 - t1) * (y2 - y1);
                     break;
                 }
-                case InterpolationMethod::CUBIC_SPLINE:
-                {
+                case InterpolationMethod::CUBIC_SPLINE: {
                     double   t0 = tAtIdx(idx - 1);
                     double   t1 = tAtIdx(idx);
                     double   t2 = tAtIdx(idx + 1);
@@ -387,13 +384,11 @@ private:
                 TangentType dy;
                 switch (interpolationMethod)
                 {
-                case InterpolationMethod::ZERO_ORDER_HOLD:
-                {
+                case InterpolationMethod::ZERO_ORDER_HOLD: {
                     dy = TangentSignalSpec::ZeroType();
                     break;
                 }
-                case InterpolationMethod::LINEAR:
-                {
+                case InterpolationMethod::LINEAR: {
                     double      t1 = tAtIdx(idx);
                     double      t2 = tAtIdx(idx + 1);
                     TangentType y1 = xDotAtIdx(idx);
@@ -401,8 +396,7 @@ private:
                     dy             = (t - t1) / (t2 - t1) * (y2 - y1);
                     break;
                 }
-                case InterpolationMethod::CUBIC_SPLINE:
-                {
+                case InterpolationMethod::CUBIC_SPLINE: {
                     double      t0 = tAtIdx(idx - 1);
                     double      t1 = tAtIdx(idx);
                     double      t2 = tAtIdx(idx + 1);
@@ -534,10 +528,10 @@ private:
 };
 
 template<typename BaseSignalSpec, typename TangentSignalSpec>
-SignalBase<BaseSignalSpec, TangentSignalSpec> operator+(const SignalBase<BaseSignalSpec, TangentSignalSpec>&    l,
-                                                        const SignalBase<TangentSignalSpec, TangentSignalSpec>& r)
+Signal<BaseSignalSpec, TangentSignalSpec> operator+(const Signal<BaseSignalSpec, TangentSignalSpec>&    l,
+                                                    const Signal<TangentSignalSpec, TangentSignalSpec>& r)
 {
-    SignalBase<BaseSignalSpec, TangentSignalSpec> lpr = l;
+    Signal<BaseSignalSpec, TangentSignalSpec> lpr = l;
     lpr.x_ += r(l.t());
     lpr.xdot_ += r.dot(l.t());
     for (auto& signalDP : lpr.signalHistory_)
@@ -549,10 +543,10 @@ SignalBase<BaseSignalSpec, TangentSignalSpec> operator+(const SignalBase<BaseSig
 }
 
 template<typename BaseSignalSpec, typename TangentSignalSpec>
-SignalBase<TangentSignalSpec, TangentSignalSpec> operator-(const SignalBase<BaseSignalSpec, TangentSignalSpec>& l,
-                                                           const SignalBase<BaseSignalSpec, TangentSignalSpec>& r)
+Signal<TangentSignalSpec, TangentSignalSpec> operator-(const Signal<BaseSignalSpec, TangentSignalSpec>& l,
+                                                       const Signal<BaseSignalSpec, TangentSignalSpec>& r)
 {
-    SignalBase<TangentSignalSpec, TangentSignalSpec> lmr;
+    Signal<TangentSignalSpec, TangentSignalSpec> lmr;
     lmr.interpolationMethod = l.interpolationMethod;
     lmr.extrapolationMethod = l.extrapolationMethod;
     lmr.derivativeMethod    = l.derivativeMethod;
@@ -574,10 +568,9 @@ SignalBase<TangentSignalSpec, TangentSignalSpec> operator-(const SignalBase<Base
 }
 
 template<typename BaseSignalSpec, typename TangentSignalSpec>
-SignalBase<BaseSignalSpec, TangentSignalSpec> operator*(const double&                                        l,
-                                                        const SignalBase<BaseSignalSpec, TangentSignalSpec>& r)
+Signal<BaseSignalSpec, TangentSignalSpec> operator*(const double& l, const Signal<BaseSignalSpec, TangentSignalSpec>& r)
 {
-    SignalBase<BaseSignalSpec, TangentSignalSpec> lr = r;
+    Signal<BaseSignalSpec, TangentSignalSpec> lr = r;
     lr.x_ *= l;
     lr.xdot_ *= l;
     for (auto& signalDP : lr.signalHistory_)
@@ -589,10 +582,9 @@ SignalBase<BaseSignalSpec, TangentSignalSpec> operator*(const double&           
 }
 
 template<typename BaseSignalSpec, typename TangentSignalSpec>
-SignalBase<BaseSignalSpec, TangentSignalSpec> operator*(const SignalBase<BaseSignalSpec, TangentSignalSpec>& l,
-                                                        const double&                                        r)
+Signal<BaseSignalSpec, TangentSignalSpec> operator*(const Signal<BaseSignalSpec, TangentSignalSpec>& l, const double& r)
 {
-    SignalBase<BaseSignalSpec, TangentSignalSpec> lr = l;
+    Signal<BaseSignalSpec, TangentSignalSpec> lr = l;
     lr.x_ *= r;
     lr.xdot_ *= r;
     for (auto& signalDP : lr.signalHistory_)
@@ -645,19 +637,14 @@ struct ManifoldSignalSpec
     }
 };
 
-template<typename T>
-using ScalarSignal = SignalBase<ScalarSignalSpec<T>, ScalarSignalSpec<T>>;
-
 template<typename T, size_t d>
-using VectorSignal = SignalBase<VectorSignalSpec<T, d>, VectorSignalSpec<T, d>>;
+using VectorSignal = Signal<VectorSignalSpec<T, d>, VectorSignalSpec<T, d>>;
 
 template<typename T, typename ManifoldType, size_t d>
-using ManifoldSignal = SignalBase<ManifoldSignalSpec<ManifoldType>, VectorSignalSpec<T, d>>;
+using ManifoldSignal = Signal<ManifoldSignalSpec<ManifoldType>, VectorSignalSpec<T, d>>;
 
 template<typename T>
-using SO3Signal = ManifoldSignal<T, SO3<T>, 3>;
-template<typename T>
-using SE3Signal = ManifoldSignal<T, SE3<T>, 6>;
+using ScalarSignal = Signal<ScalarSignalSpec<T>, ScalarSignalSpec<T>>;
 template<typename T>
 using Vector1Signal = VectorSignal<T, 1>;
 template<typename T>
@@ -678,6 +665,10 @@ template<typename T>
 using Vector9Signal = VectorSignal<T, 9>;
 template<typename T>
 using Vector10Signal = VectorSignal<T, 10>;
+template<typename T>
+using SO3Signal = ManifoldSignal<T, SO3<T>, 3>;
+template<typename T>
+using SE3Signal = ManifoldSignal<T, SE3<T>, 6>;
 
 typedef ScalarSignal<double>   ScalardSignal;
 typedef Vector1Signal<double>  Vector1dSignal;
