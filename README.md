@@ -8,10 +8,15 @@ Header-only templated C++ library implementing rigid-body dynamics, derivatives,
 
 ### Signal Types
 
-```cpp
-SO3Signal<T> x;
-SE3Signal<T> x;
+Scalar signal type:
 
+```cpp
+ScalarSignal<T> x;
+```
+
+Vector signal types:
+
+```cpp
 Vector1Signal<T> x;
 Vector2Signal<T> x;
 Vector3Signal<T> x;
@@ -24,53 +29,46 @@ Vector9Signal<T> x;
 Vector10Signal<T> x;
 ```
 
-### Dynamics Models
+Manifold signal types:
 
-```cpp
-SO3RigidBodyDynamics f;
-f(Vector3Signal<T> &xdot, SO3Signal<T> x, Vector3Signal<T> u);
 ```
-
-```cpp
-SE3RigidBodyDynamics f;
-f(Vector6Signal<T> &xdot, SE3Signal<T> x, Vector6Signal<T> u);
-```
-
-```cpp
-SO3RigidBodySimulateEuler f;
-f(SO3Signal<T> &x, Vector3Signal<T> u, double t);
-```
-```cpp
-SE3RigidBodySimulateEuler f;
-f(SE3Signal<T> &x, Vector6Signal<T> u, double t);
-```
-```cpp
-SO3RigidBodySimulateTrapezoidal f;
-f(SO3Signal<T> &x, Vector3Signal<T> u, double t);
-```
-```cpp
-SE3RigidBodySimulateTrapezoidal f;
-f(SE3Signal<T> &x, Vector6Signal<T> u, double t);
-```
-```cpp
-SO3RigidBodySimulateRK4 f;
-f(SO3Signal<T> &x, Vector3Signal<T> u, double t);
-```
-```cpp
-SE3RigidBodySimulateRK4 f;
-f(SE3Signal<T> &x, Vector6Signal<T> u, double t);
+SO3Signal<T> x;
+SE3Signal<T> x;
 ```
 
 ### Integrators
 
+Euler integrator:
+
 ```cpp
 IntegrateEuler f;
-f(VectorSignal<T, n> &xInt, VectorSignal<T, n> x, double t);
-f(ManifoldSignal<T, ST, n> &xInt, VectorSignal<T, n> x, double t);
+f(SignalType &xInt, TangentSignalType x, double t, bool insertHistory = false);
+f(SignalType &xInt, TangentSignalType x, double t, double dt, bool insertHistory = false);
 ```
+
+Trapezoidal integrator:
 
 ```cpp
 IntegrateTrapezoidal f;
-f(VectorSignal<T, n> &xInt, VectorSignal<T, n> x, double t);
-f(ManifoldSignal<T, ST, n> &xInt, VectorSignal<T, n> x, double t);
+f(SignalType &xInt, TangentSignalType x, double t, bool insertHistory = false);
+f(SignalType &xInt, TangentSignalType x, double t, double dt, bool insertHistory = false);
 ```
+
+### System Models
+
+*Pending implementations:*
+
+- `TranslationalDynamics1DOF<T>`
+  - Point mass system confined to a straight line.
+- `TranslationalDynamics2DOF<T>`
+  - Point mass system confined to a plane.
+- `TranslationalDynamics3DOF<T>`
+  - Point mass system in a 3-dimensional space.
+- `RotationalDynamics1DOF<T>`
+  - Single-axis rotating mass system fixed in space.
+- `RotationalDynamics3DOF<T>`
+  - Rotating mass fixed in 3D space.
+- `RigidBodyDynamics3DOF<T>`
+  - Rigid body system confined to a plane (unicycle model).
+- `RigidBodyDynamics6DOF<T>`
+  - Rigid body system in 3D space.
