@@ -206,17 +206,24 @@ public:
         {
             return false;
         }
-        std::vector<TangentType> _xdotHistory;
-        for (size_t i = 0; i < nTH; i++)
+        for (size_t i = 0; i < nXH; i++)
         {
             TangentType _xdot;
             if (!calculateDerivative(_tHistory[i], _xHistory[i], _xdot))
             {
                 return false;
             }
-            _xdotHistory.push_back(_xdot);
+            if (!insertIntoHistory(_tHistory[i], _xHistory[i], _xdot))
+            {
+                return false;
+            }
         }
-        return update(_tHistory, _xHistory, _xdotHistory);
+        if (needsSort_)
+        {
+            std::sort(signalHistory_.begin(), signalHistory_.end(), SignalDPComparator);
+            needsSort_ = false;
+        }
+        return true;
     }
 
     bool update(const std::vector<double>&      _tHistory,
@@ -254,6 +261,12 @@ private:
 
     bool insertIntoHistory(const double& _t, const BaseType& _x, const TangentType& _xdot)
     {
+        if (_t > t_)
+        {
+            t_    = _t;
+            x_    = _x;
+            xdot_ = _xdot;
+        }
         if (signalHistory_.size() > 0)
         {
             double mostRecentTime = signalHistory_[signalHistory_.size() - 1].t;

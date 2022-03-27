@@ -17,6 +17,8 @@ private:
     }
 
 public:
+    Integrator() {}
+
     template<typename BaseSignalSpec, typename TangentSignalSpec>
     bool operator()(Signal<BaseSignalSpec, TangentSignalSpec>&          xInt,
                     const Signal<TangentSignalSpec, TangentSignalSpec>& x,
