@@ -7,12 +7,13 @@ using namespace Eigen;
 template<typename DynamicsType>
 struct System
 {
-    using typename DynamicsType::InputSignalType;
-    using typename DynamicsType::StateSignalType;
+    using InputSignalType    = typename DynamicsType::InputSignalType;
+    using StateDotSignalType = typename DynamicsType::StateDotSignalType;
+    using StateSignalType    = typename DynamicsType::StateSignalType;
 
-    InputSignalType u;
-    StateSignalType x;
-    DynamicsType    dynamics;
+    StateSignalType    x; // e.g., sys.x(3.2).pose
+    StateDotSignalType xdot;
+    DynamicsType       dynamics; // Must set parameters before using
 
     System()
     {
@@ -21,35 +22,64 @@ struct System
 
     void reset()
     {
-        u.reset();
         x.reset();
+        xdot.reset();
     }
 
-    // TODO bool simulate(
+    double t() const
+    {
+        return x.t();
+    }
+
+    template<typename IntegratorType>
+    bool simulate(const InputSignalType& u,
+                  const double&          tf,
+                  const bool&            insertIntoHistory = false,
+                  const bool&            calculateXddot    = false)
+    {
+        IntegratorType integrator; // TODO clunky
+        if (!dynamics(xdot, x, u, x.t(), tf, insertIntoHistory, calculateXddot))
+        {
+            return false;
+        }
+        if (!integrator(x, xdot, tf, insertIntoHistory))
+        {
+            return false;
+        }
+        return true;
+    }
 
     // TODO get statespace with auto diff
 };
 
-template<typename InputSignalType, typename StateSignalType, typename StateDotSignalType, size_t d>
+template<typename IST, typename SST, typename SDST, size_t d>
 struct TranslationalDynamicsBase
 {
+    using InputSignalType    = IST;
+    using StateDotSignalType = SST;
+    using StateSignalType    = SDST;
+
     using InputType       = typename InputSignalType::BaseType;
     using StateType       = typename StateSignalType::BaseType;
     using StateDotType    = typename StateDotSignalType::BaseType;
     using StateDotDotType = typename StateDotSignalType::TangentType;
 
-    double               m = 1.0;
-    Matrix<double, d, 1> g = Matrix<double, d, 1>::Zero();
+    using SpaceType = typename StateType::PoseType; // TODO replicate this pattern
 
-    bool f(StateDotSignalType&    xdot,
-           const StateSignalType& x,
-           const InputSignalType& u,
-           const double&          t,
-           const bool&            insertIntoHistory = false,
-           const bool&            calculateXddot    = false)
+    // Set these quantities to characterize the dynamics
+    double    m = 1.0;
+    SpaceType g;
+
+    bool operator()(StateDotSignalType&    xdot,
+                    const StateSignalType& x,
+                    const InputSignalType& u,
+                    const double&          t0,
+                    const double&          tf,
+                    const bool&            insertIntoHistory = false,
+                    const bool&            calculateXddot    = false)
     {
-        InputType u_k = u(t);
-        StateType x_k = x(t);
+        InputType u_k = u(t0);
+        StateType x_k = x(t0);
 
         StateDotType xdot_k;
         xdot_k.pose  = x_k.twist;
@@ -57,11 +87,11 @@ struct TranslationalDynamicsBase
 
         if (calculateXddot)
         {
-            return xdot.update(t, xdot_k, insertIntoHistory);
+            return xdot.update(tf, xdot_k, insertIntoHistory);
         }
         else
         {
-            return xdot.update(t, xdot_k, StateDotDotType::identity(), insertIntoHistory);
+            return xdot.update(tf, xdot_k, StateDotDotType::identity(), insertIntoHistory);
         }
     }
 };
@@ -78,8 +108,6 @@ template<typename T>
 using TranslationalDynamics3DOF =
     TranslationalDynamicsBase<Vector3Signal<T>, Vector3StateSignal<T>, Vector3StateSignal<T>, 3>;
 
-// TODO RotationalDynamics1DOF [SO2]
-
 template<typename T>
 struct RotationalDynamics3DOF
 {
@@ -92,17 +120,20 @@ struct RotationalDynamics3DOF
     using StateDotType    = typename StateDotSignalType::BaseType;
     using StateDotDotType = typename StateDotSignalType::TangentType;
 
+    using SpaceType = Vector3d;
+
     Matrix3d J = Matrix3d::Identity();
 
-    bool f(StateDotSignalType&    xdot,
-           const StateSignalType& x,
-           const InputSignalType& u,
-           const double&          t,
-           const bool&            insertIntoHistory = false,
-           const bool&            calculateXddot    = false)
+    bool operator()(StateDotSignalType&    xdot,
+                    const StateSignalType& x,
+                    const InputSignalType& u,
+                    const double&          t0,
+                    const double&          tf,
+                    const bool&            insertIntoHistory = false,
+                    const bool&            calculateXddot    = false)
     {
-        InputType u_k = u(t);
-        StateType x_k = x(t);
+        InputType u_k = u(t0);
+        StateType x_k = x(t0);
 
         StateDotDotType xdot_k;
         xdot_k.pose  = x_k.twist;
@@ -110,16 +141,14 @@ struct RotationalDynamics3DOF
 
         if (calculateXddot)
         {
-            return xdot.update(t, xdot_k, insertIntoHistory);
+            return xdot.update(tf, xdot_k, insertIntoHistory);
         }
         else
         {
-            return xdot.update(t, xdot_k, StateDotDotType::identity(), insertIntoHistory);
+            return xdot.update(tf, xdot_k, StateDotDotType::identity(), insertIntoHistory);
         }
     }
 };
-
-// TODO RigidBodyDynamics3DOF [SE2]
 
 template<typename T>
 struct RigidBodyDynamics6DOF
@@ -133,19 +162,22 @@ struct RigidBodyDynamics6DOF
     using StateDotType    = typename StateDotSignalType::BaseType;
     using StateDotDotType = typename StateDotSignalType::TangentType;
 
-    double   m = 1.0;
-    Vector3d g = Vector3d::Zero();
-    Matrix3d J = Matrix3d::Identity();
+    using SpaceType = Vector3d;
 
-    bool f(StateDotSignalType&    xdot,
-           const StateSignalType& x,
-           const InputSignalType& u,
-           const double&          t,
-           const bool&            insertIntoHistory = false,
-           const bool&            calculateXddot    = false)
+    double    m = 1.0;
+    SpaceType g = Vector3d::Zero();
+    Matrix3d  J = Matrix3d::Identity();
+
+    bool operator()(StateDotSignalType&    xdot,
+                    const StateSignalType& x,
+                    const InputSignalType& u,
+                    const double&          t0,
+                    const double&          tf,
+                    const bool&            insertIntoHistory = false,
+                    const bool&            calculateXddot    = false)
     {
-        InputType u_k = u(t);
-        StateType x_k = x(t);
+        InputType u_k = u(t0);
+        StateType x_k = x(t0);
 
         StateDotDotType xdot_k;
         xdot_k.pose                             = x_k.twist;
@@ -156,11 +188,11 @@ struct RigidBodyDynamics6DOF
 
         if (calculateXddot)
         {
-            return xdot.update(t, xdot_k, insertIntoHistory);
+            return xdot.update(tf, xdot_k, insertIntoHistory);
         }
         else
         {
-            return xdot.update(t, xdot_k, StateDotDotType::identity(), insertIntoHistory);
+            return xdot.update(tf, xdot_k, StateDotDotType::identity(), insertIntoHistory);
         }
     }
 };
@@ -330,3 +362,8 @@ struct RigidBodyDynamics6DOF
 
 // typedef SimulateRK4<SO3RigidBodyDynamics> SO3RigidBodySimulateRK4;
 // typedef SimulateRK4<SE3RigidBodyDynamics> SE3RigidBodySimulateRK4;
+
+template<typename T>
+using Translational1DOFSystem = System<TranslationalDynamics1DOF<T>>;
+
+typedef Translational1DOFSystem<double> Translational1DOFSystemd;
