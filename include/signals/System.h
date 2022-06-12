@@ -169,7 +169,7 @@ struct RotationalDynamics3DOF
         InputType u_k = u(t0);
         StateType x_k = x(t0);
 
-        StateDotDotType xdot_k;
+        StateDotType xdot_k;
         xdot_k.pose  = x_k.twist;
         xdot_k.twist = J.inverse() * (-x_k.twist.cross(J * x_k.twist) + u_k);
 
@@ -213,7 +213,7 @@ struct RigidBodyDynamics6DOF
         InputType u_k = u(t0);
         StateType x_k = x(t0);
 
-        StateDotDotType xdot_k;
+        StateDotType xdot_k;
         xdot_k.pose                             = x_k.twist;
         xdot_k.twist.template block<3, 1>(0, 0) = -g + 1.0 / m * x_k.pose.q() * u_k.template block<3, 1>(0, 0);
         xdot_k.twist.template block<3, 1>(3, 0) =
