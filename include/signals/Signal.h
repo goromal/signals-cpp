@@ -3,6 +3,7 @@
 #include <Eigen/Core>
 #include <SO3.h>
 #include <SE3.h>
+#include "Utils.h"
 
 using namespace Eigen;
 
