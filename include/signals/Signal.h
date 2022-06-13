@@ -3,6 +3,7 @@
 #include <Eigen/Core>
 #include <SO3.h>
 #include <SE3.h>
+#include "Utils.h"
 
 using namespace Eigen;
 
@@ -650,14 +651,36 @@ struct ManifoldSignalSpec
     }
 };
 
+template<typename T>
+using ScalarSignal = Signal<ScalarSignalSpec<T>, ScalarSignalSpec<T>>;
+
+template<typename T>
+inline std::ostream& operator<<(std::ostream& os, const ScalarSignal<T>& x)
+{
+    os << "ScalarSignal at t=" << x.t() << ": " << x();
+    return os;
+}
+
 template<typename T, size_t d>
 using VectorSignal = Signal<VectorSignalSpec<T, d>, VectorSignalSpec<T, d>>;
+
+template<typename T, size_t d>
+inline std::ostream& operator<<(std::ostream& os, const VectorSignal<T, d>& x)
+{
+    os << "VectorSignal at t=" << x.t() << ": " << x().transpose();
+    return os;
+}
 
 template<typename T, typename ManifoldType, size_t d>
 using ManifoldSignal = Signal<ManifoldSignalSpec<ManifoldType>, VectorSignalSpec<T, d>>;
 
-template<typename T>
-using ScalarSignal = Signal<ScalarSignalSpec<T>, ScalarSignalSpec<T>>;
+template<typename T, typename ManifoldType, size_t d>
+inline std::ostream& operator<<(std::ostream& os, const ManifoldSignal<T, ManifoldType, d>& x)
+{
+    os << "ManifoldSignal at t=" << x.t() << ": " << x();
+    return os;
+}
+
 template<typename T>
 using Vector1Signal = VectorSignal<T, 1>;
 template<typename T>

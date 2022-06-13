@@ -8,8 +8,6 @@ BOOST_AUTO_TEST_SUITE(TestIntegration)
 
 BOOST_AUTO_TEST_CASE(TestEulerIntegrator)
 {
-    IntegrateEuler integrateEuler;
-
     const double dt = 0.001;
     double       t  = 0.;
     double       tf = 5. * M_PI / 4.;
@@ -18,15 +16,15 @@ BOOST_AUTO_TEST_CASE(TestEulerIntegrator)
 
     while (t <= tf)
     {
-        v_ref.update(t, sin(t), cos(t), true);
+        BOOST_CHECK(v_ref.update(t, sin(t), cos(t), true));
         t += dt;
     }
 
     ScalardSignal v_ref_dot = v_ref.dotSignal();
 
-    v_int.update(0., 0.);
+    BOOST_CHECK(v_int.update(0., 0.));
 
-    integrateEuler(v_int, v_ref_dot, t, dt, true);
+    BOOST_CHECK(EulerIntegrator::integrate(v_int, v_ref_dot, t, dt, true));
 
     BOOST_CHECK_CLOSE(v_int(0.), v_ref(0.), 1.);
     BOOST_CHECK_CLOSE(v_int(M_PI / 4.), v_ref(M_PI / 4.), 1.);
@@ -36,8 +34,6 @@ BOOST_AUTO_TEST_CASE(TestEulerIntegrator)
 
 BOOST_AUTO_TEST_CASE(TestTrapezoidalIntegrator)
 {
-    IntegrateTrapezoidal integrateTrapezoidal;
-
     const double dt = 0.001;
     double       t  = 0.;
     double       tf = 5. * M_PI / 4.;
@@ -46,15 +42,15 @@ BOOST_AUTO_TEST_CASE(TestTrapezoidalIntegrator)
 
     while (t <= tf)
     {
-        v_ref.update(t, sin(t), cos(t), true);
+        BOOST_CHECK(v_ref.update(t, sin(t), cos(t), true));
         t += dt;
     }
 
     ScalardSignal v_ref_dot = v_ref.dotSignal();
 
-    v_int.update(0., 0.);
+    BOOST_CHECK(v_int.update(0., 0.));
 
-    integrateTrapezoidal(v_int, v_ref_dot, t, dt, true);
+    BOOST_CHECK(TrapezoidalIntegrator::integrate(v_int, v_ref_dot, t, dt, true));
 
     BOOST_CHECK_CLOSE(v_int(0.), v_ref(0.), 1.);
     BOOST_CHECK_CLOSE(v_int(M_PI / 4.), v_ref(M_PI / 4.), 1.);
