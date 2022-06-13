@@ -213,9 +213,15 @@ struct RigidBodyDynamics6DOF
         InputType u_k = u(t0);
         StateType x_k = x(t0);
 
+        // The entire xdot vector is in the body-frame, since we're using it as a local perturbation
+        // vector for the oplus and ominus operations from SE(3). i.e., we increment the translation
+        // vector and attitude jointly, unlike with many filter/controller implementations.
         StateDotType xdot_k;
-        xdot_k.pose                             = x_k.twist;
-        xdot_k.twist.template block<3, 1>(0, 0) = -g + 1.0 / m * x_k.pose.q() * u_k.template block<3, 1>(0, 0);
+        xdot_k.pose = x_k.twist;
+        xdot_k.twist.template block<3, 1>(0, 0) =
+            -(x_k.pose.q().inverse() * g) -
+            x_k.twist.template block<3, 1>(3, 0).cross(x_k.twist.template block<3, 1>(0, 0)) +
+            1.0 / m * u_k.template block<3, 1>(0, 0);
         xdot_k.twist.template block<3, 1>(3, 0) =
             J.inverse() * (-x_k.twist.template block<3, 1>(3, 0).cross(J * x_k.twist.template block<3, 1>(3, 0)) +
                            u_k.template block<3, 1>(3, 0));
