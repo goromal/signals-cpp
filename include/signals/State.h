@@ -29,6 +29,21 @@ struct State
         x.twist = TwistTypeSpec::ZeroType();
         return x;
     }
+
+    State& operator*=(const double& s)
+    {
+        pose *= s;
+        twist *= s;
+        return *this;
+    }
+
+    template<typename T2>
+    State& operator+=(const State<T2, TwistTypeSpec, TwistDim, TwistTypeSpec, TwistDim>& r)
+    {
+        pose += r.pose;
+        twist += r.twist;
+        return *this;
+    }
 };
 
 template<typename T, typename PTS, size_t PD, typename TTS, size_t TD>
