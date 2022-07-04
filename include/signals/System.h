@@ -103,12 +103,14 @@ private:
 
 struct RigidBodyParams1D
 {
+    RigidBodyParams1D() : m(1), g(0) {}
     double m;
     double g;
 };
 
 struct RigidBodyParams2D
 {
+    RigidBodyParams2D() : m(1), J(0), g(Vector2d::Zero()) {}
     double   m;
     double   J;
     Vector2d g;
@@ -116,6 +118,7 @@ struct RigidBodyParams2D
 
 struct RigidBodyParams3D
 {
+    RigidBodyParams3D() : m(1), J(Matrix3d::Identity()), g(Vector3d::Zero()) {} 
     double   m;
     Matrix3d J;
     Vector3d g;
