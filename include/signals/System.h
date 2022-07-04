@@ -56,7 +56,7 @@ public:
         {
             return false;
         }
-        if (!DynamicsType::update(xdot_, x, u, t0, tf, params_.value(), insertIntoHistory, calculateXddot))
+        if (!DynamicsType::update(xdot, x, u, t0, tf, params_.value(), insertIntoHistory, calculateXddot))
         {
             return false;
         }
