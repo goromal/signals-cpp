@@ -138,6 +138,8 @@ using Vector9State = VectorStateType<T, 9>;
 template<typename T>
 using Vector10State = VectorStateType<T, 10>;
 template<typename T>
+using SO2State = ManifoldStateType<T, SO2<T>, 2, 1>;
+template<typename T>
 using SO3State = ManifoldStateType<T, SO3<T>, 4, 3>;
 template<typename T>
 using SE3State = ManifoldStateType<T, SE3<T>, 7, 6>;
@@ -236,6 +238,8 @@ using Vector9StateSignal = VectorStateSignal<T, 9>;
 template<typename T>
 using Vector10StateSignal = VectorStateSignal<T, 10>;
 template<typename T>
+using SO2StateSignal = ManifoldStateSignal<T, SO2<T>, 2, 1>;
+template<typename T>
 using SO3StateSignal = ManifoldStateSignal<T, SO3<T>, 4, 3>;
 template<typename T>
 using SE3StateSignal = ManifoldStateSignal<T, SE3<T>, 7, 6>;
@@ -252,6 +256,7 @@ typedef Vector7State<double>  Vector7dState;
 typedef Vector8State<double>  Vector8dState;
 typedef Vector9State<double>  Vector9dState;
 typedef Vector10State<double> Vector10dState;
+typedef SO2State<double>      SO2dState;
 typedef SO3State<double>      SO3dState;
 typedef SE3State<double>      SE3dState;
 
@@ -266,5 +271,6 @@ typedef Vector7StateSignal<double>  Vector7dStateSignal;
 typedef Vector8StateSignal<double>  Vector8dStateSignal;
 typedef Vector9StateSignal<double>  Vector9dStateSignal;
 typedef Vector10StateSignal<double> Vector10dStateSignal;
+typedef SO2StateSignal<double>      SO2dStateSignal;
 typedef SO3StateSignal<double>      SO3dStateSignal;
 typedef SE3StateSignal<double>      SE3dStateSignal;

@@ -11,6 +11,9 @@ BOOST_AUTO_TEST_CASE(TestTransSim)
     Translational1DOFSystemd sys, sys2;
     ScalardSignal            u;
 
+    sys.dynamics.g = 0;
+    sys2.dynamics.g = 0;
+
     double t   = 0;
     double x_d = 1;
     double kp  = 1;
@@ -36,6 +39,34 @@ BOOST_AUTO_TEST_CASE(TestTransSim)
 
     BOOST_CHECK_CLOSE(sys2.x().pose, 1., 1.);
     BOOST_CHECK_LT(sys2.x().twist, 1e-8);
+}
+
+BOOST_AUTO_TEST_CASE(TestSO2Sim)
+{
+    Rotational1DOFSystemd sys;
+    Vector1dSignal        u;
+
+    double t       = 0;
+    double angle_d = 1.0;
+    SO2d   x_d     = SO2d::fromAngle(angle_d);
+    double kp      = 1;
+    double kd      = 0.5;
+
+    BOOST_CHECK(sys.x.update(t, SO2dState::identity()));
+
+    const double       dt        = 0.01;
+    const unsigned int num_iters = 1e4;
+
+    for (unsigned int i = 0; i < num_iters; i++)
+    {
+        BOOST_CHECK(u.update(t, kp * (x_d - sys.x().pose) - kd * sys.x().twist));
+        t += dt;
+        BOOST_CHECK(sys.simulate<EulerIntegrator>(u, t));
+    }
+
+    BOOST_CHECK_CLOSE(sys.x().pose.w(), x_d.w(), 1.);
+    BOOST_CHECK_CLOSE(sys.x().pose.x(), x_d.x(), 1.);
+    BOOST_CHECK_LT(sys.x().twist.x(), 1e-8);
 }
 
 BOOST_AUTO_TEST_CASE(TestSO3Sim)

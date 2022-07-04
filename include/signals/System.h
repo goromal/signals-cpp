@@ -143,6 +143,48 @@ using TranslationalDynamics3DOF =
     TranslationalDynamicsBase<Vector3Signal<T>, Vector3StateSignal<T>, Vector3StateSignal<T>, 3>;
 
 template<typename T>
+struct RotationalDynamics1DOF
+{
+    using InputSignalType    = Vector1Signal<T>;
+    using StateSignalType    = SO2StateSignal<T>;
+    using StateDotSignalType = Vector1StateSignal<T>;
+    
+    using InputType       = typename InputSignalType::BaseType;
+    using StateType       = typename StateSignalType::BaseType;
+    using StateDotType    = typename StateDotSignalType::BaseType;
+    using StateDotDotType = typename StateDotSignalType::TangentType;
+    
+    using SpaceType = Matrix<double, 1, 1>;
+    
+    double J = 1.;
+    
+    bool operator()(StateDotSignalType&    xdot,
+                    const StateSignalType& x,
+                    const InputSignalType& u,
+                    const double&          t0,
+                    const double&          tf,
+                    const bool&            insertIntoHistory = false,
+                    const bool&            calculateXddot    = false)
+    {
+        InputType u_k = u(t0);
+        StateType x_k = x(t0);
+
+        StateDotType xdot_k;
+        xdot_k.pose  = x_k.twist;
+        xdot_k.twist = u_k / J;
+        
+        if (calculateXddot)
+        {
+            return xdot.update(tf, xdot_k, insertIntoHistory);
+        }
+        else
+        {
+            return xdot.update(tf, xdot_k, StateDotDotType::identity(), insertIntoHistory);
+        }
+    }
+};
+
+template<typename T>
 struct RotationalDynamics3DOF
 {
     using InputSignalType    = Vector3Signal<T>;
@@ -247,6 +289,9 @@ template<typename T>
 using Translational3DOFSystem = System<TranslationalDynamics3DOF<T>>;
 
 template<typename T>
+using Rotational1DOFSystem = System<RotationalDynamics1DOF<T>>;
+
+template<typename T>
 using Rotational3DOFSystem = System<RotationalDynamics3DOF<T>>;
 
 template<typename T>
@@ -255,5 +300,6 @@ using RigidBody6DOFSystem = System<RigidBodyDynamics6DOF<T>>;
 typedef Translational1DOFSystem<double> Translational1DOFSystemd;
 typedef Translational2DOFSystem<double> Translational2DOFSystemd;
 typedef Translational3DOFSystem<double> Translational3DOFSystemd;
+typedef Rotational1DOFSystem<double>    Rotational1DOFSystemd;
 typedef Rotational3DOFSystem<double>    Rotational3DOFSystemd;
 typedef RigidBody6DOFSystem<double>     RigidBody6DOFSystemd;
