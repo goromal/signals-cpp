@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <Eigen/Core>
+#include <SO2.h>
 #include <SO3.h>
 #include <SE3.h>
 #include "Utils.h"
@@ -702,6 +703,8 @@ using Vector9Signal = VectorSignal<T, 9>;
 template<typename T>
 using Vector10Signal = VectorSignal<T, 10>;
 template<typename T>
+using SO2Signal = ManifoldSignal<T, SO2<T>, 1>;
+template<typename T>
 using SO3Signal = ManifoldSignal<T, SO3<T>, 3>;
 template<typename T>
 using SE3Signal = ManifoldSignal<T, SE3<T>, 6>;
@@ -717,5 +720,6 @@ typedef Vector7Signal<double>  Vector7dSignal;
 typedef Vector8Signal<double>  Vector8dSignal;
 typedef Vector9Signal<double>  Vector9dSignal;
 typedef Vector10Signal<double> Vector10dSignal;
+typedef SO2Signal<double>      SO2dSignal;
 typedef SO3Signal<double>      SO3dSignal;
 typedef SE3Signal<double>      SE3dSignal;
