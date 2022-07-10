@@ -4,6 +4,8 @@
 
 using namespace Eigen;
 
+typedef Matrix<double, 2, 1> Vector2d;
+
 BOOST_AUTO_TEST_SUITE(TestDynamics)
 
 BOOST_AUTO_TEST_CASE(TestTransSim)
@@ -116,6 +118,47 @@ BOOST_AUTO_TEST_CASE(TestSO3Sim)
     BOOST_CHECK_LT(sys.x().twist.x(), 1e-8);
     BOOST_CHECK_LT(sys.x().twist.y(), 1e-8);
     BOOST_CHECK_LT(sys.x().twist.z(), 1e-8);
+}
+
+BOOST_AUTO_TEST_CASE(TestSE2Sim)
+{
+    RigidBody3DOFSystemd sys;
+    Vector3dSignal       u;
+    
+    RigidBodyParams2D p;
+    p.m = 1.0;
+    p.J = 0.0;
+    p.g = Vector2d::Zero();
+    sys.setParams(p);
+
+    double t       = 0;
+    double tx_d    = 0.5;
+    double ty_d    = -3.0;
+    double angle_d = 2.0;
+    SE2d   x_d     = SE2d::fromVecAndRot(Vector2d(tx_d, ty_d),
+                                         SO2d::fromAngle(angle_d));
+    double kp      = 1;
+    double kd      = 0.5;
+
+    BOOST_CHECK(sys.x.update(t, SE2dState::identity()));
+
+    const double       dt        = 0.01;
+    const unsigned int num_iters = 1e4;
+
+    for (unsigned int i = 0; i < num_iters; i++)
+    {
+        BOOST_CHECK(u.update(t, kp * (x_d - sys.x().pose) - kd * sys.x().twist));
+        t += dt;
+        BOOST_CHECK(sys.simulate<EulerIntegrator>(u, t));
+    }
+
+    BOOST_CHECK_CLOSE(sys.x().pose.t().x(), x_d.t().x(), 1.);
+    BOOST_CHECK_CLOSE(sys.x().pose.t().y(), x_d.t().y(), 1.);
+    BOOST_CHECK_CLOSE(sys.x().pose.q().w(), x_d.q().w(), 1.);
+    BOOST_CHECK_CLOSE(sys.x().pose.q().x(), x_d.q().x(), 1.);
+    BOOST_CHECK_LT(sys.x().twist(0), 1e-8);
+    BOOST_CHECK_LT(sys.x().twist(1), 1e-8);
+    BOOST_CHECK_LT(sys.x().twist(2), 1e-8);
 }
 
 BOOST_AUTO_TEST_CASE(TestSE3Sim)

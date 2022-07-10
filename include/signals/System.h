@@ -260,6 +260,50 @@ struct RotationalDynamics3DOF
 };
 
 template<typename T>
+struct RigidBodyDynamics3DOF
+{
+    using InputSignalType    = Vector3Signal<T>;
+    using StateSignalType    = SE2StateSignal<T>;
+    using StateDotSignalType = Vector3StateSignal<T>;
+
+    using InputType       = typename InputSignalType::BaseType;
+    using StateType       = typename StateSignalType::BaseType;
+    using StateDotType    = typename StateDotSignalType::BaseType;
+    using StateDotDotType = typename StateDotSignalType::TangentType;
+
+    using ParamsType = RigidBodyParams2D;
+    
+    static bool update(StateDotSignalType&    xdot,
+                       const StateSignalType& x,
+                       const InputSignalType& u,
+                       const double&          t0,
+                       const double&          tf,
+                       const ParamsType&      params,
+                       const bool&            insertIntoHistory = false,
+                       const bool&            calculateXddot    = false)
+    {
+        InputType u_k = u(t0);
+        StateType x_k = x(t0);
+
+        StateDotType xdot_k;
+        xdot_k.pose = x_k.twist;
+        xdot_k.twist.template block<2, 1>(0, 0) =
+            -(x_k.pose.q().inverse() * params.g) - x_k.twist(2) * Matrix<T,2,1>(-x_k.twist(1), x_k.twist(0)) +
+            1.0 / params.m * u_k.template block<2, 1>(0, 0);
+        xdot_k.twist(2) = u_k(2) / params.J;
+
+        if (calculateXddot)
+        {
+            return xdot.update(tf, xdot_k, insertIntoHistory);
+        }
+        else
+        {
+            return xdot.update(tf, xdot_k, StateDotDotType::identity(), insertIntoHistory);
+        }
+    }
+};
+
+template<typename T>
 struct RigidBodyDynamics6DOF
 {
     using InputSignalType    = Vector6Signal<T>;
@@ -325,6 +369,9 @@ template<typename T>
 using Rotational3DOFSystem = System<RotationalDynamics3DOF<T>>;
 
 template<typename T>
+using RigidBody3DOFSystem = System<RigidBodyDynamics3DOF<T>>;
+
+template<typename T>
 using RigidBody6DOFSystem = System<RigidBodyDynamics6DOF<T>>;
 
 typedef Translational1DOFSystem<double> Translational1DOFSystemd;
@@ -332,4 +379,5 @@ typedef Translational2DOFSystem<double> Translational2DOFSystemd;
 typedef Translational3DOFSystem<double> Translational3DOFSystemd;
 typedef Rotational1DOFSystem<double>    Rotational1DOFSystemd;
 typedef Rotational3DOFSystem<double>    Rotational3DOFSystemd;
+typedef RigidBody3DOFSystem<double>     RigidBody3DOFSystemd;
 typedef RigidBody6DOFSystem<double>     RigidBody6DOFSystemd;
