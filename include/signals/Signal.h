@@ -3,6 +3,7 @@
 #include <Eigen/Core>
 #include <SO2.h>
 #include <SO3.h>
+#include <SE2.h>
 #include <SE3.h>
 #include "Utils.h"
 
@@ -707,6 +708,8 @@ using SO2Signal = ManifoldSignal<T, SO2<T>, 1>;
 template<typename T>
 using SO3Signal = ManifoldSignal<T, SO3<T>, 3>;
 template<typename T>
+using SE2Signal = ManifoldSignal<T, SE2<T>, 3>;
+template<typename T>
 using SE3Signal = ManifoldSignal<T, SE3<T>, 6>;
 
 typedef ScalarSignal<double>   ScalardSignal;
@@ -722,4 +725,5 @@ typedef Vector9Signal<double>  Vector9dSignal;
 typedef Vector10Signal<double> Vector10dSignal;
 typedef SO2Signal<double>      SO2dSignal;
 typedef SO3Signal<double>      SO3dSignal;
+typedef SE2Signal<double>      SE2dSignal;
 typedef SE3Signal<double>      SE3dSignal;
