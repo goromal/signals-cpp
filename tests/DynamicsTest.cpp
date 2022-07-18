@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(TestSO2Sim)
 {
     Rotational1DOFSystemd sys;
     Vector1dSignal        u;
-    
+
     RigidBodyParams2D p;
     p.m = 1.0;
     p.J = 1.0;
@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(TestSO3Sim)
 {
     Rotational3DOFSystemd sys;
     Vector3dSignal        u;
-    
+
     RigidBodyParams3D p;
     p.m = 1.0;
     p.J = Matrix3d::Identity();
@@ -124,10 +124,10 @@ BOOST_AUTO_TEST_CASE(TestSE2Sim)
 {
     RigidBody3DOFSystemd sys;
     Vector3dSignal       u;
-    
+
     RigidBodyParams2D p;
     p.m = 1.0;
-    p.J = 0.0;
+    p.J = 1.0;
     p.g = Vector2d::Zero();
     sys.setParams(p);
 
@@ -135,8 +135,7 @@ BOOST_AUTO_TEST_CASE(TestSE2Sim)
     double tx_d    = 0.5;
     double ty_d    = -3.0;
     double angle_d = 2.0;
-    SE2d   x_d     = SE2d::fromVecAndRot(Vector2d(tx_d, ty_d),
-                                         SO2d::fromAngle(angle_d));
+    SE2d   x_d     = SE2d::fromVecAndRot(Vector2d(tx_d, ty_d), SO2d::fromAngle(angle_d));
     double kp      = 1;
     double kd      = 0.5;
 
@@ -165,7 +164,7 @@ BOOST_AUTO_TEST_CASE(TestSE3Sim)
 {
     RigidBody6DOFSystemd sys;
     Vector6dSignal       u;
-    
+
     RigidBodyParams3D p;
     p.m = 1.0;
     p.J = Matrix3d::Identity();
@@ -179,8 +178,7 @@ BOOST_AUTO_TEST_CASE(TestSE3Sim)
     double roll_d  = 1.0;
     double pitch_d = -2.0;
     double yaw_d   = 0.5;
-    SE3d   x_d     = SE3d::fromVecAndQuat(Vector3d(tx_d, ty_d, tz_d),
-                                          SO3d::fromEuler(roll_d, pitch_d, yaw_d));
+    SE3d   x_d     = SE3d::fromVecAndQuat(Vector3d(tx_d, ty_d, tz_d), SO3d::fromEuler(roll_d, pitch_d, yaw_d));
     double kp      = 1;
     double kd      = 0.5;
 

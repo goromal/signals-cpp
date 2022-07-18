@@ -14,19 +14,19 @@ public:
     using StateSignalType    = typename DynamicsType::StateSignalType;
     using ParamsType         = typename DynamicsType::ParamsType;
 
-    StateSignalType           x;
-    StateDotSignalType        xdot;
+    StateSignalType    x;
+    StateDotSignalType xdot;
 
     System() : params_{std::nullopt}
     {
         reset();
     }
-    
-    void setParams(const ParamsType &params)
+
+    void setParams(const ParamsType& params)
     {
         params_ = params;
     }
-    
+
     bool hasParams()
     {
         return params_.has_value();
@@ -49,7 +49,8 @@ public:
                   const bool&            insertIntoHistory = false,
                   const bool&            calculateXddot    = false)
     {
-        if (!hasParams()) return false;
+        if (!hasParams())
+            return false;
         double t0 = x.t();
         double dt;
         if (!signal_utils::getTimeDelta(dt, t0, tf))
@@ -74,7 +75,8 @@ public:
                   const bool&            insertIntoHistory = false,
                   const bool&            calculateXddot    = false)
     {
-        if (!hasParams()) return false;
+        if (!hasParams())
+            return false;
         double t_k = x.t();
         while (t_k < tf)
         {
@@ -96,8 +98,8 @@ public:
         }
         return true;
     }
-    
-private: 
+
+private:
     std::optional<ParamsType> params_;
 };
 
@@ -110,7 +112,7 @@ struct RigidBodyParams1D
 
 struct RigidBodyParams2D
 {
-    RigidBodyParams2D() : m(1), J(0), g(Vector2d::Zero()) {}
+    RigidBodyParams2D() : m(1), J(1), g(Vector2d::Zero()) {}
     double   m;
     double   J;
     Vector2d g;
@@ -118,7 +120,7 @@ struct RigidBodyParams2D
 
 struct RigidBodyParams3D
 {
-    RigidBodyParams3D() : m(1), J(Matrix3d::Identity()), g(Vector3d::Zero()) {} 
+    RigidBodyParams3D() : m(1), J(Matrix3d::Identity()), g(Vector3d::Zero()) {}
     double   m;
     Matrix3d J;
     Vector3d g;
@@ -183,14 +185,14 @@ struct RotationalDynamics1DOF
     using InputSignalType    = Vector1Signal<T>;
     using StateSignalType    = SO2StateSignal<T>;
     using StateDotSignalType = Vector1StateSignal<T>;
-    
+
     using InputType       = typename InputSignalType::BaseType;
     using StateType       = typename StateSignalType::BaseType;
     using StateDotType    = typename StateDotSignalType::BaseType;
     using StateDotDotType = typename StateDotSignalType::TangentType;
-    
+
     using ParamsType = RigidBodyParams2D;
-    
+
     static bool update(StateDotSignalType&    xdot,
                        const StateSignalType& x,
                        const InputSignalType& u,
@@ -206,7 +208,7 @@ struct RotationalDynamics1DOF
         StateDotType xdot_k;
         xdot_k.pose  = x_k.twist;
         xdot_k.twist = u_k / params.J;
-        
+
         if (calculateXddot)
         {
             return xdot.update(tf, xdot_k, insertIntoHistory);
@@ -272,7 +274,7 @@ struct RigidBodyDynamics3DOF
     using StateDotDotType = typename StateDotSignalType::TangentType;
 
     using ParamsType = RigidBodyParams2D;
-    
+
     static bool update(StateDotSignalType&    xdot,
                        const StateSignalType& x,
                        const InputSignalType& u,
@@ -286,10 +288,10 @@ struct RigidBodyDynamics3DOF
         StateType x_k = x(t0);
 
         StateDotType xdot_k;
-        xdot_k.pose = x_k.twist;
-        xdot_k.twist.template block<2, 1>(0, 0) =
-            -(x_k.pose.q().inverse() * params.g) - x_k.twist(2) * Matrix<T,2,1>(-x_k.twist(1), x_k.twist(0)) +
-            1.0 / params.m * u_k.template block<2, 1>(0, 0);
+        xdot_k.pose                             = x_k.twist;
+        xdot_k.twist.template block<2, 1>(0, 0) = -(x_k.pose.q().inverse() * params.g) -
+                                                  x_k.twist(2) * Matrix<T, 2, 1>(-x_k.twist(1), x_k.twist(0)) +
+                                                  1.0 / params.m * u_k.template block<2, 1>(0, 0);
         xdot_k.twist(2) = u_k(2) / params.J;
 
         if (calculateXddot)
@@ -339,8 +341,9 @@ struct RigidBodyDynamics6DOF
             x_k.twist.template block<3, 1>(3, 0).cross(x_k.twist.template block<3, 1>(0, 0)) +
             1.0 / params.m * u_k.template block<3, 1>(0, 0);
         xdot_k.twist.template block<3, 1>(3, 0) =
-            params.J.inverse() * (-x_k.twist.template block<3, 1>(3, 0).cross(params.J * x_k.twist.template block<3, 1>(3, 0)) +
-                           u_k.template block<3, 1>(3, 0));
+            params.J.inverse() *
+            (-x_k.twist.template block<3, 1>(3, 0).cross(params.J * x_k.twist.template block<3, 1>(3, 0)) +
+             u_k.template block<3, 1>(3, 0));
 
         if (calculateXddot)
         {
