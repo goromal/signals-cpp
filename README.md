@@ -1,5 +1,7 @@
 # Signals Cpp
 
+![example workflow](https://github.com/goromal/signals-cpp/actions/workflows/test.yml/badge.svg)
+
 Header-only templated C++ library implementing rigid-body dynamics, derivatives, integrals, and interpolation.
 
 **Under construction**
