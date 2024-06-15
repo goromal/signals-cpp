@@ -53,7 +53,7 @@ public:
             return false;
         double t0 = x.t();
         double dt;
-        if (!signal_utils::getTimeDelta(dt, t0, tf))
+        if (!signal_utils::__getTimeDelta(dt, t0, tf))
         {
             return false;
         }
@@ -81,7 +81,7 @@ public:
         while (t_k < tf)
         {
             double dt_k;
-            if (!signal_utils::getTimeDelta(dt_k, t_k, tf, dt))
+            if (!signal_utils::__getTimeDelta(dt_k, t_k, tf, dt))
             {
                 return false;
             }

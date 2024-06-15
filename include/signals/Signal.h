@@ -5,7 +5,7 @@
 #include <SO3.h>
 #include <SE2.h>
 #include <SE3.h>
-#include "Utils.h"
+#include "internal/Utils.h"
 
 using namespace Eigen;
 

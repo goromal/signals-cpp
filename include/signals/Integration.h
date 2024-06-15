@@ -12,7 +12,7 @@ struct Integrator
     {
         double t0 = xInt.t();
         double dt;
-        if (!signal_utils::getTimeDelta(dt, t0, tf))
+        if (!signal_utils::__getTimeDelta(dt, t0, tf))
         {
             return false;
         }
@@ -31,7 +31,7 @@ struct Integrator
         while (t_k < tf && success)
         {
             double dt_k;
-            if (signal_utils::getTimeDelta(dt_k, t_k, tf, dt))
+            if (signal_utils::__getTimeDelta(dt_k, t_k, tf, dt))
             {
                 double t_kp1 = t_k + dt_k;
                 success &= IntegratorType::integrate(xInt, x, t_k, t_kp1, insertIntoHistory);
