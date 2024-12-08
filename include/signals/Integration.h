@@ -74,15 +74,7 @@ struct TrapezoidalIntegratorSpec
     }
 };
 
-// TODO RK4 support
-//         const double dt = t - x.t();
-//         DeltaType k1, k2, k3, k4, dx;
-//         f(k1, x, u);
-//         f(k2, x + k1 * dt / 2.0, u);
-//         f(k3, x + k2 * dt / 2.0, u);
-//         f(k4, x + k3 * dt, u);
-//         dx = (k1 + 2.0 * k2 + 2.0 * k3 + k4) * dt / 6.0;
-//         x.update(t, x() + dx(), x.dot() + dx.dot(), insertIntoHistory);
+// TODO SimpsonIntegratorSpec
 
 typedef Integrator<EulerIntegratorSpec>       EulerIntegrator;
 typedef Integrator<TrapezoidalIntegratorSpec> TrapezoidalIntegrator;
