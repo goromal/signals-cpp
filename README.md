@@ -56,7 +56,7 @@ f(SignalType &xInt, TangentSignalType x, double t, bool insertHistory = false);
 f(SignalType &xInt, TangentSignalType x, double t, double dt, bool insertHistory = false);
 ```
 
-### System Models
+### Models
 
 *Pending implementations:*
 

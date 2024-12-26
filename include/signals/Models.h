@@ -6,7 +6,7 @@
 using namespace Eigen;
 
 template<typename DynamicsType>
-class System
+class Model
 {
 public:
     using InputSignalType    = typename DynamicsType::InputSignalType;
@@ -17,7 +17,7 @@ public:
     StateSignalType    x;
     StateDotSignalType xdot;
 
-    System() : params_{std::nullopt}
+    Model() : params_{std::nullopt}
     {
         reset();
     }
@@ -357,30 +357,30 @@ struct RigidBodyDynamics6DOF
 };
 
 template<typename T>
-using Translational1DOFSystem = System<TranslationalDynamics1DOF<T>>;
+using Translational1DOFModel = Model<TranslationalDynamics1DOF<T>>;
 
 template<typename T>
-using Translational2DOFSystem = System<TranslationalDynamics2DOF<T>>;
+using Translational2DOFModel = Model<TranslationalDynamics2DOF<T>>;
 
 template<typename T>
-using Translational3DOFSystem = System<TranslationalDynamics3DOF<T>>;
+using Translational3DOFModel = Model<TranslationalDynamics3DOF<T>>;
 
 template<typename T>
-using Rotational1DOFSystem = System<RotationalDynamics1DOF<T>>;
+using Rotational1DOFModel = Model<RotationalDynamics1DOF<T>>;
 
 template<typename T>
-using Rotational3DOFSystem = System<RotationalDynamics3DOF<T>>;
+using Rotational3DOFModel = Model<RotationalDynamics3DOF<T>>;
 
 template<typename T>
-using RigidBody3DOFSystem = System<RigidBodyDynamics3DOF<T>>;
+using RigidBody3DOFModel = Model<RigidBodyDynamics3DOF<T>>;
 
 template<typename T>
-using RigidBody6DOFSystem = System<RigidBodyDynamics6DOF<T>>;
+using RigidBody6DOFModel = Model<RigidBodyDynamics6DOF<T>>;
 
-typedef Translational1DOFSystem<double> Translational1DOFSystemd;
-typedef Translational2DOFSystem<double> Translational2DOFSystemd;
-typedef Translational3DOFSystem<double> Translational3DOFSystemd;
-typedef Rotational1DOFSystem<double>    Rotational1DOFSystemd;
-typedef Rotational3DOFSystem<double>    Rotational3DOFSystemd;
-typedef RigidBody3DOFSystem<double>     RigidBody3DOFSystemd;
-typedef RigidBody6DOFSystem<double>     RigidBody6DOFSystemd;
+typedef Translational1DOFModel<double> Translational1DOFModeld;
+typedef Translational2DOFModel<double> Translational2DOFModeld;
+typedef Translational3DOFModel<double> Translational3DOFModeld;
+typedef Rotational1DOFModel<double>    Rotational1DOFModeld;
+typedef Rotational3DOFModel<double>    Rotational3DOFModeld;
+typedef RigidBody3DOFModel<double>     RigidBody3DOFModeld;
+typedef RigidBody6DOFModel<double>     RigidBody6DOFModeld;

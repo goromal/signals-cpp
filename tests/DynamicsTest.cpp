@@ -10,7 +10,7 @@ BOOST_AUTO_TEST_SUITE(TestDynamics)
 
 BOOST_AUTO_TEST_CASE(TestTransSim)
 {
-    Translational1DOFSystemd sys, sys2;
+    Translational1DOFModeld sys, sys2;
     ScalardSignal            u;
 
     RigidBodyParams1D p;
@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(TestTransSim)
 
 BOOST_AUTO_TEST_CASE(TestSO2Sim)
 {
-    Rotational1DOFSystemd sys;
+    Rotational1DOFModeld sys;
     Vector1dSignal        u;
 
     RigidBodyParams2D p;
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(TestSO2Sim)
 
 BOOST_AUTO_TEST_CASE(TestSO3Sim)
 {
-    Rotational3DOFSystemd sys;
+    Rotational3DOFModeld sys;
     Vector3dSignal        u;
 
     RigidBodyParams3D p;
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE(TestSO3Sim)
 
 BOOST_AUTO_TEST_CASE(TestSE2Sim)
 {
-    RigidBody3DOFSystemd sys;
+    RigidBody3DOFModeld sys;
     Vector3dSignal       u;
 
     RigidBodyParams2D p;
@@ -162,7 +162,7 @@ BOOST_AUTO_TEST_CASE(TestSE2Sim)
 
 BOOST_AUTO_TEST_CASE(TestSE3Sim)
 {
-    RigidBody6DOFSystemd sys;
+    RigidBody6DOFModeld sys;
     Vector6dSignal       u;
 
     RigidBodyParams3D p;
