@@ -75,6 +75,11 @@ public:
         this->needsSort_          = other.needsSort_;
     }
 
+    static size_t dimension()
+    {
+        return TangentSignalSpec::Dimension();
+    }
+
     Signal<TangentSignalSpec, TangentSignalSpec> dotSignal()
     {
         Signal<TangentSignalSpec, TangentSignalSpec> signalDot;
@@ -623,6 +628,10 @@ struct ScalarSignalSpec
     {
         return (T)1. / 0.;
     }
+    static size_t Dimension()
+    {
+        return 1;
+    }
 };
 
 template<typename T, size_t d>
@@ -637,6 +646,10 @@ struct VectorSignalSpec
     {
         return Type::Zero(); // TODO fix
     }
+    static size_t Dimension()
+    {
+        return d;
+    }
 };
 
 template<typename ManifoldType>
@@ -650,6 +663,10 @@ struct ManifoldSignalSpec
     static Type NansType()
     {
         return Type::identity(); // TODO fix
+    }
+    static size_t Dimension()
+    {
+        return Type::Log(Type::Identity()).rows();
     }
 };
 
