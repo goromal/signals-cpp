@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <limits>
 #include <Eigen/Core>
 #include <SO2.h>
 #include <SO3.h>
@@ -635,7 +636,7 @@ struct VectorSignalSpec
     }
     static Type NansType()
     {
-        return Type::Zero(); // TODO fix
+        return Type::Constant(std::numeric_limits<T>::quiet_NaN());
     }
 };
 
@@ -649,7 +650,7 @@ struct ManifoldSignalSpec
     }
     static Type NansType()
     {
-        return Type::identity(); // TODO fix
+        return Type::nans();
     }
 };
 
@@ -683,47 +684,28 @@ inline std::ostream& operator<<(std::ostream& os, const ManifoldSignal<T, Manifo
     return os;
 }
 
-template<typename T>
-using Vector1Signal = VectorSignal<T, 1>;
-template<typename T>
-using Vector2Signal = VectorSignal<T, 2>;
-template<typename T>
-using Vector3Signal = VectorSignal<T, 3>;
-template<typename T>
-using Vector4Signal = VectorSignal<T, 4>;
-template<typename T>
-using Vector5Signal = VectorSignal<T, 5>;
-template<typename T>
-using Vector6Signal = VectorSignal<T, 6>;
-template<typename T>
-using Vector7Signal = VectorSignal<T, 7>;
-template<typename T>
-using Vector8Signal = VectorSignal<T, 8>;
-template<typename T>
-using Vector9Signal = VectorSignal<T, 9>;
-template<typename T>
-using Vector10Signal = VectorSignal<T, 10>;
-template<typename T>
-using SO2Signal = ManifoldSignal<T, SO2<T>, 1>;
-template<typename T>
-using SO3Signal = ManifoldSignal<T, SO3<T>, 3>;
-template<typename T>
-using SE2Signal = ManifoldSignal<T, SE2<T>, 3>;
-template<typename T>
-using SE3Signal = ManifoldSignal<T, SE3<T>, 6>;
+#define MAKE_VECTOR_SIGNAL(Dimension)                                                                                  \
+    template<typename T>                                                                                               \
+    using Vector##Dimension##Signal = VectorSignal<T, Dimension>;                                                      \
+    typedef Vector##Dimension##Signal<double> Vector##Dimension##dSignal;
 
-typedef ScalarSignal<double>   ScalardSignal;
-typedef Vector1Signal<double>  Vector1dSignal;
-typedef Vector2Signal<double>  Vector2dSignal;
-typedef Vector3Signal<double>  Vector3dSignal;
-typedef Vector4Signal<double>  Vector4dSignal;
-typedef Vector5Signal<double>  Vector5dSignal;
-typedef Vector6Signal<double>  Vector6dSignal;
-typedef Vector7Signal<double>  Vector7dSignal;
-typedef Vector8Signal<double>  Vector8dSignal;
-typedef Vector9Signal<double>  Vector9dSignal;
-typedef Vector10Signal<double> Vector10dSignal;
-typedef SO2Signal<double>      SO2dSignal;
-typedef SO3Signal<double>      SO3dSignal;
-typedef SE2Signal<double>      SE2dSignal;
-typedef SE3Signal<double>      SE3dSignal;
+#define MAKE_MANIF_SIGNAL(Manif, Dimension)                                                                            \
+    template<typename T>                                                                                               \
+    using Manif##Signal = ManifoldSignal<T, Manif<T>, Dimension>;                                                      \
+    typedef Manif##Signal<double> Manif##dSignal;
+
+typedef ScalarSignal<double> ScalardSignal;
+MAKE_VECTOR_SIGNAL(1)
+MAKE_VECTOR_SIGNAL(2)
+MAKE_VECTOR_SIGNAL(3)
+MAKE_VECTOR_SIGNAL(4)
+MAKE_VECTOR_SIGNAL(5)
+MAKE_VECTOR_SIGNAL(6)
+MAKE_VECTOR_SIGNAL(7)
+MAKE_VECTOR_SIGNAL(8)
+MAKE_VECTOR_SIGNAL(9)
+MAKE_VECTOR_SIGNAL(10)
+MAKE_MANIF_SIGNAL(SO2, 1)
+MAKE_MANIF_SIGNAL(SO3, 3)
+MAKE_MANIF_SIGNAL(SE2, 3)
+MAKE_MANIF_SIGNAL(SE3, 6)

@@ -356,31 +356,15 @@ struct RigidBodyDynamics6DOF
     }
 };
 
-template<typename T>
-using Translational1DOFModel = Model<TranslationalDynamics1DOF<T>>;
+#define MAKE_MODEL(ModelBaseName, ModelDOF)                                                                            \
+    template<typename T>                                                                                               \
+    using ModelBaseName##ModelDOF##Model = Model<ModelBaseName##Dynamics##ModelDOF<T>>;                                \
+    typedef ModelBaseName##ModelDOF##Model<double> ModelBaseName##ModelDOF##Modeld;
 
-template<typename T>
-using Translational2DOFModel = Model<TranslationalDynamics2DOF<T>>;
-
-template<typename T>
-using Translational3DOFModel = Model<TranslationalDynamics3DOF<T>>;
-
-template<typename T>
-using Rotational1DOFModel = Model<RotationalDynamics1DOF<T>>;
-
-template<typename T>
-using Rotational3DOFModel = Model<RotationalDynamics3DOF<T>>;
-
-template<typename T>
-using RigidBody3DOFModel = Model<RigidBodyDynamics3DOF<T>>;
-
-template<typename T>
-using RigidBody6DOFModel = Model<RigidBodyDynamics6DOF<T>>;
-
-typedef Translational1DOFModel<double> Translational1DOFModeld;
-typedef Translational2DOFModel<double> Translational2DOFModeld;
-typedef Translational3DOFModel<double> Translational3DOFModeld;
-typedef Rotational1DOFModel<double>    Rotational1DOFModeld;
-typedef Rotational3DOFModel<double>    Rotational3DOFModeld;
-typedef RigidBody3DOFModel<double>     RigidBody3DOFModeld;
-typedef RigidBody6DOFModel<double>     RigidBody6DOFModeld;
+MAKE_MODEL(Translational, 1DOF)
+MAKE_MODEL(Translational, 2DOF)
+MAKE_MODEL(Translational, 3DOF)
+MAKE_MODEL(Rotational, 1DOF)
+MAKE_MODEL(Rotational, 3DOF)
+MAKE_MODEL(RigidBody, 3DOF)
+MAKE_MODEL(RigidBody, 6DOF)

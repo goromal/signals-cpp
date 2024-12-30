@@ -70,11 +70,29 @@ struct TrapezoidalIntegratorSpec
                           const bool&                                         insertIntoHistory)
     {
         double dt = tf - t0;
-        return xInt.update(tf, xInt() + (xInt.dot() + x(tf)) * dt / 2.0, x(tf), insertIntoHistory);
+        return xInt.update(tf, xInt() + (x(t0) + x(tf)) * dt / 2.0, x(tf), insertIntoHistory);
     }
 };
 
-// TODO SimpsonIntegratorSpec
+struct SimpsonIntegratorSpec
+{
+    template<typename BaseSignalSpec, typename TangentSignalSpec>
+    static bool integrate(Signal<BaseSignalSpec, TangentSignalSpec>&          xInt,
+                          const Signal<TangentSignalSpec, TangentSignalSpec>& x,
+                          const double&                                       t0,
+                          const double&                                       tf,
+                          const bool&                                         insertIntoHistory)
+    {
+        double dt = tf - t0;
+        return xInt.update(tf,
+                           xInt() + (x(t0) + 4.0 * x((t0 + tf) / 2.0) + x(tf)) * dt / 6.0,
+                           x(tf),
+                           insertIntoHistory);
+    }
+};
 
-typedef Integrator<EulerIntegratorSpec>       EulerIntegrator;
-typedef Integrator<TrapezoidalIntegratorSpec> TrapezoidalIntegrator;
+#define MAKE_INTEGRATOR(IntegratorName) typedef Integrator<IntegratorName##IntegratorSpec> IntegratorName##Integrator;
+
+MAKE_INTEGRATOR(Euler)
+MAKE_INTEGRATOR(Trapezoidal)
+MAKE_INTEGRATOR(Simpson)
