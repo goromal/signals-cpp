@@ -24,6 +24,7 @@ if (BUILD_TESTS)
         tests/SignalTest.cpp
         tests/IntegrationTest.cpp
         tests/DynamicsTest.cpp
+        tests/FunctionTest.cpp
     )
     target_link_libraries(${UNIT_TEST}
         ${PROJ_NAME}
