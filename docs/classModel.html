@@ -87,6 +87,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Base type for all model simulators.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Models_8h_source.html">Models.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -105,28 +108,50 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3cbccc00606661a35110dbe111af54ad" id="r_a3cbccc00606661a35110dbe111af54ad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cbccc00606661a35110dbe111af54ad">Model</a> ()</td></tr>
 <tr class="separator:a3cbccc00606661a35110dbe111af54ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96533143a30ab87c379e411fcae59643" id="r_a96533143a30ab87c379e411fcae59643"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a96533143a30ab87c379e411fcae59643">setParams</a> (const <a class="el" href="#aec20251d98505785fa51c52eb81dd3a2">ParamsType</a> &amp;params)</td></tr>
+<tr class="memdesc:a96533143a30ab87c379e411fcae59643"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the model with any required parameters.  <br /></td></tr>
 <tr class="separator:a96533143a30ab87c379e411fcae59643"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f059d658bfda1665bf44a36b7aaf8e5" id="r_a4f059d658bfda1665bf44a36b7aaf8e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f059d658bfda1665bf44a36b7aaf8e5">hasParams</a> ()</td></tr>
+<tr class="memdesc:a4f059d658bfda1665bf44a36b7aaf8e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify that the model has parameters explicity set by <code><a class="el" href="#a96533143a30ab87c379e411fcae59643" title="Initialize the model with any required parameters.">setParams()</a></code>.  <br /></td></tr>
 <tr class="separator:a4f059d658bfda1665bf44a36b7aaf8e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a823536a9764d6a35cce173573ee62e90" id="r_a823536a9764d6a35cce173573ee62e90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a823536a9764d6a35cce173573ee62e90">reset</a> ()</td></tr>
+<tr class="memdesc:a823536a9764d6a35cce173573ee62e90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zero out the model state and derivative variables and reset simulation time to zero.  <br /></td></tr>
 <tr class="separator:a823536a9764d6a35cce173573ee62e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7661852411b9ffd59240d5d5ca0e4dd3" id="r_a7661852411b9ffd59240d5d5ca0e4dd3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7661852411b9ffd59240d5d5ca0e4dd3">t</a> () const</td></tr>
+<tr class="memdesc:a7661852411b9ffd59240d5d5ca0e4dd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current simulation time.  <br /></td></tr>
 <tr class="separator:a7661852411b9ffd59240d5d5ca0e4dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7446138b27c8feba779ebfe8e82b99d" id="r_ac7446138b27c8feba779ebfe8e82b99d"><td class="memTemplParams" colspan="2">template&lt;typename IntegratorType &gt; </td></tr>
 <tr class="memitem:ac7446138b27c8feba779ebfe8e82b99d"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac7446138b27c8feba779ebfe8e82b99d">simulate</a> (const <a class="el" href="#ac990dd4740b30e4477bca86fc6172970">InputSignalType</a> &amp;u, const double &amp;tf, const bool &amp;insertIntoHistory=false, const bool &amp;calculateXddot=false)</td></tr>
+<tr class="memdesc:ac7446138b27c8feba779ebfe8e82b99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate the system response to an input over a specified time interval.  <br /></td></tr>
 <tr class="separator:ac7446138b27c8feba779ebfe8e82b99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2550ae8ed888d167450160ce55286df" id="r_ac2550ae8ed888d167450160ce55286df"><td class="memTemplParams" colspan="2">template&lt;typename IntegratorType &gt; </td></tr>
 <tr class="memitem:ac2550ae8ed888d167450160ce55286df"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac2550ae8ed888d167450160ce55286df">simulate</a> (const <a class="el" href="#ac990dd4740b30e4477bca86fc6172970">InputSignalType</a> &amp;u, const double &amp;tf, const double &amp;dt, const bool &amp;insertIntoHistory=false, const bool &amp;calculateXddot=false)</td></tr>
+<tr class="memdesc:ac2550ae8ed888d167450160ce55286df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate the system response to an input over a specified time interval, chunked up into smaller integration increments.  <br /></td></tr>
 <tr class="separator:ac2550ae8ed888d167450160ce55286df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:abfe8871b9f0eac35c76af3f5cfcdea35" id="r_abfe8871b9f0eac35c76af3f5cfcdea35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a643e1a47ddbb10c5c10844f9aea5be98">StateSignalType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abfe8871b9f0eac35c76af3f5cfcdea35">x</a></td></tr>
+<tr class="memdesc:abfe8871b9f0eac35c76af3f5cfcdea35"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classModel.html" title="Base type for all model simulators.">Model</a> state signal.  <br /></td></tr>
 <tr class="separator:abfe8871b9f0eac35c76af3f5cfcdea35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8bb4819a03ed642326295c28bea6fa7" id="r_ab8bb4819a03ed642326295c28bea6fa7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a8abdf37c6158386a9f1d2c6c506f6839">StateDotSignalType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8bb4819a03ed642326295c28bea6fa7">xdot</a></td></tr>
+<tr class="memdesc:ab8bb4819a03ed642326295c28bea6fa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time derivative of the model state signal.  <br /></td></tr>
 <tr class="separator:ab8bb4819a03ed642326295c28bea6fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename DynamicsType&gt;<br />
+class Model&lt; DynamicsType &gt;</div><p>Base type for all model simulators. </p>
+<p>Provides methods for initialization, reset, and simulation of dynamic models.</p>
+<p><b>Derived types</b>:</p>
+<ul>
+<li><code><a class="el" href="Models_8h.html#a06f4823dd2b571a8718ccad09ce44fe7">Translational1DOFModel(d)</a></code></li>
+<li><code><a class="el" href="Models_8h.html#aa8b7fa1f2cfd2453d95d80ce49abd8fc">Translational2DOFModel(d)</a></code></li>
+<li><code><a class="el" href="Models_8h.html#aae658b45855be04ff99456f612008b96">Translational3DOFModel(d)</a></code></li>
+<li><code><a class="el" href="Models_8h.html#a44917fd68b589ce4fc82e69e00c41201">Rotational1DOFModel(d)</a></code></li>
+<li><code><a class="el" href="Models_8h.html#ad5282fd410476dbdd8381772a38ac2f1">Rotational3DOFModel(d)</a></code></li>
+<li><code><a class="el" href="Models_8h.html#a253b3866118f6e70cfc4f08b471c2975">RigidBody3DOFModel(d)</a></code></li>
+<li><code><a class="el" href="Models_8h.html#ac6b34f1aa0a10dcb6e9fda4a2814a9b3">RigidBody6DOFModel(d)</a></code> </li>
+</ul>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ac990dd4740b30e4477bca86fc6172970" name="ac990dd4740b30e4477bca86fc6172970"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac990dd4740b30e4477bca86fc6172970">&#9670;&#160;</a></span>InputSignalType</h2>
 
@@ -245,6 +270,8 @@ template&lt;typename DynamicsType &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Verify that the model has parameters explicity set by <code><a class="el" href="#a96533143a30ab87c379e411fcae59643" title="Initialize the model with any required parameters.">setParams()</a></code>. </p>
+
 </div>
 </div>
 <a id="a823536a9764d6a35cce173573ee62e90" name="a823536a9764d6a35cce173573ee62e90"></a>
@@ -272,6 +299,8 @@ template&lt;typename DynamicsType &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Zero out the model state and derivative variables and reset simulation time to zero. </p>
+
 </div>
 </div>
 <a id="a96533143a30ab87c379e411fcae59643" name="a96533143a30ab87c379e411fcae59643"></a>
@@ -298,6 +327,9 @@ template&lt;typename DynamicsType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Initialize the model with any required parameters. </p>
+<p>The required parameters are determined by the model / dynamics specialization. </p>
 
 </div>
 </div>
@@ -341,6 +373,18 @@ template&lt;typename IntegratorType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Simulate the system response to an input over a specified time interval. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td>The input signal, which should be defined up to tf. </td></tr>
+    <tr><td class="paramname">tf</td><td>The time to simulate to. Ideally the delta from the current time is small. </td></tr>
+    <tr><td class="paramname">insertIntoHistory</td><td>Whether to store the result in state memory. </td></tr>
+    <tr><td class="paramname">calculateXddot</td><td>Whether to use finite differencing to calculate the second time derivative of the state. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the simulation was successful. </dd></dl>
 
 </div>
 </div>
@@ -390,6 +434,19 @@ template&lt;typename IntegratorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Simulate the system response to an input over a specified time interval, chunked up into smaller integration increments. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td>The input signal, which should be defined up to tf. </td></tr>
+    <tr><td class="paramname">tf</td><td>The time to simulate to. </td></tr>
+    <tr><td class="paramname">dt</td><td>Time delta length by which to chunk up the integrations. Ideally this is small. </td></tr>
+    <tr><td class="paramname">insertIntoHistory</td><td>Whether to store the result in state memory. </td></tr>
+    <tr><td class="paramname">calculateXddot</td><td>Whether to use finite differencing to calculate the second time derivative of the state. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the simulation was successful. </dd></dl>
+
 </div>
 </div>
 <a id="a7661852411b9ffd59240d5d5ca0e4dd3" name="a7661852411b9ffd59240d5d5ca0e4dd3"></a>
@@ -417,6 +474,8 @@ template&lt;typename DynamicsType &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get the current simulation time. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -434,6 +493,8 @@ template&lt;typename DynamicsType &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p><a class="el" href="classModel.html" title="Base type for all model simulators.">Model</a> state signal. </p>
+
 </div>
 </div>
 <a id="ab8bb4819a03ed642326295c28bea6fa7" name="ab8bb4819a03ed642326295c28bea6fa7"></a>
@@ -449,6 +510,8 @@ template&lt;typename DynamicsType &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Time derivative of the model state signal. </p>
 
 </div>
 </div>

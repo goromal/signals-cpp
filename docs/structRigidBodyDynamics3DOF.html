@@ -86,6 +86,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Definition of the dynamics for planar motion of a mass that's allowed to rotate.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Models_8h_source.html">Models.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -110,9 +113,13 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:acafe68f9e9ea78f54bc70d64a1b39d9c" id="r_acafe68f9e9ea78f54bc70d64a1b39d9c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acafe68f9e9ea78f54bc70d64a1b39d9c">update</a> (<a class="el" href="#a28d138392ca0069c5e6274f78fd08e29">StateDotSignalType</a> &amp;xdot, const <a class="el" href="#a0c346a983bc929f1f7a6e5d2be3a0841">StateSignalType</a> &amp;x, const <a class="el" href="#a4341d5e4a676e15edc8f8faafef5431a">InputSignalType</a> &amp;u, const double &amp;t0, const double &amp;tf, const <a class="el" href="#afa1ade3cc027b78a2d2c65df867d52b0">ParamsType</a> &amp;params, const bool &amp;insertIntoHistory=false, const bool &amp;calculateXddot=false)</td></tr>
+<tr class="memdesc:acafe68f9e9ea78f54bc70d64a1b39d9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update a provided state time derivative given an input and time interval.  <br /></td></tr>
 <tr class="separator:acafe68f9e9ea78f54bc70d64a1b39d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+struct RigidBodyDynamics3DOF&lt; T &gt;</div><p>Definition of the dynamics for planar motion of a mass that's allowed to rotate. </p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a4341d5e4a676e15edc8f8faafef5431a" name="a4341d5e4a676e15edc8f8faafef5431a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4341d5e4a676e15edc8f8faafef5431a">&#9670;&#160;</a></span>InputSignalType</h2>
 
@@ -300,6 +307,21 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Update a provided state time derivative given an input and time interval. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xdot</td><td>The state time derivative signal to update. </td></tr>
+    <tr><td class="paramname">x</td><td>The state signal to reference for the dynamics. </td></tr>
+    <tr><td class="paramname">u</td><td>The input signal to reference for the dynamics. </td></tr>
+    <tr><td class="paramname">t0</td><td>The time at which to sample the state and input. </td></tr>
+    <tr><td class="paramname">tf</td><td>The time at which to modify the state time derivative. </td></tr>
+    <tr><td class="paramname">params</td><td>The 2D rigid body model parameters. </td></tr>
+    <tr><td class="paramname">insertIntoHistory</td><td>Whether to insert the answer into state time derivative signal history. </td></tr>
+    <tr><td class="paramname">calculateXddot</td><td>Whether to use finite differencing to calculate the second time derivative of the state. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

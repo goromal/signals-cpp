@@ -86,6 +86,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Parameters for a 3D rigid body model.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Models_8h_source.html">Models.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -96,13 +99,19 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:acfa4c165c3278306dac4c0f51819e694" id="r_acfa4c165c3278306dac4c0f51819e694"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfa4c165c3278306dac4c0f51819e694">m</a></td></tr>
+<tr class="memdesc:acfa4c165c3278306dac4c0f51819e694"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classModel.html" title="Base type for all model simulators.">Model</a> mass.  <br /></td></tr>
 <tr class="separator:acfa4c165c3278306dac4c0f51819e694"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a049fb70b2897579849053dfe2ea840e6" id="r_a049fb70b2897579849053dfe2ea840e6"><td class="memItemLeft" align="right" valign="top">Matrix3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a049fb70b2897579849053dfe2ea840e6">J</a></td></tr>
+<tr class="memdesc:a049fb70b2897579849053dfe2ea840e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moment of inertia.  <br /></td></tr>
 <tr class="separator:a049fb70b2897579849053dfe2ea840e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87b9c6a467ebcd6805a1d9419e6149d1" id="r_a87b9c6a467ebcd6805a1d9419e6149d1"><td class="memItemLeft" align="right" valign="top">Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87b9c6a467ebcd6805a1d9419e6149d1">g</a></td></tr>
+<tr class="memdesc:a87b9c6a467ebcd6805a1d9419e6149d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gravitational vector.  <br /></td></tr>
 <tr class="separator:a87b9c6a467ebcd6805a1d9419e6149d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Parameters for a 3D rigid body model. </p>
+<p>Picture a mass (not necessarily a point mass) free to move around 3D space. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8aa76fea7a0790ead025bf79e767d0cf" name="a8aa76fea7a0790ead025bf79e767d0cf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8aa76fea7a0790ead025bf79e767d0cf">&#9670;&#160;</a></span>RigidBodyParams3D()</h2>
 
@@ -141,6 +150,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gravitational vector. </p>
+<p>Essentially defines which way is "down." Set to all zeroes if there's no gravity. </p>
+
 </div>
 </div>
 <a id="a049fb70b2897579849053dfe2ea840e6" name="a049fb70b2897579849053dfe2ea840e6"></a>
@@ -155,6 +167,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Moment of inertia. </p>
+<p>Moments of inertia about all three principal axes, represented as \(\boldsymbol{J}\in\mathbb{R}^{3\times 3}\). </p>
+
 </div>
 </div>
 <a id="acfa4c165c3278306dac4c0f51819e694" name="acfa4c165c3278306dac4c0f51819e694"></a>
@@ -168,6 +183,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="classModel.html" title="Base type for all model simulators.">Model</a> mass. </p>
 
 </div>
 </div>

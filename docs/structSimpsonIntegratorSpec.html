@@ -85,15 +85,21 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Specification for numerically integrating a black box function using Simpson's method.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Integration_8h_source.html">Integration.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a6194da52902a391e4a9b251c05e6abf2" id="r_a6194da52902a391e4a9b251c05e6abf2"><td class="memTemplParams" colspan="2">template&lt;typename BaseSignalSpec , typename TangentSignalSpec &gt; </td></tr>
 <tr class="memitem:a6194da52902a391e4a9b251c05e6abf2"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a6194da52902a391e4a9b251c05e6abf2">integrate</a> (<a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const <a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;t0, const double &amp;tf, const bool &amp;insertIntoHistory)</td></tr>
+<tr class="memdesc:a6194da52902a391e4a9b251c05e6abf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simpson integration implementation.  <br /></td></tr>
 <tr class="separator:a6194da52902a391e4a9b251c05e6abf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Specification for numerically integrating a black box function using Simpson's method. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6194da52902a391e4a9b251c05e6abf2" name="a6194da52902a391e4a9b251c05e6abf2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6194da52902a391e4a9b251c05e6abf2">&#9670;&#160;</a></span>integrate()</h2>
 
@@ -137,6 +143,21 @@ template&lt;typename BaseSignalSpec , typename TangentSignalSpec &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Simpson integration implementation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xInt</td><td>The output signal representing the integration. </td></tr>
+    <tr><td class="paramname">x</td><td>The input signal to be integrated. </td></tr>
+    <tr><td class="paramname">t0</td><td>The start time for the integration. </td></tr>
+    <tr><td class="paramname">tf</td><td>The time to integrate to. Ideally the delta from the start time is small. </td></tr>
+    <tr><td class="paramname">insertIntoHistory</td><td>Whether to store the result in xInt's memory. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the integration was successful.</dd></dl>
+<p>Simpson's method for integration increments the current integral by</p>
+<p>\(\frac{x(t_0)+4x((t_0+t_f)/2)+x(t_f)}{6}\Delta t\) </p>
 
 </div>
 </div>

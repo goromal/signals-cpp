@@ -3,12 +3,41 @@
 
 using namespace Eigen;
 
+/**
+ * @brief Base type for all Model state representations.
+ *
+ * Provides a convenient union of the "pose" and "twist" (or time derivative of pose) components of a state vector and
+ * defines arithmetic operations for that union.
+ *
+ * A state is *not* a Signal type in itself, which is why separate `*Signal` types are derived below.
+ *
+ * **Derived types**:
+ *
+ * - `Scalar(d)State` and `Scalar(d)StateSignal`
+ * - `Vector1(d)State` and `Vector1(d)StateSignal`
+ * - `Vector2(d)State` and `Vector2(d)StateSignal`
+ * - `Vector3(d)State` and `Vector3(d)StateSignal`
+ * - `Vector4(d)State` and `Vector4(d)StateSignal`
+ * - `Vector5(d)State` and `Vector5(d)StateSignal`
+ * - `Vector6(d)State` and `Vector6(d)StateSignal`
+ * - `Vector7(d)State` and `Vector7(d)StateSignal`
+ * - `Vector8(d)State` and `Vector8(d)StateSignal`
+ * - `Vector9(d)State` and `Vector9(d)StateSignal`
+ * - `Vector10(d)State` and `Vector10(d)StateSignal`
+ * - `SO2(d)State` and `SO2(d)StateSignal`
+ * - `SO3(d)State` and `SO3(d)StateSignal`
+ * - `SE2(d)State` and `SE2(d)StateSignal`
+ * - `SE3(d)State` and `SE3(d)StateSignal`
+ */
 template<typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTypeSpec, size_t TwistDim>
 struct State
 {
     using PoseType  = typename PoseTypeSpec::Type;
     using TwistType = typename TwistTypeSpec::Type;
 
+    /**
+     * @brief TODO
+     */
     PoseType  pose;
     TwistType twist;
 

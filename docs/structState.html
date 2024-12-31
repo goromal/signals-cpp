@@ -88,6 +88,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Base type for all <a class="el" href="classModel.html" title="Base type for all model simulators.">Model</a> state representations.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="State_8h_source.html">State.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -125,7 +128,30 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a3f5fb4275701e71a56d2fa1fb8d54080" id="r_a3f5fb4275701e71a56d2fa1fb8d54080"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ab58b6e2fe6ea3c2777c5a8a92f6665a1">TwistType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f5fb4275701e71a56d2fa1fb8d54080">twist</a></td></tr>
 <tr class="separator:a3f5fb4275701e71a56d2fa1fb8d54080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTypeSpec, size_t TwistDim&gt;<br />
+struct State&lt; T, PoseTypeSpec, PoseDim, TwistTypeSpec, TwistDim &gt;</div><p>Base type for all <a class="el" href="classModel.html" title="Base type for all model simulators.">Model</a> state representations. </p>
+<p>Provides a convenient union of the "pose" and "twist" (or time derivative of pose) components of a state vector and defines arithmetic operations for that union.</p>
+<p>A state is <em>not</em> a <a class="el" href="classSignal.html">Signal</a> type in itself, which is why separate <code>*Signal</code> types are derived below.</p>
+<p><b>Derived types</b>:</p>
+<ul>
+<li><code>Scalar(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Scalar(d)StateSignal</code></li>
+<li><code>Vector1(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Vector1(d)StateSignal</code></li>
+<li><code>Vector2(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Vector2(d)StateSignal</code></li>
+<li><code>Vector3(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Vector3(d)StateSignal</code></li>
+<li><code>Vector4(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Vector4(d)StateSignal</code></li>
+<li><code>Vector5(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Vector5(d)StateSignal</code></li>
+<li><code>Vector6(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Vector6(d)StateSignal</code></li>
+<li><code>Vector7(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Vector7(d)StateSignal</code></li>
+<li><code>Vector8(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Vector8(d)StateSignal</code></li>
+<li><code>Vector9(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Vector9(d)StateSignal</code></li>
+<li><code>Vector10(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Vector10(d)StateSignal</code></li>
+<li><code>SO2(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>SO2(d)StateSignal</code></li>
+<li><code>SO3(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>SO3(d)StateSignal</code></li>
+<li><code>SE2(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>SE2(d)StateSignal</code></li>
+<li><code>SE3(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>SE3(d)StateSignal</code> </li>
+</ul>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a31bd8aa44dff5f656b2b2057c8d63821" name="a31bd8aa44dff5f656b2b2057c8d63821"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a31bd8aa44dff5f656b2b2057c8d63821">&#9670;&#160;</a></span>PoseType</h2>
 

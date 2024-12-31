@@ -86,6 +86,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Parameters for a 1D rigid body model.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Models_8h_source.html">Models.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -96,11 +99,16 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a2f5a1c0e6320c14d72d0ff98ad979332" id="r_a2f5a1c0e6320c14d72d0ff98ad979332"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f5a1c0e6320c14d72d0ff98ad979332">m</a></td></tr>
+<tr class="memdesc:a2f5a1c0e6320c14d72d0ff98ad979332"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classModel.html" title="Base type for all model simulators.">Model</a> mass.  <br /></td></tr>
 <tr class="separator:a2f5a1c0e6320c14d72d0ff98ad979332"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a823d208bcbabadd83d3cc8f222973c95" id="r_a823d208bcbabadd83d3cc8f222973c95"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a823d208bcbabadd83d3cc8f222973c95">g</a></td></tr>
+<tr class="memdesc:a823d208bcbabadd83d3cc8f222973c95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gravitational constant.  <br /></td></tr>
 <tr class="separator:a823d208bcbabadd83d3cc8f222973c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Parameters for a 1D rigid body model. </p>
+<p>Picture a point mass existing on a line, whether horizontal or vertical. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab2b9c3eb89bcbf0ac06a33e95725e0eb" name="ab2b9c3eb89bcbf0ac06a33e95725e0eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab2b9c3eb89bcbf0ac06a33e95725e0eb">&#9670;&#160;</a></span>RigidBodyParams1D()</h2>
 
@@ -139,6 +147,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gravitational constant. </p>
+<p>Essentially defines which way is "down." Set to zero if e.g., the 1D dimension is horizontal. </p>
+
 </div>
 </div>
 <a id="a2f5a1c0e6320c14d72d0ff98ad979332" name="a2f5a1c0e6320c14d72d0ff98ad979332"></a>
@@ -152,6 +163,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="classModel.html" title="Base type for all model simulators.">Model</a> mass. </p>
 
 </div>
 </div>

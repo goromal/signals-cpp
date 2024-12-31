@@ -85,18 +85,33 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Base type for all integrators.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Integration_8h_source.html">Integration.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ab3bebaa347f6019f3d2da2b2bcee5918" id="r_ab3bebaa347f6019f3d2da2b2bcee5918"><td class="memTemplParams" colspan="2">template&lt;typename BaseSignalSpec , typename TangentSignalSpec &gt; </td></tr>
 <tr class="memitem:ab3bebaa347f6019f3d2da2b2bcee5918"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ab3bebaa347f6019f3d2da2b2bcee5918">integrate</a> (<a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const <a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;tf, const bool &amp;insertIntoHistory=false)</td></tr>
+<tr class="memdesc:ab3bebaa347f6019f3d2da2b2bcee5918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate a signal from the current time to the specified end time.  <br /></td></tr>
 <tr class="separator:ab3bebaa347f6019f3d2da2b2bcee5918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8266e6bf3abd90d83fa7eb6b9270c0c4" id="r_a8266e6bf3abd90d83fa7eb6b9270c0c4"><td class="memTemplParams" colspan="2">template&lt;typename BaseSignalSpec , typename TangentSignalSpec &gt; </td></tr>
 <tr class="memitem:a8266e6bf3abd90d83fa7eb6b9270c0c4"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a8266e6bf3abd90d83fa7eb6b9270c0c4">integrate</a> (<a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const <a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;tf, const double &amp;dt, const bool &amp;insertIntoHistory=false)</td></tr>
+<tr class="memdesc:a8266e6bf3abd90d83fa7eb6b9270c0c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate a signal from the current time to the specified end time, chunked up into smaller integration increments.  <br /></td></tr>
 <tr class="separator:a8266e6bf3abd90d83fa7eb6b9270c0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename IntegratorType&gt;<br />
+struct Integrator&lt; IntegratorType &gt;</div><p>Base type for all integrators. </p>
+<p>Provides methods for incremental (e.g., for control) or holistic (e.g., for open-loop simulation) integrations of arbitrary signal types.</p>
+<p><b>Derived types</b>:</p>
+<ul>
+<li><code>EulerIntegrator</code></li>
+<li><code>TrapezoidalIntegrator</code></li>
+<li><code>SimpsonIntegrator</code> </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab3bebaa347f6019f3d2da2b2bcee5918" name="ab3bebaa347f6019f3d2da2b2bcee5918"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3bebaa347f6019f3d2da2b2bcee5918">&#9670;&#160;</a></span>integrate() <span class="overload">[1/2]</span></h2>
 
@@ -137,6 +152,18 @@ template&lt;typename BaseSignalSpec , typename TangentSignalSpec &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Integrate a signal from the current time to the specified end time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xInt</td><td>The output signal representing the integration. </td></tr>
+    <tr><td class="paramname">x</td><td>The input signal to be integrated. </td></tr>
+    <tr><td class="paramname">tf</td><td>The time to integrate to. Ideally the delta from the current time is small. </td></tr>
+    <tr><td class="paramname">insertIntoHistory</td><td>Whether to store the result in xInt's memory. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the integration was successful. </dd></dl>
 
 </div>
 </div>
@@ -185,6 +212,19 @@ template&lt;typename BaseSignalSpec , typename TangentSignalSpec &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Integrate a signal from the current time to the specified end time, chunked up into smaller integration increments. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xInt</td><td>The output signal representing the integration. </td></tr>
+    <tr><td class="paramname">x</td><td>The input signal to be integrated. </td></tr>
+    <tr><td class="paramname">tf</td><td>The time to integrate to. </td></tr>
+    <tr><td class="paramname">dt</td><td>Time delta length by which to chunk up the integrations. Ideally this is small. </td></tr>
+    <tr><td class="paramname">insertIntoHistory</td><td>Whether to store the result in xInt's memory. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the integration was successful. </dd></dl>
 
 </div>
 </div>

@@ -11,6 +11,13 @@
  * @section intro_sec Introduction
  * Header-only templated C++ library implementing rigid-body dynamics, derivatives, integrals, and interpolation.
  *
+ * The key class definitions in this library from which all specialized types are derived are:
+ *
+ * - Signal
+ * - State
+ * - Model
+ * - Integrator
+ *
  * @section install Installation
  * This code is meant to be built as a static library with CMake. It should be compatible with the latest versions of
  * Eigen and Boost (unit test framework only).

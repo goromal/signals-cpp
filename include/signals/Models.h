@@ -5,6 +5,21 @@
 
 using namespace Eigen;
 
+/**
+ * @brief Base type for all model simulators.
+ *
+ * Provides methods for initialization, reset, and simulation of dynamic models.
+ *
+ * **Derived types**:
+ *
+ * - `Translational1DOFModel(d)`
+ * - `Translational2DOFModel(d)`
+ * - `Translational3DOFModel(d)`
+ * - `Rotational1DOFModel(d)`
+ * - `Rotational3DOFModel(d)`
+ * - `RigidBody3DOFModel(d)`
+ * - `RigidBody6DOFModel(d)`
+ */
 template<typename DynamicsType>
 class Model
 {
@@ -14,7 +29,13 @@ public:
     using StateSignalType    = typename DynamicsType::StateSignalType;
     using ParamsType         = typename DynamicsType::ParamsType;
 
-    StateSignalType    x;
+    /**
+     * @brief Model state signal.
+     */
+    StateSignalType x;
+    /**
+     * @brief Time derivative of the model state signal.
+     */
     StateDotSignalType xdot;
 
     Model() : params_{std::nullopt}
@@ -22,27 +43,49 @@ public:
         reset();
     }
 
+    /**
+     * @brief Initialize the model with any required parameters.
+     *
+     * The required parameters are determined by the model / dynamics specialization.
+     */
     void setParams(const ParamsType& params)
     {
         params_ = params;
     }
 
+    /**
+     * @brief Verify that the model has parameters explicity set by `setParams()`.
+     */
     bool hasParams()
     {
         return params_.has_value();
     }
 
+    /**
+     * @brief Zero out the model state and derivative variables and reset simulation time to zero.
+     */
     void reset()
     {
         x.reset();
         xdot.reset();
     }
 
+    /**
+     * @brief Get the current simulation time.
+     */
     double t() const
     {
         return x.t();
     }
 
+    /**
+     * @brief Simulate the system response to an input over a specified time interval.
+     * @param u The input signal, which should be defined up to tf.
+     * @param tf The time to simulate to. Ideally the delta from the current time is small.
+     * @param insertIntoHistory Whether to store the result in state memory.
+     * @param calculateXddot Whether to use finite differencing to calculate the second time derivative of the state.
+     * @returns Whether the simulation was successful.
+     */
     template<typename IntegratorType>
     bool simulate(const InputSignalType& u,
                   const double&          tf,
@@ -68,6 +111,16 @@ public:
         return true;
     }
 
+    /**
+     * @brief Simulate the system response to an input over a specified time interval, chunked up into smaller
+     * integration increments.
+     * @param u The input signal, which should be defined up to tf.
+     * @param tf The time to simulate to.
+     * @param dt Time delta length by which to chunk up the integrations. Ideally this is small.
+     * @param insertIntoHistory Whether to store the result in state memory.
+     * @param calculateXddot Whether to use finite differencing to calculate the second time derivative of the state.
+     * @returns Whether the simulation was successful.
+     */
     template<typename IntegratorType>
     bool simulate(const InputSignalType& u,
                   const double&          tf,
@@ -103,29 +156,81 @@ private:
     std::optional<ParamsType> params_;
 };
 
+/**
+ * @brief Parameters for a 1D rigid body model.
+ *
+ * Picture a point mass existing on a line, whether horizontal or vertical.
+ */
 struct RigidBodyParams1D
 {
     RigidBodyParams1D() : m(1), g(0) {}
+    /**
+     * @brief Model mass.
+     */
     double m;
+    /**
+     * @brief Gravitational constant.
+     *
+     * Essentially defines which way is "down." Set to zero if e.g., the 1D dimension is horizontal.
+     */
     double g;
 };
 
+/**
+ * @brief Parameters for a 2D rigid body model.
+ *
+ * Picture a mass (not necessarily a point mass) confined to a 2D plane.
+ */
 struct RigidBodyParams2D
 {
     RigidBodyParams2D() : m(1), J(1), g(Vector2d::Zero()) {}
-    double   m;
-    double   J;
+    /**
+     * @brief Model mass.
+     */
+    double m;
+    /**
+     * @brief Moment of inertia.
+     *
+     * The moment of inertia is about the axis coming out of the 2D plane.
+     */
+    double J;
+    /**
+     * @brief Gravitational vector.
+     *
+     * Essentially defines which way is "down." Set to all zeroes if e.g., the 2D plane represents flat ground.
+     */
     Vector2d g;
 };
 
+/**
+ * @brief Parameters for a 3D rigid body model.
+ *
+ * Picture a mass (not necessarily a point mass) free to move around 3D space.
+ */
 struct RigidBodyParams3D
 {
     RigidBodyParams3D() : m(1), J(Matrix3d::Identity()), g(Vector3d::Zero()) {}
-    double   m;
+    /**
+     * @brief Model mass.
+     */
+    double m;
+    /**
+     * @brief Moment of inertia.
+     *
+     * Moments of inertia about all three principal axes, represented as \f$\boldsymbol{J}\in\mathbb{R}^{3\times 3}\f$.
+     */
     Matrix3d J;
+    /**
+     * @brief Gravitational vector.
+     *
+     * Essentially defines which way is "down." Set to all zeroes if there's no gravity.
+     */
     Vector3d g;
 };
 
+/**
+ * @brief Base class for defining the dynamics for 1D, 2D, and 3D *point masses*.
+ */
 template<typename IST, typename SST, typename SDST, size_t d, typename PT>
 struct TranslationalDynamicsBase
 {
@@ -140,6 +245,17 @@ struct TranslationalDynamicsBase
 
     using ParamsType = PT;
 
+    /**
+     * @brief Update a provided state time derivative given an input and time interval.
+     * @param xdot The state time derivative signal to update.
+     * @param x The state signal to reference for the dynamics.
+     * @param u The input signal to reference for the dynamics.
+     * @param t0 The time at which to sample the state and input.
+     * @param tf The time at which to modify the state time derivative.
+     * @param params The rigid body model parameters.
+     * @param insertIntoHistory Whether to insert the answer into state time derivative signal history.
+     * @param calculateXddot Whether to use finite differencing to calculate the second time derivative of the state.
+     */
     static bool update(StateDotSignalType&    xdot,
                        const StateSignalType& x,
                        const InputSignalType& u,
@@ -179,6 +295,9 @@ template<typename T>
 using TranslationalDynamics3DOF =
     TranslationalDynamicsBase<Vector3Signal<T>, Vector3StateSignal<T>, Vector3StateSignal<T>, 3, RigidBodyParams3D>;
 
+/**
+ * @brief Definition of the dynamics for planar rotation-only motion of a mass.
+ */
 template<typename T>
 struct RotationalDynamics1DOF
 {
@@ -193,6 +312,17 @@ struct RotationalDynamics1DOF
 
     using ParamsType = RigidBodyParams2D;
 
+    /**
+     * @brief Update a provided state time derivative given an input and time interval.
+     * @param xdot The state time derivative signal to update.
+     * @param x The state signal to reference for the dynamics.
+     * @param u The input signal to reference for the dynamics.
+     * @param t0 The time at which to sample the state and input.
+     * @param tf The time at which to modify the state time derivative.
+     * @param params The 2D rigid body model parameters.
+     * @param insertIntoHistory Whether to insert the answer into state time derivative signal history.
+     * @param calculateXddot Whether to use finite differencing to calculate the second time derivative of the state.
+     */
     static bool update(StateDotSignalType&    xdot,
                        const StateSignalType& x,
                        const InputSignalType& u,
@@ -220,6 +350,9 @@ struct RotationalDynamics1DOF
     }
 };
 
+/**
+ * @brief Definition of the dynamics for 3D rotation-only motion of a mass.
+ */
 template<typename T>
 struct RotationalDynamics3DOF
 {
@@ -234,6 +367,17 @@ struct RotationalDynamics3DOF
 
     using ParamsType = RigidBodyParams3D;
 
+    /**
+     * @brief Update a provided state time derivative given an input and time interval.
+     * @param xdot The state time derivative signal to update.
+     * @param x The state signal to reference for the dynamics.
+     * @param u The input signal to reference for the dynamics.
+     * @param t0 The time at which to sample the state and input.
+     * @param tf The time at which to modify the state time derivative.
+     * @param params The 3D rigid body model parameters.
+     * @param insertIntoHistory Whether to insert the answer into state time derivative signal history.
+     * @param calculateXddot Whether to use finite differencing to calculate the second time derivative of the state.
+     */
     static bool update(StateDotSignalType&    xdot,
                        const StateSignalType& x,
                        const InputSignalType& u,
@@ -261,6 +405,9 @@ struct RotationalDynamics3DOF
     }
 };
 
+/**
+ * @brief Definition of the dynamics for planar motion of a mass that's allowed to rotate.
+ */
 template<typename T>
 struct RigidBodyDynamics3DOF
 {
@@ -275,6 +422,17 @@ struct RigidBodyDynamics3DOF
 
     using ParamsType = RigidBodyParams2D;
 
+    /**
+     * @brief Update a provided state time derivative given an input and time interval.
+     * @param xdot The state time derivative signal to update.
+     * @param x The state signal to reference for the dynamics.
+     * @param u The input signal to reference for the dynamics.
+     * @param t0 The time at which to sample the state and input.
+     * @param tf The time at which to modify the state time derivative.
+     * @param params The 2D rigid body model parameters.
+     * @param insertIntoHistory Whether to insert the answer into state time derivative signal history.
+     * @param calculateXddot Whether to use finite differencing to calculate the second time derivative of the state.
+     */
     static bool update(StateDotSignalType&    xdot,
                        const StateSignalType& x,
                        const InputSignalType& u,
@@ -305,6 +463,9 @@ struct RigidBodyDynamics3DOF
     }
 };
 
+/**
+ * @brief Definition of the dynamics for a 3D rigid body that can rotate about any axis.
+ */
 template<typename T>
 struct RigidBodyDynamics6DOF
 {
@@ -319,6 +480,17 @@ struct RigidBodyDynamics6DOF
 
     using ParamsType = RigidBodyParams3D;
 
+    /**
+     * @brief Update a provided state time derivative given an input and time interval.
+     * @param xdot The state time derivative signal to update.
+     * @param x The state signal to reference for the dynamics.
+     * @param u The input signal to reference for the dynamics.
+     * @param t0 The time at which to sample the state and input.
+     * @param tf The time at which to modify the state time derivative.
+     * @param params The 3D rigid body model parameters.
+     * @param insertIntoHistory Whether to insert the answer into state time derivative signal history.
+     * @param calculateXddot Whether to use finite differencing to calculate the second time derivative of the state.
+     */
     static bool update(StateDotSignalType&    xdot,
                        const StateSignalType& x,
                        const InputSignalType& u,

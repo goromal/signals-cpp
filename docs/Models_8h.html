@@ -98,22 +98,31 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html">Model&lt; DynamicsType &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base type for all model simulators.  <a href="classModel.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRigidBodyParams1D.html">RigidBodyParams1D</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameters for a 1D rigid body model.  <a href="structRigidBodyParams1D.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRigidBodyParams2D.html">RigidBodyParams2D</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameters for a 2D rigid body model.  <a href="structRigidBodyParams2D.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRigidBodyParams3D.html">RigidBodyParams3D</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameters for a 3D rigid body model.  <a href="structRigidBodyParams3D.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTranslationalDynamicsBase.html">TranslationalDynamicsBase&lt; IST, SST, SDST, d, PT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for defining the dynamics for 1D, 2D, and 3D <em>point masses</em>.  <a href="structTranslationalDynamicsBase.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRotationalDynamics1DOF.html">RotationalDynamics1DOF&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition of the dynamics for planar rotation-only motion of a mass.  <a href="structRotationalDynamics1DOF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRotationalDynamics3DOF.html">RotationalDynamics3DOF&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition of the dynamics for 3D rotation-only motion of a mass.  <a href="structRotationalDynamics3DOF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRigidBodyDynamics3DOF.html">RigidBodyDynamics3DOF&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition of the dynamics for planar motion of a mass that's allowed to rotate.  <a href="structRigidBodyDynamics3DOF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRigidBodyDynamics6DOF.html">RigidBodyDynamics6DOF&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition of the dynamics for a 3D rigid body that can rotate about any axis.  <a href="structRigidBodyDynamics6DOF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -190,7 +199,7 @@ Typedefs</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;                                                                                               \</div>
 <div class="line">    <span class="keyword">using </span>ModelBaseName##ModelDOF##<a class="code hl_class" href="classModel.html">Model</a> = <a class="code hl_class" href="classModel.html">Model&lt;ModelBaseName##Dynamics##ModelDOF&lt;T&gt;</a>&gt;;                                \</div>
 <div class="line">    <span class="keyword">typedef</span> ModelBaseName##ModelDOF##<a class="code hl_class" href="classModel.html">Model&lt;double&gt;</a> ModelBaseName##ModelDOF##Modeld;</div>
-<div class="ttc" id="aclassModel_html"><div class="ttname"><a href="classModel.html">Model</a></div><div class="ttdef"><b>Definition</b> Models.h:10</div></div>
+<div class="ttc" id="aclassModel_html"><div class="ttname"><a href="classModel.html">Model</a></div><div class="ttdoc">Base type for all model simulators.</div><div class="ttdef"><b>Definition</b> Models.h:25</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -421,8 +430,8 @@ template&lt;typename T &gt; </div>
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line">    <a class="code hl_struct" href="structTranslationalDynamicsBase.html">TranslationalDynamicsBase&lt;ScalarSignal&lt;T&gt;</a>, <a class="code hl_class" href="classSignal.html">ScalarStateSignal&lt;T&gt;</a>, <a class="code hl_class" href="classSignal.html">ScalarStateSignal&lt;T&gt;</a>, 1, <a class="code hl_struct" href="structRigidBodyParams1D.html">RigidBodyParams1D</a>&gt;</div>
 <div class="ttc" id="aclassSignal_html"><div class="ttname"><a href="classSignal.html">Signal</a></div><div class="ttdef"><b>Definition</b> Signal.h:35</div></div>
-<div class="ttc" id="astructRigidBodyParams1D_html"><div class="ttname"><a href="structRigidBodyParams1D.html">RigidBodyParams1D</a></div><div class="ttdef"><b>Definition</b> Models.h:107</div></div>
-<div class="ttc" id="astructTranslationalDynamicsBase_html"><div class="ttname"><a href="structTranslationalDynamicsBase.html">TranslationalDynamicsBase</a></div><div class="ttdef"><b>Definition</b> Models.h:131</div></div>
+<div class="ttc" id="astructRigidBodyParams1D_html"><div class="ttname"><a href="structRigidBodyParams1D.html">RigidBodyParams1D</a></div><div class="ttdoc">Parameters for a 1D rigid body model.</div><div class="ttdef"><b>Definition</b> Models.h:165</div></div>
+<div class="ttc" id="astructTranslationalDynamicsBase_html"><div class="ttname"><a href="structTranslationalDynamicsBase.html">TranslationalDynamicsBase</a></div><div class="ttdoc">Base class for defining the dynamics for 1D, 2D, and 3D point masses.</div><div class="ttdef"><b>Definition</b> Models.h:236</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -441,7 +450,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line">    <a class="code hl_struct" href="structTranslationalDynamicsBase.html">TranslationalDynamicsBase&lt;Vector2Signal&lt;T&gt;</a>, <a class="code hl_class" href="classSignal.html">Vector2StateSignal&lt;T&gt;</a>, <a class="code hl_class" href="classSignal.html">Vector2StateSignal&lt;T&gt;</a>, 2, <a class="code hl_struct" href="structRigidBodyParams2D.html">RigidBodyParams2D</a>&gt;</div>
-<div class="ttc" id="astructRigidBodyParams2D_html"><div class="ttname"><a href="structRigidBodyParams2D.html">RigidBodyParams2D</a></div><div class="ttdef"><b>Definition</b> Models.h:114</div></div>
+<div class="ttc" id="astructRigidBodyParams2D_html"><div class="ttname"><a href="structRigidBodyParams2D.html">RigidBodyParams2D</a></div><div class="ttdoc">Parameters for a 2D rigid body model.</div><div class="ttdef"><b>Definition</b> Models.h:185</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -460,7 +469,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line">    <a class="code hl_struct" href="structTranslationalDynamicsBase.html">TranslationalDynamicsBase&lt;Vector3Signal&lt;T&gt;</a>, <a class="code hl_class" href="classSignal.html">Vector3StateSignal&lt;T&gt;</a>, <a class="code hl_class" href="classSignal.html">Vector3StateSignal&lt;T&gt;</a>, 3, <a class="code hl_struct" href="structRigidBodyParams3D.html">RigidBodyParams3D</a>&gt;</div>
-<div class="ttc" id="astructRigidBodyParams3D_html"><div class="ttname"><a href="structRigidBodyParams3D.html">RigidBodyParams3D</a></div><div class="ttdef"><b>Definition</b> Models.h:122</div></div>
+<div class="ttc" id="astructRigidBodyParams3D_html"><div class="ttname"><a href="structRigidBodyParams3D.html">RigidBodyParams3D</a></div><div class="ttdoc">Parameters for a 3D rigid body model.</div><div class="ttdef"><b>Definition</b> Models.h:211</div></div>
 </div><!-- fragment -->
 </div>
 </div>

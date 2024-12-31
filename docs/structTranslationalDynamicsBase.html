@@ -86,6 +86,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Base class for defining the dynamics for 1D, 2D, and 3D <em>point masses</em>.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Models_8h_source.html">Models.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -110,9 +113,13 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3f1e02018ec014fe38ba851dc0d5b2ed" id="r_a3f1e02018ec014fe38ba851dc0d5b2ed"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f1e02018ec014fe38ba851dc0d5b2ed">update</a> (<a class="el" href="#a3870f6b57fcb6cb578b3640401331a39">StateDotSignalType</a> &amp;xdot, const <a class="el" href="#a1f0fdd4bbfb73f52878c7e5c7e459f16">StateSignalType</a> &amp;x, const <a class="el" href="#aac403e4db54adf389b8f1fa3700f6f6a">InputSignalType</a> &amp;u, const double &amp;t0, const double &amp;tf, const <a class="el" href="#a4ba374f05dd1f5c4168adf3d6a15ef0c">ParamsType</a> &amp;params, const bool &amp;insertIntoHistory=false, const bool &amp;calculateXddot=false)</td></tr>
+<tr class="memdesc:a3f1e02018ec014fe38ba851dc0d5b2ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update a provided state time derivative given an input and time interval.  <br /></td></tr>
 <tr class="separator:a3f1e02018ec014fe38ba851dc0d5b2ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename IST, typename SST, typename SDST, size_t d, typename PT&gt;<br />
+struct TranslationalDynamicsBase&lt; IST, SST, SDST, d, PT &gt;</div><p>Base class for defining the dynamics for 1D, 2D, and 3D <em>point masses</em>. </p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="aac403e4db54adf389b8f1fa3700f6f6a" name="aac403e4db54adf389b8f1fa3700f6f6a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac403e4db54adf389b8f1fa3700f6f6a">&#9670;&#160;</a></span>InputSignalType</h2>
 
@@ -300,6 +307,21 @@ template&lt;typename IST , typename SST , typename SDST , size_t d, typename PT 
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Update a provided state time derivative given an input and time interval. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xdot</td><td>The state time derivative signal to update. </td></tr>
+    <tr><td class="paramname">x</td><td>The state signal to reference for the dynamics. </td></tr>
+    <tr><td class="paramname">u</td><td>The input signal to reference for the dynamics. </td></tr>
+    <tr><td class="paramname">t0</td><td>The time at which to sample the state and input. </td></tr>
+    <tr><td class="paramname">tf</td><td>The time at which to modify the state time derivative. </td></tr>
+    <tr><td class="paramname">params</td><td>The rigid body model parameters. </td></tr>
+    <tr><td class="paramname">insertIntoHistory</td><td>Whether to insert the answer into state time derivative signal history. </td></tr>
+    <tr><td class="paramname">calculateXddot</td><td>Whether to use finite differencing to calculate the second time derivative of the state. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

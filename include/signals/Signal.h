@@ -10,6 +10,9 @@
 
 using namespace Eigen;
 
+/**
+ * @brief TODO
+ */
 enum InterpolationMethod
 {
     ZERO_ORDER_HOLD,
