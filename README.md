@@ -4,73 +4,30 @@
 
 Header-only templated C++ library implementing rigid-body dynamics, derivatives, integrals, and interpolation.
 
-**Under construction**
+View the library documentation [HERE](https://andrewtorgesen.com/signals-cpp).
 
-## Implemented Types
+## Installation
 
-### Signal Types
+This code is meant to be built as a static library with CMake. It should be compatible with the latest versions of
+Eigen and Boost (unit test framework only).
+The library [manif-geom-cpp](https://github.com/goromal/manif-geom-cpp) must also be installed.
 
-Scalar signal type:
+Install with
 
-```cpp
-ScalarSignal<T> x;
+```bash
+mkdir build
+cd build
+cmake ..
+make # or make install
 ```
 
-Vector signal types:
+By default, building will also build and run the unit tests, but this can be turned off with the CMake option `BUILD_TESTS`.
 
-```cpp
-Vector1Signal<T> x;
-Vector2Signal<T> x;
-Vector3Signal<T> x;
-Vector4Signal<T> x;
-Vector5Signal<T> x;
-Vector6Signal<T> x;
-Vector7Signal<T> x;
-Vector8Signal<T> x;
-Vector9Signal<T> x;
-Vector10Signal<T> x;
+## Docs Generation
+
+Generate updated docs in the `docs/` directory with
+
+```bash
+doxygen Doxyfile
 ```
 
-Manifold signal types:
-
-```
-SO3Signal<T> x;
-SE3Signal<T> x;
-```
-
-### Integrators
-
-Euler integrator:
-
-```cpp
-IntegrateEuler f;
-f(SignalType &xInt, TangentSignalType x, double t, bool insertHistory = false);
-f(SignalType &xInt, TangentSignalType x, double t, double dt, bool insertHistory = false);
-```
-
-Trapezoidal integrator:
-
-```cpp
-IntegrateTrapezoidal f;
-f(SignalType &xInt, TangentSignalType x, double t, bool insertHistory = false);
-f(SignalType &xInt, TangentSignalType x, double t, double dt, bool insertHistory = false);
-```
-
-### Models
-
-*Pending implementations:*
-
-- `TranslationalDynamics1DOF<T>`
-  - Point mass system confined to a straight line.
-- `TranslationalDynamics2DOF<T>`
-  - Point mass system confined to a plane.
-- `TranslationalDynamics3DOF<T>`
-  - Point mass system in a 3-dimensional space.
-- `RotationalDynamics1DOF<T>`
-  - Single-axis rotating mass system fixed in space.
-- `RotationalDynamics3DOF<T>`
-  - Rotating mass fixed in 3D space.
-- `RigidBodyDynamics3DOF<T>`
-  - Rigid body system confined to a plane (unicycle model).
-- `RigidBodyDynamics6DOF<T>`
-  - Rigid body system in 3D space.
