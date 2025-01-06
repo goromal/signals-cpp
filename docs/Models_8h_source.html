@@ -10,6 +10,10 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -22,6 +26,7 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -60,6 +65,23 @@ $(function() {
 $(function() { codefold.init(0); });
 /* @license-end */
 </script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('Models_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -81,11 +103,6 @@ $(function() { codefold.init(0); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_661483514bb8dea267426763b771558e.html">signals</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">Models.h</div></div>
 </div><!--header-->
@@ -521,10 +538,10 @@ $(function() { codefold.init(0); });
 <div class="ttc" id="aclassModel_html_ac7446138b27c8feba779ebfe8e82b99d"><div class="ttname"><a href="classModel.html#ac7446138b27c8feba779ebfe8e82b99d">Model::simulate</a></div><div class="ttdeci">bool simulate(const InputSignalType &amp;u, const double &amp;tf, const bool &amp;insertIntoHistory=false, const bool &amp;calculateXddot=false)</div><div class="ttdoc">Simulate the system response to an input over a specified time interval.</div><div class="ttdef"><b>Definition</b> Models.h:90</div></div>
 <div class="ttc" id="aclassModel_html_ac990dd4740b30e4477bca86fc6172970"><div class="ttname"><a href="classModel.html#ac990dd4740b30e4477bca86fc6172970">Model::InputSignalType</a></div><div class="ttdeci">typename DynamicsType::InputSignalType InputSignalType</div><div class="ttdef"><b>Definition</b> Models.h:27</div></div>
 <div class="ttc" id="aclassModel_html_aec20251d98505785fa51c52eb81dd3a2"><div class="ttname"><a href="classModel.html#aec20251d98505785fa51c52eb81dd3a2">Model::ParamsType</a></div><div class="ttdeci">typename DynamicsType::ParamsType ParamsType</div><div class="ttdef"><b>Definition</b> Models.h:30</div></div>
-<div class="ttc" id="aclassSignal_html"><div class="ttname"><a href="classSignal.html">Signal</a></div><div class="ttdef"><b>Definition</b> Signal.h:35</div></div>
-<div class="ttc" id="aclassSignal_html_a9bda97fe7663f5481807259ca8bcd8cb"><div class="ttname"><a href="classSignal.html#a9bda97fe7663f5481807259ca8bcd8cb">Signal::BaseType</a></div><div class="ttdeci">typename BaseSignalSpec::Type BaseType</div><div class="ttdef"><b>Definition</b> Signal.h:37</div></div>
-<div class="ttc" id="aclassSignal_html_aa0094b1c69fd482de9de83b99634996a"><div class="ttname"><a href="classSignal.html#aa0094b1c69fd482de9de83b99634996a">Signal::TangentType</a></div><div class="ttdeci">typename TangentSignalSpec::Type TangentType</div><div class="ttdef"><b>Definition</b> Signal.h:38</div></div>
-<div class="ttc" id="aclassSignal_html_ab91f52b80939a6c67b6863ee463b4ff0"><div class="ttname"><a href="classSignal.html#ab91f52b80939a6c67b6863ee463b4ff0">Signal::update</a></div><div class="ttdeci">bool update(const double &amp;_t, const BaseType &amp;_x, bool insertHistory=false)</div><div class="ttdef"><b>Definition</b> Signal.h:171</div></div>
+<div class="ttc" id="aclassSignal_html"><div class="ttname"><a href="classSignal.html">Signal</a></div><div class="ttdef"><b>Definition</b> Signal.h:38</div></div>
+<div class="ttc" id="aclassSignal_html_a9bda97fe7663f5481807259ca8bcd8cb"><div class="ttname"><a href="classSignal.html#a9bda97fe7663f5481807259ca8bcd8cb">Signal::BaseType</a></div><div class="ttdeci">typename BaseSignalSpec::Type BaseType</div><div class="ttdef"><b>Definition</b> Signal.h:40</div></div>
+<div class="ttc" id="aclassSignal_html_aa0094b1c69fd482de9de83b99634996a"><div class="ttname"><a href="classSignal.html#aa0094b1c69fd482de9de83b99634996a">Signal::TangentType</a></div><div class="ttdeci">typename TangentSignalSpec::Type TangentType</div><div class="ttdef"><b>Definition</b> Signal.h:41</div></div>
+<div class="ttc" id="aclassSignal_html_ab91f52b80939a6c67b6863ee463b4ff0"><div class="ttname"><a href="classSignal.html#ab91f52b80939a6c67b6863ee463b4ff0">Signal::update</a></div><div class="ttdeci">bool update(const double &amp;_t, const BaseType &amp;_x, bool insertHistory=false)</div><div class="ttdef"><b>Definition</b> Signal.h:174</div></div>
 <div class="ttc" id="anamespacesignal__utils_html_ad7667542f893604d059a5d0022d2890c"><div class="ttname"><a href="namespacesignal__utils.html#ad7667542f893604d059a5d0022d2890c">signal_utils::getTimeDelta</a></div><div class="ttdeci">bool getTimeDelta(double &amp;dt, const double &amp;t0, const double &amp;tf, const double &amp;dt_max=std::numeric_limits&lt; double &gt;::max())</div><div class="ttdef"><b>Definition</b> Utils.h:11</div></div>
 <div class="ttc" id="astructRigidBodyDynamics3DOF_html"><div class="ttname"><a href="structRigidBodyDynamics3DOF.html">RigidBodyDynamics3DOF</a></div><div class="ttdoc">Definition of the dynamics for planar motion of a mass that's allowed to rotate.</div><div class="ttdef"><b>Definition</b> Models.h:413</div></div>
 <div class="ttc" id="astructRigidBodyDynamics3DOF_html_a448c5efb998f492d1518eb0d2d7ded74"><div class="ttname"><a href="structRigidBodyDynamics3DOF.html#a448c5efb998f492d1518eb0d2d7ded74">RigidBodyDynamics3DOF::StateType</a></div><div class="ttdeci">typename StateSignalType::BaseType StateType</div><div class="ttdef"><b>Definition</b> Models.h:419</div></div>
@@ -575,9 +592,13 @@ $(function() { codefold.init(0); });
 <div class="ttc" id="astructTranslationalDynamicsBase_html_aac403e4db54adf389b8f1fa3700f6f6a"><div class="ttname"><a href="structTranslationalDynamicsBase.html#aac403e4db54adf389b8f1fa3700f6f6a">TranslationalDynamicsBase::InputSignalType</a></div><div class="ttdeci">IST InputSignalType</div><div class="ttdef"><b>Definition</b> Models.h:237</div></div>
 <div class="ttc" id="astructTranslationalDynamicsBase_html_ac57d5ab2e4cf3e6afe4a5ae550e858bb"><div class="ttname"><a href="structTranslationalDynamicsBase.html#ac57d5ab2e4cf3e6afe4a5ae550e858bb">TranslationalDynamicsBase::InputType</a></div><div class="ttdeci">typename InputSignalType::BaseType InputType</div><div class="ttdef"><b>Definition</b> Models.h:241</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_661483514bb8dea267426763b771558e.html">signals</a></li><li class="navelem"><a class="el" href="Models_8h.html">Models.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+  </ul>
+</div>
 </body>
 </html>
