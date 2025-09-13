@@ -38,6 +38,9 @@ public:
      */
     StateDotSignalType xdot;
 
+    /**
+     * @brief Initialize a model with no parameters.
+     */
     Model() : params_{std::nullopt}
     {
         reset();

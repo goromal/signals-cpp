@@ -36,21 +36,36 @@ struct State
     using TwistType = typename TwistTypeSpec::Type;
 
     /**
-     * @brief TODO
+     * @brief Pose type.
      */
-    PoseType  pose;
+    PoseType pose;
+    /**
+     * @brief Twist (derivative of Pose) type.
+     */
     TwistType twist;
 
+    /**
+     * @brief Initialize an empty state.
+     */
     State() {}
 
+    /**
+     * @brief Initialize state from a pose and twist pointer array.
+     */
     State(T* arr) : pose(arr), twist(arr + PoseDim) {}
 
+    /**
+     * @brief State copy constructor.
+     */
     State(const State& other)
     {
         this->pose  = other.pose;
         this->twist = other.twist;
     }
 
+    /**
+     * @brief Set the state to identity (zero) values across the board.
+     */
     static State identity()
     {
         State x;
@@ -59,6 +74,9 @@ struct State
         return x;
     }
 
+    /**
+     * @brief Set the state to NaN values across the board.
+     */
     static State nans()
     {
         State x;
@@ -67,6 +85,9 @@ struct State
         return x;
     }
 
+    /**
+     * @brief Scale the state (pose and twist) by a scalar.
+     */
     State& operator*=(const double& s)
     {
         pose *= s;
@@ -74,6 +95,9 @@ struct State
         return *this;
     }
 
+    /**
+     * @brief Add a tangent space state (twist and derivative of twist) to the current state.
+     */
     template<typename T2>
     State& operator+=(const State<T2, TwistTypeSpec, TwistDim, TwistTypeSpec, TwistDim>& r)
     {
@@ -83,6 +107,9 @@ struct State
     }
 };
 
+/**
+ * @brief Add a tangent space state (twist and derivative of twist) to the current state.
+ */
 template<typename T, typename PTS, size_t PD, typename TTS, size_t TD>
 State<T, PTS, PD, TTS, TD> operator+(const State<T, PTS, PD, TTS, TD>& l, const State<T, TTS, TD, TTS, TD>& r)
 {
@@ -92,6 +119,9 @@ State<T, PTS, PD, TTS, TD> operator+(const State<T, PTS, PD, TTS, TD>& l, const 
     return lpr;
 }
 
+/**
+ * @brief Subtract a tangent space state (twist and derivative of twist) from the current state.
+ */
 template<typename T, typename PTS, size_t PD, typename TTS, size_t TD>
 State<T, TTS, TD, TTS, TD> operator-(const State<T, PTS, PD, TTS, TD>& l, const State<T, PTS, PD, TTS, TD>& r)
 {
@@ -101,6 +131,9 @@ State<T, TTS, TD, TTS, TD> operator-(const State<T, PTS, PD, TTS, TD>& l, const 
     return lmr;
 }
 
+/**
+ * @brief Scale the state (pose and twist) by a scalar.
+ */
 template<typename T, typename PTS, size_t PD, typename TTS, size_t TD>
 State<T, PTS, PD, TTS, TD> operator*(const double& l, const State<T, PTS, PD, TTS, TD>& r)
 {
@@ -110,6 +143,9 @@ State<T, PTS, PD, TTS, TD> operator*(const double& l, const State<T, PTS, PD, TT
     return lr;
 }
 
+/**
+ * @brief Scale the state (pose and twist) by a scalar.
+ */
 template<typename T, typename PTS, size_t PD, typename TTS, size_t TD>
 State<T, PTS, PD, TTS, TD> operator*(const State<T, PTS, PD, TTS, TD>& l, const double& r)
 {
@@ -129,6 +165,9 @@ inline std::ostream& operator<<(std::ostream& os, const ScalarStateType<T>& x)
     return os;
 }
 
+/**
+ * @brief Scale the state (pose and twist) by a scalar.
+ */
 template<typename T>
 ScalarStateType<T> operator/(const ScalarStateType<T>& l, const double& r)
 {
@@ -148,6 +187,9 @@ inline std::ostream& operator<<(std::ostream& os, const VectorStateType<T, d>& x
     return os;
 }
 
+/**
+ * @brief Scale the state (pose and twist) by a scalar.
+ */
 template<typename T, size_t d>
 VectorStateType<T, d> operator/(const VectorStateType<T, d>& l, const double& r)
 {
@@ -171,6 +213,9 @@ template<typename T>
 struct ScalarStateSignalSpec
 {
     using Type = ScalarStateType<T>;
+    /**
+     * TODO
+     */
     static Type ZeroType()
     {
         return Type::identity();
