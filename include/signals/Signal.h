@@ -11,7 +11,7 @@
 using namespace Eigen;
 
 /**
- * @brief TODO
+ * @brief ^^^^ TODO
  */
 enum InterpolationMethod
 {

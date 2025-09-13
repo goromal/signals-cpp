@@ -214,7 +214,7 @@ struct ScalarStateSignalSpec
 {
     using Type = ScalarStateType<T>;
     /**
-     * TODO
+     * ^^^^ TODO
      */
     static Type ZeroType()
     {
