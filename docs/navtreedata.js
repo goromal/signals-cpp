@@ -61,8 +61,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Integration_8h.html",
-"structRigidBodyDynamics6DOF.html"
+"structRigidBodyDynamics6DOF.html#a32c92b85c94f66739358385a0a3a07fc"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';

@@ -13,5 +13,19 @@ var searchData=
   ['manifoldstatesignalspec_10',['ManifoldStateSignalSpec',['../structManifoldStateSignalSpec.html',1,'']]],
   ['manifoldstatetype_11',['ManifoldStateType',['../State_8h.html#a73655df4c5d92f1cf1cf69d5fa057753',1,'State.h']]],
   ['model_12',['Model',['../classModel.html',1,'Model&lt; DynamicsType &gt;'],['../classModel.html#a3cbccc00606661a35110dbe111af54ad',1,'Model::Model()']]],
-  ['models_2eh_13',['Models.h',['../Models_8h.html',1,'']]]
+  ['model_3c_20rigidbodydynamics3dof_3c_20t_20_3e_20_3e_13',['Model&lt; RigidBodyDynamics3DOF&lt; T &gt; &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20rigidbodydynamics3dof_3c_20t_20_3e_20_3e_3c_20double_20_3e_14',['Model&lt; RigidBodyDynamics3DOF&lt; T &gt; &gt;&lt; double &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20rigidbodydynamics6dof_3c_20t_20_3e_20_3e_15',['Model&lt; RigidBodyDynamics6DOF&lt; T &gt; &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20rigidbodydynamics6dof_3c_20t_20_3e_20_3e_3c_20double_20_3e_16',['Model&lt; RigidBodyDynamics6DOF&lt; T &gt; &gt;&lt; double &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20rotationaldynamics1dof_3c_20t_20_3e_20_3e_17',['Model&lt; RotationalDynamics1DOF&lt; T &gt; &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20rotationaldynamics1dof_3c_20t_20_3e_20_3e_3c_20double_20_3e_18',['Model&lt; RotationalDynamics1DOF&lt; T &gt; &gt;&lt; double &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20rotationaldynamics3dof_3c_20t_20_3e_20_3e_19',['Model&lt; RotationalDynamics3DOF&lt; T &gt; &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20rotationaldynamics3dof_3c_20t_20_3e_20_3e_3c_20double_20_3e_20',['Model&lt; RotationalDynamics3DOF&lt; T &gt; &gt;&lt; double &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20translationaldynamics1dof_3c_20t_20_3e_20_3e_21',['Model&lt; TranslationalDynamics1DOF&lt; T &gt; &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20translationaldynamics1dof_3c_20t_20_3e_20_3e_3c_20double_20_3e_22',['Model&lt; TranslationalDynamics1DOF&lt; T &gt; &gt;&lt; double &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20translationaldynamics2dof_3c_20t_20_3e_20_3e_23',['Model&lt; TranslationalDynamics2DOF&lt; T &gt; &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20translationaldynamics2dof_3c_20t_20_3e_20_3e_3c_20double_20_3e_24',['Model&lt; TranslationalDynamics2DOF&lt; T &gt; &gt;&lt; double &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20translationaldynamics3dof_3c_20t_20_3e_20_3e_25',['Model&lt; TranslationalDynamics3DOF&lt; T &gt; &gt;',['../classModel.html',1,'']]],
+  ['model_3c_20translationaldynamics3dof_3c_20t_20_3e_20_3e_3c_20double_20_3e_26',['Model&lt; TranslationalDynamics3DOF&lt; T &gt; &gt;&lt; double &gt;',['../classModel.html',1,'']]],
+  ['models_2eh_27',['Models.h',['../Models_8h.html',1,'']]]
 ];

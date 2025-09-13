@@ -7,7 +7,10 @@ var searchData=
   ['integrate_4',['integrate',['../structIntegrator.html#ab3bebaa347f6019f3d2da2b2bcee5918',1,'Integrator::integrate(Signal&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const Signal&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;tf, const bool &amp;insertIntoHistory=false)'],['../structIntegrator.html#a8266e6bf3abd90d83fa7eb6b9270c0c4',1,'Integrator::integrate(Signal&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const Signal&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;tf, const double &amp;dt, const bool &amp;insertIntoHistory=false)'],['../structEulerIntegratorSpec.html#a6c8d7aa2ecf83f7a348a575e5023639f',1,'EulerIntegratorSpec::integrate()'],['../structTrapezoidalIntegratorSpec.html#a38c21a876135bae55c62ec43c3a18a86',1,'TrapezoidalIntegratorSpec::integrate()'],['../structSimpsonIntegratorSpec.html#a6194da52902a391e4a9b251c05e6abf2',1,'SimpsonIntegratorSpec::integrate()']]],
   ['integration_2eh_5',['Integration.h',['../Integration_8h.html',1,'']]],
   ['integrator_6',['Integrator',['../structIntegrator.html',1,'']]],
-  ['interpolationmethod_7',['interpolationMethod',['../classSignal.html#ae4c3f0098aaec52921d28cce09ff1ed4',1,'Signal']]],
-  ['interpolationmethod_8',['InterpolationMethod',['../Signal_8h.html#aa0081e804011c551ea0f4a596a64b284',1,'Signal.h']]],
-  ['introduction_9',['Introduction',['../index.html#intro_sec',1,'']]]
+  ['integrator_3c_20eulerintegratorspec_20_3e_7',['Integrator&lt; EulerIntegratorSpec &gt;',['../structIntegrator.html',1,'']]],
+  ['integrator_3c_20simpsonintegratorspec_20_3e_8',['Integrator&lt; SimpsonIntegratorSpec &gt;',['../structIntegrator.html',1,'']]],
+  ['integrator_3c_20trapezoidalintegratorspec_20_3e_9',['Integrator&lt; TrapezoidalIntegratorSpec &gt;',['../structIntegrator.html',1,'']]],
+  ['interpolationmethod_10',['InterpolationMethod',['../Signal_8h.html#aa0081e804011c551ea0f4a596a64b284',1,'Signal.h']]],
+  ['interpolationmethod_11',['interpolationMethod',['../classSignal.html#ae4c3f0098aaec52921d28cce09ff1ed4',1,'Signal']]],
+  ['introduction_12',['Introduction',['../index.html#intro_sec',1,'']]]
 ];

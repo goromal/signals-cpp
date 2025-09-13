@@ -28,5 +28,5 @@ var classSignal =
     [ "derivativeMethod", "classSignal.html#ac0536cd4021cc4815a3dbb60c5b4f473", null ],
     [ "extrapolationMethod", "classSignal.html#aff76e692ad975b7721ecf6e60d33a11f", null ],
     [ "interpolationMethod", "classSignal.html#ae4c3f0098aaec52921d28cce09ff1ed4", null ],
-    [ "SignalDPComparator", "classSignal.html#a3961e7ce30f40f8104dd3d25f2e70a7f", null ]
+    [ "SignalDPComparator", "classSignal.html#a6db70e8a2784b5596a47f2249a2627b7", null ]
 ];
