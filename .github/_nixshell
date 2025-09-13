@@ -8,5 +8,6 @@ in with pkgs; mkShell {
     buildInputs = [
         boost
         eigen
+        manif-geom-cpp
     ];
 }
