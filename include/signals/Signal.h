@@ -255,6 +255,16 @@ public:
         return true;
     }
 
+    BaseType baseZero()
+    {
+        return BaseSignalSpec::ZeroType();
+    }
+
+    TangentType tangentZero()
+    {
+        return TangentSignalSpec::ZeroType();
+    }
+
 private:
     double                t_;
     BaseType              x_;
