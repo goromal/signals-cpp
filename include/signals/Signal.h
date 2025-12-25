@@ -255,12 +255,12 @@ public:
         return true;
     }
 
-    static BaseType baseZero()
+    static inline BaseType baseZero()
     {
         return BaseSignalSpec::ZeroType();
     }
 
-    static TangentType tangentZero()
+    static inline TangentType tangentZero()
     {
         return TangentSignalSpec::ZeroType();
     }
