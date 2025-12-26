@@ -30,6 +30,13 @@ struct State
         return x;
     }
 
+    T norm()
+    {
+        T poseNorm  = PoseTypeSpec::Norm(pose);
+        T twistNorm = TwistTypeSpec::Norm(twist);
+        return std::sqrt(poseNorm * poseNorm + twistNorm * twistNorm);
+    }
+
     State& operator*=(const double& s)
     {
         pose *= s;
@@ -173,6 +180,10 @@ struct ScalarStateSignalSpec
     {
         return Type::identity(); // TODO fix
     }
+    static T Norm(const Type& a)
+    {
+        return a.norm();
+    }
 };
 
 template<typename T, size_t d>
@@ -187,6 +198,10 @@ struct VectorStateSignalSpec
     {
         return Type::identity(); // TODO fix
     }
+    static T Norm(const Type& a)
+    {
+        return a.norm();
+    }
 };
 
 template<typename T, typename ManifoldType, size_t PD, size_t TD>
@@ -200,6 +215,10 @@ struct ManifoldStateSignalSpec
     static Type NansType()
     {
         return Type::identity(); // TODO fix
+    }
+    static T Norm(const Type& a)
+    {
+        return a.norm();
     }
 };
 
