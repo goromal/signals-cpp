@@ -30,10 +30,10 @@ struct State
         return x;
     }
 
-    T norm()
+    T norm() const
     {
-        T poseNorm  = PoseTypeSpec::Norm(pose);
-        T twistNorm = TwistTypeSpec::Norm(twist);
+        const T poseNorm  = PoseTypeSpec::Norm(pose);
+        const T twistNorm = TwistTypeSpec::Norm(twist);
         return std::sqrt(poseNorm * poseNorm + twistNorm * twistNorm);
     }
 
