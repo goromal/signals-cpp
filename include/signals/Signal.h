@@ -29,7 +29,7 @@ enum DerivativeMethod
     FINITE_DIFF
 };
 
-template<typename BaseSignalSpec, typename TangentSignalSpec>
+template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
 class Signal
 {
 public:
@@ -75,9 +75,9 @@ public:
         this->needsSort_          = other.needsSort_;
     }
 
-    Signal<TangentSignalSpec, TangentSignalSpec> dotSignal()
+    Signal<T, TangentSignalSpec, TangentSignalSpec> dotSignal()
     {
-        Signal<TangentSignalSpec, TangentSignalSpec> signalDot;
+        Signal<T, TangentSignalSpec, TangentSignalSpec> signalDot;
         for (auto signalDP : signalHistory_)
         {
             signalDot.update(signalDP.t, signalDP.xdot, true);
@@ -86,17 +86,17 @@ public:
         return signalDot;
     }
 
-    template<typename BSS, typename TSS>
-    friend Signal<BSS, TSS> operator+(const Signal<BSS, TSS>& l, const Signal<TSS, TSS>& r);
+    template<typename S, typename BSS, typename TSS>
+    friend Signal<S, BSS, TSS> operator+(const Signal<S, BSS, TSS>& l, const Signal<S, TSS, TSS>& r);
 
-    template<typename BSS, typename TSS>
-    friend Signal<TSS, TSS> operator-(const Signal<BSS, TSS>& l, const Signal<BSS, TSS>& r);
+    template<typename S, typename BSS, typename TSS>
+    friend Signal<S, TSS, TSS> operator-(const Signal<S, BSS, TSS>& l, const Signal<S, BSS, TSS>& r);
 
-    template<typename BSS, typename TSS>
-    friend Signal<BSS, TSS> operator*(const double& l, const Signal<BSS, TSS>& r);
+    template<typename S, typename BSS, typename TSS>
+    friend Signal<S, BSS, TSS> operator*(const double& l, const Signal<S, BSS, TSS>& r);
 
-    template<typename BSS, typename TSS>
-    friend Signal<BSS, TSS> operator*(const Signal<BSS, TSS>& l, const double& r);
+    template<typename S, typename BSS, typename TSS>
+    friend Signal<S, BSS, TSS> operator*(const Signal<S, BSS, TSS>& l, const double& r);
 
     double t() const
     {
@@ -253,6 +253,26 @@ public:
             needsSort_ = false;
         }
         return true;
+    }
+
+    static inline BaseType baseZero()
+    {
+        return BaseSignalSpec::ZeroType();
+    }
+
+    static inline TangentType tangentZero()
+    {
+        return TangentSignalSpec::ZeroType();
+    }
+
+    static inline T baseNorm(const BaseType& x)
+    {
+        return BaseSignalSpec::Norm(x);
+    }
+
+    static inline T tangentNorm(const TangentType& x)
+    {
+        return TangentSignalSpec::Norm(x);
     }
 
 private:
@@ -543,11 +563,11 @@ private:
     }
 };
 
-template<typename BaseSignalSpec, typename TangentSignalSpec>
-Signal<BaseSignalSpec, TangentSignalSpec> operator+(const Signal<BaseSignalSpec, TangentSignalSpec>&    l,
-                                                    const Signal<TangentSignalSpec, TangentSignalSpec>& r)
+template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
+Signal<T, BaseSignalSpec, TangentSignalSpec> operator+(const Signal<T, BaseSignalSpec, TangentSignalSpec>&    l,
+                                                       const Signal<T, TangentSignalSpec, TangentSignalSpec>& r)
 {
-    Signal<BaseSignalSpec, TangentSignalSpec> lpr = l;
+    Signal<T, BaseSignalSpec, TangentSignalSpec> lpr = l;
     lpr.x_ += r(l.t());
     lpr.xdot_ += r.dot(l.t());
     for (auto& signalDP : lpr.signalHistory_)
@@ -558,11 +578,11 @@ Signal<BaseSignalSpec, TangentSignalSpec> operator+(const Signal<BaseSignalSpec,
     return lpr;
 }
 
-template<typename BaseSignalSpec, typename TangentSignalSpec>
-Signal<TangentSignalSpec, TangentSignalSpec> operator-(const Signal<BaseSignalSpec, TangentSignalSpec>& l,
-                                                       const Signal<BaseSignalSpec, TangentSignalSpec>& r)
+template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
+Signal<T, TangentSignalSpec, TangentSignalSpec> operator-(const Signal<T, BaseSignalSpec, TangentSignalSpec>& l,
+                                                          const Signal<T, BaseSignalSpec, TangentSignalSpec>& r)
 {
-    Signal<TangentSignalSpec, TangentSignalSpec> lmr;
+    Signal<T, TangentSignalSpec, TangentSignalSpec> lmr;
     lmr.interpolationMethod = l.interpolationMethod;
     lmr.extrapolationMethod = l.extrapolationMethod;
     lmr.derivativeMethod    = l.derivativeMethod;
@@ -583,10 +603,11 @@ Signal<TangentSignalSpec, TangentSignalSpec> operator-(const Signal<BaseSignalSp
     return lmr;
 }
 
-template<typename BaseSignalSpec, typename TangentSignalSpec>
-Signal<BaseSignalSpec, TangentSignalSpec> operator*(const double& l, const Signal<BaseSignalSpec, TangentSignalSpec>& r)
+template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
+Signal<T, BaseSignalSpec, TangentSignalSpec> operator*(const double&                                       l,
+                                                       const Signal<T, BaseSignalSpec, TangentSignalSpec>& r)
 {
-    Signal<BaseSignalSpec, TangentSignalSpec> lr = r;
+    Signal<T, BaseSignalSpec, TangentSignalSpec> lr = r;
     lr.x_ *= l;
     lr.xdot_ *= l;
     for (auto& signalDP : lr.signalHistory_)
@@ -597,10 +618,11 @@ Signal<BaseSignalSpec, TangentSignalSpec> operator*(const double& l, const Signa
     return lr;
 }
 
-template<typename BaseSignalSpec, typename TangentSignalSpec>
-Signal<BaseSignalSpec, TangentSignalSpec> operator*(const Signal<BaseSignalSpec, TangentSignalSpec>& l, const double& r)
+template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
+Signal<T, BaseSignalSpec, TangentSignalSpec> operator*(const Signal<T, BaseSignalSpec, TangentSignalSpec>& l,
+                                                       const double&                                       r)
 {
-    Signal<BaseSignalSpec, TangentSignalSpec> lr = l;
+    Signal<T, BaseSignalSpec, TangentSignalSpec> lr = l;
     lr.x_ *= r;
     lr.xdot_ *= r;
     for (auto& signalDP : lr.signalHistory_)
@@ -623,6 +645,10 @@ struct ScalarSignalSpec
     {
         return (T)1. / 0.;
     }
+    static T Norm(const Type& a)
+    {
+        return a;
+    }
 };
 
 template<typename T, size_t d>
@@ -637,9 +663,13 @@ struct VectorSignalSpec
     {
         return Type::Zero(); // TODO fix
     }
+    static T Norm(const Type& a)
+    {
+        return a.norm();
+    }
 };
 
-template<typename ManifoldType>
+template<typename T, typename ManifoldType>
 struct ManifoldSignalSpec
 {
     using Type = ManifoldType;
@@ -651,10 +681,14 @@ struct ManifoldSignalSpec
     {
         return Type::identity(); // TODO fix
     }
+    static T Norm(const Type& a)
+    {
+        return ManifoldType::Log(a).norm();
+    }
 };
 
 template<typename T>
-using ScalarSignal = Signal<ScalarSignalSpec<T>, ScalarSignalSpec<T>>;
+using ScalarSignal = Signal<T, ScalarSignalSpec<T>, ScalarSignalSpec<T>>;
 
 template<typename T>
 inline std::ostream& operator<<(std::ostream& os, const ScalarSignal<T>& x)
@@ -664,7 +698,7 @@ inline std::ostream& operator<<(std::ostream& os, const ScalarSignal<T>& x)
 }
 
 template<typename T, size_t d>
-using VectorSignal = Signal<VectorSignalSpec<T, d>, VectorSignalSpec<T, d>>;
+using VectorSignal = Signal<T, VectorSignalSpec<T, d>, VectorSignalSpec<T, d>>;
 
 template<typename T, size_t d>
 inline std::ostream& operator<<(std::ostream& os, const VectorSignal<T, d>& x)
@@ -674,7 +708,7 @@ inline std::ostream& operator<<(std::ostream& os, const VectorSignal<T, d>& x)
 }
 
 template<typename T, typename ManifoldType, size_t d>
-using ManifoldSignal = Signal<ManifoldSignalSpec<ManifoldType>, VectorSignalSpec<T, d>>;
+using ManifoldSignal = Signal<T, ManifoldSignalSpec<T, ManifoldType>, VectorSignalSpec<T, d>>;
 
 template<typename T, typename ManifoldType, size_t d>
 inline std::ostream& operator<<(std::ostream& os, const ManifoldSignal<T, ManifoldType, d>& x)
