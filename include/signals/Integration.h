@@ -4,11 +4,11 @@
 template<typename IntegratorType>
 struct Integrator
 {
-    template<typename BaseSignalSpec, typename TangentSignalSpec>
-    static bool integrate(Signal<BaseSignalSpec, TangentSignalSpec>&          xInt,
-                          const Signal<TangentSignalSpec, TangentSignalSpec>& x,
-                          const double&                                       tf,
-                          const bool&                                         insertIntoHistory = false)
+    template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
+    static bool integrate(Signal<T, BaseSignalSpec, TangentSignalSpec>&          xInt,
+                          const Signal<T, TangentSignalSpec, TangentSignalSpec>& x,
+                          const double&                                          tf,
+                          const bool&                                            insertIntoHistory = false)
     {
         double t0 = xInt.t();
         double dt;
@@ -19,12 +19,12 @@ struct Integrator
         return IntegratorType::integrate(xInt, x, t0, tf, insertIntoHistory);
     }
 
-    template<typename BaseSignalSpec, typename TangentSignalSpec>
-    static bool integrate(Signal<BaseSignalSpec, TangentSignalSpec>&          xInt,
-                          const Signal<TangentSignalSpec, TangentSignalSpec>& x,
-                          const double&                                       tf,
-                          const double&                                       dt,
-                          const bool&                                         insertIntoHistory = false)
+    template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
+    static bool integrate(Signal<T, BaseSignalSpec, TangentSignalSpec>&          xInt,
+                          const Signal<T, TangentSignalSpec, TangentSignalSpec>& x,
+                          const double&                                          tf,
+                          const double&                                          dt,
+                          const bool&                                            insertIntoHistory = false)
     {
         double t_k     = xInt.t();
         bool   success = true;
@@ -48,12 +48,12 @@ struct Integrator
 
 struct EulerIntegratorSpec
 {
-    template<typename BaseSignalSpec, typename TangentSignalSpec>
-    static bool integrate(Signal<BaseSignalSpec, TangentSignalSpec>&          xInt,
-                          const Signal<TangentSignalSpec, TangentSignalSpec>& x,
-                          const double&                                       t0,
-                          const double&                                       tf,
-                          const bool&                                         insertIntoHistory)
+    template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
+    static bool integrate(Signal<T, BaseSignalSpec, TangentSignalSpec>&          xInt,
+                          const Signal<T, TangentSignalSpec, TangentSignalSpec>& x,
+                          const double&                                          t0,
+                          const double&                                          tf,
+                          const bool&                                            insertIntoHistory)
     {
         double dt = tf - t0;
         return xInt.update(tf, xInt() + x(tf) * dt, x(tf), insertIntoHistory);
@@ -62,12 +62,12 @@ struct EulerIntegratorSpec
 
 struct TrapezoidalIntegratorSpec
 {
-    template<typename BaseSignalSpec, typename TangentSignalSpec>
-    static bool integrate(Signal<BaseSignalSpec, TangentSignalSpec>&          xInt,
-                          const Signal<TangentSignalSpec, TangentSignalSpec>& x,
-                          const double&                                       t0,
-                          const double&                                       tf,
-                          const bool&                                         insertIntoHistory)
+    template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
+    static bool integrate(Signal<T, BaseSignalSpec, TangentSignalSpec>&          xInt,
+                          const Signal<T, TangentSignalSpec, TangentSignalSpec>& x,
+                          const double&                                          t0,
+                          const double&                                          tf,
+                          const bool&                                            insertIntoHistory)
     {
         double dt = tf - t0;
         return xInt.update(tf, xInt() + (xInt.dot() + x(tf)) * dt / 2.0, x(tf), insertIntoHistory);

@@ -121,7 +121,7 @@ VectorStateType<T, d> operator/(const VectorStateType<T, d>& l, const double& r)
 }
 
 template<typename T, typename ManifoldType, size_t PD, size_t TD>
-using ManifoldStateType = State<T, ManifoldSignalSpec<ManifoldType>, PD, VectorSignalSpec<T, TD>, TD>;
+using ManifoldStateType = State<T, ManifoldSignalSpec<T, ManifoldType>, PD, VectorSignalSpec<T, TD>, TD>;
 
 template<typename T, typename ManifoldType, size_t PD, size_t TD>
 inline std::ostream& operator<<(std::ostream& os, const ManifoldStateType<T, ManifoldType, PD, TD>& x)
@@ -204,7 +204,7 @@ struct ManifoldStateSignalSpec
 };
 
 template<typename T>
-using ScalarStateSignal = Signal<ScalarStateSignalSpec<T>, ScalarStateSignalSpec<T>>;
+using ScalarStateSignal = Signal<T, ScalarStateSignalSpec<T>, ScalarStateSignalSpec<T>>;
 
 template<typename T>
 inline std::ostream& operator<<(std::ostream& os, const ScalarStateSignal<T>& x)
@@ -214,7 +214,7 @@ inline std::ostream& operator<<(std::ostream& os, const ScalarStateSignal<T>& x)
 }
 
 template<typename T, size_t d>
-using VectorStateSignal = Signal<VectorStateSignalSpec<T, d>, VectorStateSignalSpec<T, d>>;
+using VectorStateSignal = Signal<T, VectorStateSignalSpec<T, d>, VectorStateSignalSpec<T, d>>;
 
 template<typename T, size_t d>
 inline std::ostream& operator<<(std::ostream& os, const VectorStateSignal<T, d>& x)
@@ -225,7 +225,7 @@ inline std::ostream& operator<<(std::ostream& os, const VectorStateSignal<T, d>&
 }
 
 template<typename T, typename ManifoldType, size_t PD, size_t TD>
-using ManifoldStateSignal = Signal<ManifoldStateSignalSpec<T, ManifoldType, PD, TD>, VectorStateSignalSpec<T, TD>>;
+using ManifoldStateSignal = Signal<T, ManifoldStateSignalSpec<T, ManifoldType, PD, TD>, VectorStateSignalSpec<T, TD>>;
 
 template<typename T, typename ManifoldType, size_t PD, size_t TD>
 inline std::ostream& operator<<(std::ostream& os, const ManifoldStateSignal<T, ManifoldType, PD, TD>& x)
