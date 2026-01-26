@@ -26,7 +26,6 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -112,6 +111,9 @@ $(function(){initNavTree('structManifoldStateSignalSpec.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="#aef8d411c012125303e1faa1d66b35c1c">Type</a> specification for manifold state signals.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="State_8h_source.html">State.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -122,11 +124,25 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:adca9f48f26d97f95b2083b9e55bb58cb" id="r_adca9f48f26d97f95b2083b9e55bb58cb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#aef8d411c012125303e1faa1d66b35c1c">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adca9f48f26d97f95b2083b9e55bb58cb">ZeroType</a> ()</td></tr>
+<tr class="memdesc:adca9f48f26d97f95b2083b9e55bb58cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns identity (zero) state.  <br /></td></tr>
 <tr class="separator:adca9f48f26d97f95b2083b9e55bb58cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7542075f653a7e8fba76702499936b17" id="r_a7542075f653a7e8fba76702499936b17"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#aef8d411c012125303e1faa1d66b35c1c">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7542075f653a7e8fba76702499936b17">NansType</a> ()</td></tr>
+<tr class="memdesc:a7542075f653a7e8fba76702499936b17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns state with NaN values.  <br /></td></tr>
 <tr class="separator:a7542075f653a7e8fba76702499936b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename ManifoldType, size_t PD, size_t TD&gt;<br />
+struct ManifoldStateSignalSpec&lt; T, ManifoldType, PD, TD &gt;</div><p><a class="el" href="#aef8d411c012125303e1faa1d66b35c1c">Type</a> specification for manifold state signals. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Scalar element type (e.g., double, float). </td></tr>
+    <tr><td class="paramname">ManifoldType</td><td>The manifold type (e.g., SO2&lt;double&gt;, SE3&lt;float&gt;). </td></tr>
+    <tr><td class="paramname">PD</td><td>Pose dimension. </td></tr>
+    <tr><td class="paramname">TD</td><td>Tangent (twist) dimension. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="aef8d411c012125303e1faa1d66b35c1c" name="aef8d411c012125303e1faa1d66b35c1c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aef8d411c012125303e1faa1d66b35c1c">&#9670;&#160;</a></span>Type</h2>
 
@@ -169,6 +185,8 @@ template&lt;typename T, typename ManifoldType, size_t PD, size_t TD&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Returns state with NaN values. </p>
+
 </div>
 </div>
 <a id="adca9f48f26d97f95b2083b9e55bb58cb" name="adca9f48f26d97f95b2083b9e55bb58cb"></a>
@@ -195,6 +213,8 @@ template&lt;typename T, typename ManifoldType, size_t PD, size_t TD&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Returns identity (zero) state. </p>
 
 </div>
 </div>

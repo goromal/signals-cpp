@@ -26,7 +26,6 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -127,14 +126,19 @@ $(function(){initNavTree('Signal_8h.html',''); initResizable(true); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSignal.html">Signal&lt; BaseSignalSpec, TangentSignalSpec &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template class for time-series signals with interpolation, extrapolation, and derivative capabilities.  <a href="classSignal.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSignal_1_1SignalDP.html">Signal&lt; BaseSignalSpec, TangentSignalSpec &gt;::SignalDP</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data point structure storing time, value, and derivative.  <a href="structSignal_1_1SignalDP.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structScalarSignalSpec.html">ScalarSignalSpec&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structScalarSignalSpec.html#a4a319643aeb76b94214f8b41d64d5402">Type</a> specification for scalar-valued signals.  <a href="structScalarSignalSpec.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVectorSignalSpec.html">VectorSignalSpec&lt; T, d &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structVectorSignalSpec.html#ac21d15d01635665373eaf23b62f3d440">Type</a> specification for vector-valued signals.  <a href="structVectorSignalSpec.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structManifoldSignalSpec.html">ManifoldSignalSpec&lt; ManifoldType &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structManifoldSignalSpec.html#ae6292debacd46f629429d03cf7e9a342">Type</a> specification for manifold-valued signals (e.g., SO2, SO3, SE2, SE3).  <a href="structManifoldSignalSpec.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -234,31 +238,37 @@ Enumerations</h2></td></tr>
 , <a class="el" href="#aa0081e804011c551ea0f4a596a64b284adc101ebf31c49c2d4b80b7c6f59f22cb">LINEAR</a>
 , <a class="el" href="#aa0081e804011c551ea0f4a596a64b284a13480ea7779c90806a9fa4ef70322ebc">CUBIC_SPLINE</a>
  }</td></tr>
-<tr class="memdesc:aa0081e804011c551ea0f4a596a64b284"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO.  <a href="#aa0081e804011c551ea0f4a596a64b284">More...</a><br /></td></tr>
+<tr class="memdesc:aa0081e804011c551ea0f4a596a64b284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Methods for interpolating signal values between discrete time points.  <a href="#aa0081e804011c551ea0f4a596a64b284">More...</a><br /></td></tr>
 <tr class="separator:aa0081e804011c551ea0f4a596a64b284"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9943b8bd1a1a1cdb774553d44c12cde4" id="r_a9943b8bd1a1a1cdb774553d44c12cde4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9943b8bd1a1a1cdb774553d44c12cde4">ExtrapolationMethod</a> { <a class="el" href="#a9943b8bd1a1a1cdb774553d44c12cde4af4517d0db561241ccfcf150e1629767f">NANS</a>
 , <a class="el" href="#a9943b8bd1a1a1cdb774553d44c12cde4a5d7341ec5879a7f47c5cb82c0fdf6b5f">ZEROS</a>
 , <a class="el" href="#a9943b8bd1a1a1cdb774553d44c12cde4a901e715f86c693ccd2851e8c0b64cca3">CLOSEST</a>
  }</td></tr>
+<tr class="memdesc:a9943b8bd1a1a1cdb774553d44c12cde4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Methods for extrapolating signal values outside the defined time range.  <a href="#a9943b8bd1a1a1cdb774553d44c12cde4">More...</a><br /></td></tr>
 <tr class="separator:a9943b8bd1a1a1cdb774553d44c12cde4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35d05b0e727a39b86907d8669e9e1242" id="r_a35d05b0e727a39b86907d8669e9e1242"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35d05b0e727a39b86907d8669e9e1242">DerivativeMethod</a> { <a class="el" href="#a35d05b0e727a39b86907d8669e9e1242a6a4e132eb192a22c351397837d4c082c">DIRTY</a>
 , <a class="el" href="#a35d05b0e727a39b86907d8669e9e1242a31a5b438304c770230e3fbb9999c9c2e">FINITE_DIFF</a>
  }</td></tr>
+<tr class="memdesc:a35d05b0e727a39b86907d8669e9e1242"><td class="mdescLeft">&#160;</td><td class="mdescRight">Methods for computing numerical derivatives of signals.  <a href="#a35d05b0e727a39b86907d8669e9e1242">More...</a><br /></td></tr>
 <tr class="separator:a35d05b0e727a39b86907d8669e9e1242"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aa4dc7aa056ee91a7dc4ec540b6bc9cd3" id="r_aa4dc7aa056ee91a7dc4ec540b6bc9cd3"><td class="memTemplParams" colspan="2">template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </td></tr>
 <tr class="memitem:aa4dc7aa056ee91a7dc4ec540b6bc9cd3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aa4dc7aa056ee91a7dc4ec540b6bc9cd3">operator+</a> (const <a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;l, const <a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;r)</td></tr>
+<tr class="memdesc:aa4dc7aa056ee91a7dc4ec540b6bc9cd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a tangent signal to a base signal.  <br /></td></tr>
 <tr class="separator:aa4dc7aa056ee91a7dc4ec540b6bc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd611b1d0ab8c1f43be72184926ec8ac" id="r_afd611b1d0ab8c1f43be72184926ec8ac"><td class="memTemplParams" colspan="2">template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </td></tr>
 <tr class="memitem:afd611b1d0ab8c1f43be72184926ec8ac"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#afd611b1d0ab8c1f43be72184926ec8ac">operator-</a> (const <a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;l, const <a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;r)</td></tr>
+<tr class="memdesc:afd611b1d0ab8c1f43be72184926ec8ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract one signal from another, producing a tangent signal.  <br /></td></tr>
 <tr class="separator:afd611b1d0ab8c1f43be72184926ec8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad77fa5fab1a3e9a6ca4d7e87364003b9" id="r_ad77fa5fab1a3e9a6ca4d7e87364003b9"><td class="memTemplParams" colspan="2">template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </td></tr>
 <tr class="memitem:ad77fa5fab1a3e9a6ca4d7e87364003b9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ad77fa5fab1a3e9a6ca4d7e87364003b9">operator*</a> (const double &amp;l, const <a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;r)</td></tr>
+<tr class="memdesc:ad77fa5fab1a3e9a6ca4d7e87364003b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply a signal by a scalar from the left.  <br /></td></tr>
 <tr class="separator:ad77fa5fab1a3e9a6ca4d7e87364003b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0b0bee5051aeec3c9cff9fd148d8cb5" id="r_ae0b0bee5051aeec3c9cff9fd148d8cb5"><td class="memTemplParams" colspan="2">template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </td></tr>
 <tr class="memitem:ae0b0bee5051aeec3c9cff9fd148d8cb5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ae0b0bee5051aeec3c9cff9fd148d8cb5">operator*</a> (const <a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;l, const double &amp;r)</td></tr>
+<tr class="memdesc:ae0b0bee5051aeec3c9cff9fd148d8cb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply a signal by a scalar from the right.  <br /></td></tr>
 <tr class="separator:ae0b0bee5051aeec3c9cff9fd148d8cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47318c97bced9b7ee828c94c1a4eeb29" id="r_a47318c97bced9b7ee828c94c1a4eeb29"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a47318c97bced9b7ee828c94c1a4eeb29"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a47318c97bced9b7ee828c94c1a4eeb29">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="#a19e9e3fdf9dac462c6fb79ee572d2b4c">ScalarSignal</a>&lt; T &gt; &amp;x)</td></tr>
@@ -292,8 +302,8 @@ Functions</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;                                                                                               \</div>
 <div class="line">    <span class="keyword">using </span>Manif##<a class="code hl_class" href="classSignal.html">Signal</a> = <a class="code hl_typedef" href="#a278e5023dd90a58b58ce28b413ecec4a">ManifoldSignal&lt;T, Manif&lt;T&gt;</a>, Dimension&gt;;                                                      \</div>
 <div class="line">    <span class="keyword">typedef</span> Manif##<a class="code hl_class" href="classSignal.html">Signal&lt;double&gt;</a> Manif##dSignal;</div>
-<div class="ttc" id="aSignal_8h_html_a278e5023dd90a58b58ce28b413ecec4a"><div class="ttname"><a href="#a278e5023dd90a58b58ce28b413ecec4a">ManifoldSignal</a></div><div class="ttdeci">Signal&lt; ManifoldSignalSpec&lt; ManifoldType &gt;, VectorSignalSpec&lt; T, d &gt; &gt; ManifoldSignal</div><div class="ttdef"><b>Definition</b> Signal.h:681</div></div>
-<div class="ttc" id="aclassSignal_html"><div class="ttname"><a href="classSignal.html">Signal</a></div><div class="ttdef"><b>Definition</b> Signal.h:38</div></div>
+<div class="ttc" id="aSignal_8h_html_a278e5023dd90a58b58ce28b413ecec4a"><div class="ttname"><a href="#a278e5023dd90a58b58ce28b413ecec4a">ManifoldSignal</a></div><div class="ttdeci">Signal&lt; ManifoldSignalSpec&lt; ManifoldType &gt;, VectorSignalSpec&lt; T, d &gt; &gt; ManifoldSignal</div><div class="ttdef"><b>Definition</b> Signal.h:853</div></div>
+<div class="ttc" id="aclassSignal_html"><div class="ttname"><a href="classSignal.html">Signal</a></div><div class="ttdoc">Template class for time-series signals with interpolation, extrapolation, and derivative capabilities...</div><div class="ttdef"><b>Definition</b> Signal.h:63</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -314,7 +324,7 @@ Functions</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;                                                                                               \</div>
 <div class="line">    <span class="keyword">using </span>Vector##Dimension##<a class="code hl_class" href="classSignal.html">Signal</a> = <a class="code hl_typedef" href="#a51a32a4dd69ee28867dba6202c812c5a">VectorSignal&lt;T, Dimension&gt;</a>;                                                      \</div>
 <div class="line">    <span class="keyword">typedef</span> Vector##Dimension##<a class="code hl_class" href="classSignal.html">Signal&lt;double&gt;</a> Vector##Dimension##dSignal;</div>
-<div class="ttc" id="aSignal_8h_html_a51a32a4dd69ee28867dba6202c812c5a"><div class="ttname"><a href="#a51a32a4dd69ee28867dba6202c812c5a">VectorSignal</a></div><div class="ttdeci">Signal&lt; VectorSignalSpec&lt; T, d &gt;, VectorSignalSpec&lt; T, d &gt; &gt; VectorSignal</div><div class="ttdef"><b>Definition</b> Signal.h:671</div></div>
+<div class="ttc" id="aSignal_8h_html_a51a32a4dd69ee28867dba6202c812c5a"><div class="ttname"><a href="#a51a32a4dd69ee28867dba6202c812c5a">VectorSignal</a></div><div class="ttdeci">Signal&lt; VectorSignalSpec&lt; T, d &gt;, VectorSignalSpec&lt; T, d &gt; &gt; VectorSignal</div><div class="ttdef"><b>Definition</b> Signal.h:843</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -813,9 +823,13 @@ template&lt;typename T, size_t d&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Methods for computing numerical derivatives of signals. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a35d05b0e727a39b86907d8669e9e1242a6a4e132eb192a22c351397837d4c082c" name="a35d05b0e727a39b86907d8669e9e1242a6a4e132eb192a22c351397837d4c082c"></a>DIRTY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a35d05b0e727a39b86907d8669e9e1242a31a5b438304c770230e3fbb9999c9c2e" name="a35d05b0e727a39b86907d8669e9e1242a31a5b438304c770230e3fbb9999c9c2e"></a>FINITE_DIFF&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a35d05b0e727a39b86907d8669e9e1242a6a4e132eb192a22c351397837d4c082c" name="a35d05b0e727a39b86907d8669e9e1242a6a4e132eb192a22c351397837d4c082c"></a>DIRTY&#160;</td><td class="fielddoc"><p>Use a discrete-time dirty derivative filter for smoothing. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a35d05b0e727a39b86907d8669e9e1242a31a5b438304c770230e3fbb9999c9c2e" name="a35d05b0e727a39b86907d8669e9e1242a31a5b438304c770230e3fbb9999c9c2e"></a>FINITE_DIFF&#160;</td><td class="fielddoc"><p>Use simple finite difference approximation. </p>
+</td></tr>
 </table>
 
 </div>
@@ -831,10 +845,15 @@ template&lt;typename T, size_t d&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Methods for extrapolating signal values outside the defined time range. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9943b8bd1a1a1cdb774553d44c12cde4af4517d0db561241ccfcf150e1629767f" name="a9943b8bd1a1a1cdb774553d44c12cde4af4517d0db561241ccfcf150e1629767f"></a>NANS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a9943b8bd1a1a1cdb774553d44c12cde4a5d7341ec5879a7f47c5cb82c0fdf6b5f" name="a9943b8bd1a1a1cdb774553d44c12cde4a5d7341ec5879a7f47c5cb82c0fdf6b5f"></a>ZEROS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a9943b8bd1a1a1cdb774553d44c12cde4a901e715f86c693ccd2851e8c0b64cca3" name="a9943b8bd1a1a1cdb774553d44c12cde4a901e715f86c693ccd2851e8c0b64cca3"></a>CLOSEST&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9943b8bd1a1a1cdb774553d44c12cde4af4517d0db561241ccfcf150e1629767f" name="a9943b8bd1a1a1cdb774553d44c12cde4af4517d0db561241ccfcf150e1629767f"></a>NANS&#160;</td><td class="fielddoc"><p>Return NaN (Not a Number) values outside the defined range. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9943b8bd1a1a1cdb774553d44c12cde4a5d7341ec5879a7f47c5cb82c0fdf6b5f" name="a9943b8bd1a1a1cdb774553d44c12cde4a5d7341ec5879a7f47c5cb82c0fdf6b5f"></a>ZEROS&#160;</td><td class="fielddoc"><p>Return zero values outside the defined range. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9943b8bd1a1a1cdb774553d44c12cde4a901e715f86c693ccd2851e8c0b64cca3" name="a9943b8bd1a1a1cdb774553d44c12cde4a901e715f86c693ccd2851e8c0b64cca3"></a>CLOSEST&#160;</td><td class="fielddoc"><p>Return the closest boundary value (first or last data point). </p>
+</td></tr>
 </table>
 
 </div>
@@ -851,11 +870,14 @@ template&lt;typename T, size_t d&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>TODO. </p>
+<p>Methods for interpolating signal values between discrete time points. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa0081e804011c551ea0f4a596a64b284ad873f8ab97a3f6e892c8b834b23db574" name="aa0081e804011c551ea0f4a596a64b284ad873f8ab97a3f6e892c8b834b23db574"></a>ZERO_ORDER_HOLD&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa0081e804011c551ea0f4a596a64b284adc101ebf31c49c2d4b80b7c6f59f22cb" name="aa0081e804011c551ea0f4a596a64b284adc101ebf31c49c2d4b80b7c6f59f22cb"></a>LINEAR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa0081e804011c551ea0f4a596a64b284a13480ea7779c90806a9fa4ef70322ebc" name="aa0081e804011c551ea0f4a596a64b284a13480ea7779c90806a9fa4ef70322ebc"></a>CUBIC_SPLINE&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa0081e804011c551ea0f4a596a64b284ad873f8ab97a3f6e892c8b834b23db574" name="aa0081e804011c551ea0f4a596a64b284ad873f8ab97a3f6e892c8b834b23db574"></a>ZERO_ORDER_HOLD&#160;</td><td class="fielddoc"><p>Hold the previous value constant until the next data point. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa0081e804011c551ea0f4a596a64b284adc101ebf31c49c2d4b80b7c6f59f22cb" name="aa0081e804011c551ea0f4a596a64b284adc101ebf31c49c2d4b80b7c6f59f22cb"></a>LINEAR&#160;</td><td class="fielddoc"><p>Linearly interpolate between adjacent data points. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa0081e804011c551ea0f4a596a64b284a13480ea7779c90806a9fa4ef70322ebc" name="aa0081e804011c551ea0f4a596a64b284a13480ea7779c90806a9fa4ef70322ebc"></a>CUBIC_SPLINE&#160;</td><td class="fielddoc"><p>Use cubic spline interpolation for smooth transitions. </p>
+</td></tr>
 </table>
 
 </div>
@@ -882,6 +904,16 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Multiply a signal by a scalar from the left. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>The scalar multiplier. </td></tr>
+    <tr><td class="paramname">r</td><td>The signal to multiply. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new signal with all values and derivatives scaled by l. </dd></dl>
+
 </div>
 </div>
 <a id="ae0b0bee5051aeec3c9cff9fd148d8cb5" name="ae0b0bee5051aeec3c9cff9fd148d8cb5"></a>
@@ -904,6 +936,16 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Multiply a signal by a scalar from the right. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>The signal to multiply. </td></tr>
+    <tr><td class="paramname">r</td><td>The scalar multiplier. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new signal with all values and derivatives scaled by r. </dd></dl>
 
 </div>
 </div>
@@ -928,6 +970,16 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Add a tangent signal to a base signal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>The left-hand side signal (base type). </td></tr>
+    <tr><td class="paramname">r</td><td>The right-hand side signal (tangent type) to add. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new signal with r added to l's values and derivatives. </dd></dl>
+
 </div>
 </div>
 <a id="afd611b1d0ab8c1f43be72184926ec8ac" name="afd611b1d0ab8c1f43be72184926ec8ac"></a>
@@ -950,6 +1002,16 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Subtract one signal from another, producing a tangent signal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>The left-hand side signal. </td></tr>
+    <tr><td class="paramname">r</td><td>The right-hand side signal to subtract. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new tangent signal representing the difference l - r. </dd></dl>
 
 </div>
 </div>

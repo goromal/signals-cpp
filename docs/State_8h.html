@@ -26,7 +26,6 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -122,10 +121,13 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base type for all <a class="el" href="classModel.html" title="Base type for all model simulators.">Model</a> state representations.  <a href="structState.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structScalarStateSignalSpec.html">ScalarStateSignalSpec&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structScalarStateSignalSpec.html#a7ae52069e3aafdb7c45b14168b1ad11b">Type</a> specification for scalar state signals.  <a href="structScalarStateSignalSpec.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVectorStateSignalSpec.html">VectorStateSignalSpec&lt; T, d &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structVectorStateSignalSpec.html#a3994948f467b39ca2dcd77d220a8cf3a">Type</a> specification for vector state signals.  <a href="structVectorStateSignalSpec.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structManifoldStateSignalSpec.html">ManifoldStateSignalSpec&lt; T, ManifoldType, PD, TD &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structManifoldStateSignalSpec.html#aef8d411c012125303e1faa1d66b35c1c">Type</a> specification for manifold state signals.  <a href="structManifoldStateSignalSpec.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -307,27 +309,33 @@ Typedefs</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ac3e1ccc35f63b762bdd2c87478f8aad6" id="r_ac3e1ccc35f63b762bdd2c87478f8aad6"><td class="memTemplParams" colspan="2">template&lt;typename T, typename PTS, size_t PD, typename TTS, size_t TD&gt; </td></tr>
 <tr class="memitem:ac3e1ccc35f63b762bdd2c87478f8aad6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structState.html">State</a>&lt; T, PTS, PD, TTS, TD &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac3e1ccc35f63b762bdd2c87478f8aad6">operator+</a> (const <a class="el" href="structState.html">State</a>&lt; T, PTS, PD, TTS, TD &gt; &amp;l, const <a class="el" href="structState.html">State</a>&lt; T, TTS, TD, TTS, TD &gt; &amp;r)</td></tr>
+<tr class="memdesc:ac3e1ccc35f63b762bdd2c87478f8aad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a tangent space state (twist and derivative of twist) to the current state.  <br /></td></tr>
 <tr class="separator:ac3e1ccc35f63b762bdd2c87478f8aad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7ac1ecc8c925fbc991d2fa8ca50d4eb" id="r_ad7ac1ecc8c925fbc991d2fa8ca50d4eb"><td class="memTemplParams" colspan="2">template&lt;typename T, typename PTS, size_t PD, typename TTS, size_t TD&gt; </td></tr>
 <tr class="memitem:ad7ac1ecc8c925fbc991d2fa8ca50d4eb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structState.html">State</a>&lt; T, TTS, TD, TTS, TD &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ad7ac1ecc8c925fbc991d2fa8ca50d4eb">operator-</a> (const <a class="el" href="structState.html">State</a>&lt; T, PTS, PD, TTS, TD &gt; &amp;l, const <a class="el" href="structState.html">State</a>&lt; T, PTS, PD, TTS, TD &gt; &amp;r)</td></tr>
+<tr class="memdesc:ad7ac1ecc8c925fbc991d2fa8ca50d4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract a tangent space state (twist and derivative of twist) from the current state.  <br /></td></tr>
 <tr class="separator:ad7ac1ecc8c925fbc991d2fa8ca50d4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a795d2ff5c53f24de712134f27e197001" id="r_a795d2ff5c53f24de712134f27e197001"><td class="memTemplParams" colspan="2">template&lt;typename T, typename PTS, size_t PD, typename TTS, size_t TD&gt; </td></tr>
 <tr class="memitem:a795d2ff5c53f24de712134f27e197001"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structState.html">State</a>&lt; T, PTS, PD, TTS, TD &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a795d2ff5c53f24de712134f27e197001">operator*</a> (const double &amp;l, const <a class="el" href="structState.html">State</a>&lt; T, PTS, PD, TTS, TD &gt; &amp;r)</td></tr>
+<tr class="memdesc:a795d2ff5c53f24de712134f27e197001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale the state (pose and twist) by a scalar.  <br /></td></tr>
 <tr class="separator:a795d2ff5c53f24de712134f27e197001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7fa016cf853be0dbc882359bf5b637f9" id="r_a7fa016cf853be0dbc882359bf5b637f9"><td class="memTemplParams" colspan="2">template&lt;typename T, typename PTS, size_t PD, typename TTS, size_t TD&gt; </td></tr>
 <tr class="memitem:a7fa016cf853be0dbc882359bf5b637f9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structState.html">State</a>&lt; T, PTS, PD, TTS, TD &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a7fa016cf853be0dbc882359bf5b637f9">operator*</a> (const <a class="el" href="structState.html">State</a>&lt; T, PTS, PD, TTS, TD &gt; &amp;l, const double &amp;r)</td></tr>
+<tr class="memdesc:a7fa016cf853be0dbc882359bf5b637f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale the state (pose and twist) by a scalar.  <br /></td></tr>
 <tr class="separator:a7fa016cf853be0dbc882359bf5b637f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae29ac55bb38cdbd3acce109857e8e7a4" id="r_ae29ac55bb38cdbd3acce109857e8e7a4"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ae29ac55bb38cdbd3acce109857e8e7a4"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ae29ac55bb38cdbd3acce109857e8e7a4">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="#aad51d946606df50291c6c2f546030f11">ScalarStateType</a>&lt; T &gt; &amp;x)</td></tr>
 <tr class="separator:ae29ac55bb38cdbd3acce109857e8e7a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3ec1e7d28a9aac4e1cde4c7f3438128" id="r_af3ec1e7d28a9aac4e1cde4c7f3438128"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:af3ec1e7d28a9aac4e1cde4c7f3438128"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="#aad51d946606df50291c6c2f546030f11">ScalarStateType</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#af3ec1e7d28a9aac4e1cde4c7f3438128">operator/</a> (const <a class="el" href="#aad51d946606df50291c6c2f546030f11">ScalarStateType</a>&lt; T &gt; &amp;l, const double &amp;r)</td></tr>
+<tr class="memdesc:af3ec1e7d28a9aac4e1cde4c7f3438128"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale the state (pose and twist) by a scalar.  <br /></td></tr>
 <tr class="separator:af3ec1e7d28a9aac4e1cde4c7f3438128"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1eca508289d2fcbdecd0cc136eed43d" id="r_af1eca508289d2fcbdecd0cc136eed43d"><td class="memTemplParams" colspan="2">template&lt;typename T, size_t d&gt; </td></tr>
 <tr class="memitem:af1eca508289d2fcbdecd0cc136eed43d"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#af1eca508289d2fcbdecd0cc136eed43d">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="#a60d0230d5788084bb8f559f4561d4d96">VectorStateType</a>&lt; T, d &gt; &amp;x)</td></tr>
 <tr class="separator:af1eca508289d2fcbdecd0cc136eed43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f388e10603fb47846a1147ff5b6839d" id="r_a0f388e10603fb47846a1147ff5b6839d"><td class="memTemplParams" colspan="2">template&lt;typename T, size_t d&gt; </td></tr>
 <tr class="memitem:a0f388e10603fb47846a1147ff5b6839d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="#a60d0230d5788084bb8f559f4561d4d96">VectorStateType</a>&lt; T, d &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a0f388e10603fb47846a1147ff5b6839d">operator/</a> (const <a class="el" href="#a60d0230d5788084bb8f559f4561d4d96">VectorStateType</a>&lt; T, d &gt; &amp;l, const double &amp;r)</td></tr>
+<tr class="memdesc:a0f388e10603fb47846a1147ff5b6839d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale the state (pose and twist) by a scalar.  <br /></td></tr>
 <tr class="separator:a0f388e10603fb47846a1147ff5b6839d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a494fe74e8c2fc3cd3f7e14886eeb7d6c" id="r_a494fe74e8c2fc3cd3f7e14886eeb7d6c"><td class="memTemplParams" colspan="2">template&lt;typename T, typename ManifoldType, size_t PD, size_t TD&gt; </td></tr>
 <tr class="memitem:a494fe74e8c2fc3cd3f7e14886eeb7d6c"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a494fe74e8c2fc3cd3f7e14886eeb7d6c">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="#a73655df4c5d92f1cf1cf69d5fa057753">ManifoldStateType</a>&lt; T, ManifoldType, PD, TD &gt; &amp;x)</td></tr>
@@ -372,8 +380,8 @@ Functions</h2></td></tr>
 <div class="line">    <span class="keyword">using </span>Manif##StateSignal = <a class="code hl_typedef" href="#a111e9957b3bae43e71ce97678f712b8c">ManifoldStateSignal&lt;T, Manif&lt;T&gt;</a>, Dimension, TangentDimension&gt;;                          \</div>
 <div class="line">    <span class="keyword">typedef</span> Manif##<a class="code hl_struct" href="structState.html">State&lt;double&gt;</a>       Manif##dState;                                                                  \</div>
 <div class="line">    <span class="keyword">typedef</span> Manif##StateSignal&lt;double&gt; Manif##dStateSignal;</div>
-<div class="ttc" id="aState_8h_html_a111e9957b3bae43e71ce97678f712b8c"><div class="ttname"><a href="#a111e9957b3bae43e71ce97678f712b8c">ManifoldStateSignal</a></div><div class="ttdeci">Signal&lt; ManifoldStateSignalSpec&lt; T, ManifoldType, PD, TD &gt;, VectorStateSignalSpec&lt; T, TD &gt; &gt; ManifoldStateSignal</div><div class="ttdef"><b>Definition</b> State.h:234</div></div>
-<div class="ttc" id="aState_8h_html_a73655df4c5d92f1cf1cf69d5fa057753"><div class="ttname"><a href="#a73655df4c5d92f1cf1cf69d5fa057753">ManifoldStateType</a></div><div class="ttdeci">State&lt; T, ManifoldSignalSpec&lt; ManifoldType &gt;, PD, VectorSignalSpec&lt; T, TD &gt;, TD &gt; ManifoldStateType</div><div class="ttdef"><b>Definition</b> State.h:161</div></div>
+<div class="ttc" id="aState_8h_html_a111e9957b3bae43e71ce97678f712b8c"><div class="ttname"><a href="#a111e9957b3bae43e71ce97678f712b8c">ManifoldStateSignal</a></div><div class="ttdeci">Signal&lt; ManifoldStateSignalSpec&lt; T, ManifoldType, PD, TD &gt;, VectorStateSignalSpec&lt; T, TD &gt; &gt; ManifoldStateSignal</div><div class="ttdef"><b>Definition</b> State.h:310</div></div>
+<div class="ttc" id="aState_8h_html_a73655df4c5d92f1cf1cf69d5fa057753"><div class="ttname"><a href="#a73655df4c5d92f1cf1cf69d5fa057753">ManifoldStateType</a></div><div class="ttdeci">State&lt; T, ManifoldSignalSpec&lt; ManifoldType &gt;, PD, VectorSignalSpec&lt; T, TD &gt;, TD &gt; ManifoldStateType</div><div class="ttdef"><b>Definition</b> State.h:203</div></div>
 <div class="ttc" id="astructState_html"><div class="ttname"><a href="structState.html">State</a></div><div class="ttdoc">Base type for all Model state representations.</div><div class="ttdef"><b>Definition</b> State.h:34</div></div>
 </div><!-- fragment -->
 </div>
@@ -398,8 +406,8 @@ Functions</h2></td></tr>
 <div class="line">    <span class="keyword">using </span>Vector##Dimension##StateSignal = <a class="code hl_typedef" href="#a214bd9926c3d8a2bb83b9b471744775b">VectorStateSignal&lt;T, Dimension&gt;</a>;                                            \</div>
 <div class="line">    <span class="keyword">typedef</span> Vector##Dimension##<a class="code hl_struct" href="structState.html">State&lt;double&gt;</a>       Vector##Dimension##dState;                                          \</div>
 <div class="line">    <span class="keyword">typedef</span> Vector##Dimension##StateSignal&lt;double&gt; Vector##Dimension##dStateSignal;</div>
-<div class="ttc" id="aState_8h_html_a214bd9926c3d8a2bb83b9b471744775b"><div class="ttname"><a href="#a214bd9926c3d8a2bb83b9b471744775b">VectorStateSignal</a></div><div class="ttdeci">Signal&lt; VectorStateSignalSpec&lt; T, d &gt;, VectorStateSignalSpec&lt; T, d &gt; &gt; VectorStateSignal</div><div class="ttdef"><b>Definition</b> State.h:223</div></div>
-<div class="ttc" id="aState_8h_html_a60d0230d5788084bb8f559f4561d4d96"><div class="ttname"><a href="#a60d0230d5788084bb8f559f4561d4d96">VectorStateType</a></div><div class="ttdeci">State&lt; T, VectorSignalSpec&lt; T, d &gt;, d, VectorSignalSpec&lt; T, d &gt;, d &gt; VectorStateType</div><div class="ttdef"><b>Definition</b> State.h:142</div></div>
+<div class="ttc" id="aState_8h_html_a214bd9926c3d8a2bb83b9b471744775b"><div class="ttname"><a href="#a214bd9926c3d8a2bb83b9b471744775b">VectorStateSignal</a></div><div class="ttdeci">Signal&lt; VectorStateSignalSpec&lt; T, d &gt;, VectorStateSignalSpec&lt; T, d &gt; &gt; VectorStateSignal</div><div class="ttdef"><b>Definition</b> State.h:299</div></div>
+<div class="ttc" id="aState_8h_html_a60d0230d5788084bb8f559f4561d4d96"><div class="ttname"><a href="#a60d0230d5788084bb8f559f4561d4d96">VectorStateType</a></div><div class="ttdeci">State&lt; T, VectorSignalSpec&lt; T, d &gt;, d, VectorSignalSpec&lt; T, d &gt;, d &gt; VectorStateType</div><div class="ttdef"><b>Definition</b> State.h:181</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1406,6 +1414,8 @@ template&lt;typename T, typename PTS, size_t PD, typename TTS, size_t TD&gt; </d
       </table>
 </div><div class="memdoc">
 
+<p>Scale the state (pose and twist) by a scalar. </p>
+
 </div>
 </div>
 <a id="a7fa016cf853be0dbc882359bf5b637f9" name="a7fa016cf853be0dbc882359bf5b637f9"></a>
@@ -1428,6 +1438,8 @@ template&lt;typename T, typename PTS, size_t PD, typename TTS, size_t TD&gt; </d
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Scale the state (pose and twist) by a scalar. </p>
 
 </div>
 </div>
@@ -1452,6 +1464,8 @@ template&lt;typename T, typename PTS, size_t PD, typename TTS, size_t TD&gt; </d
       </table>
 </div><div class="memdoc">
 
+<p>Add a tangent space state (twist and derivative of twist) to the current state. </p>
+
 </div>
 </div>
 <a id="ad7ac1ecc8c925fbc991d2fa8ca50d4eb" name="ad7ac1ecc8c925fbc991d2fa8ca50d4eb"></a>
@@ -1474,6 +1488,8 @@ template&lt;typename T, typename PTS, size_t PD, typename TTS, size_t TD&gt; </d
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Subtract a tangent space state (twist and derivative of twist) from the current state. </p>
 
 </div>
 </div>
@@ -1498,6 +1514,8 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Scale the state (pose and twist) by a scalar. </p>
+
 </div>
 </div>
 <a id="a0f388e10603fb47846a1147ff5b6839d" name="a0f388e10603fb47846a1147ff5b6839d"></a>
@@ -1520,6 +1538,8 @@ template&lt;typename T, size_t d&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Scale the state (pose and twist) by a scalar. </p>
 
 </div>
 </div>

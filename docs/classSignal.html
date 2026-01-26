@@ -26,7 +26,6 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -115,11 +114,15 @@ $(function(){initNavTree('classSignal.html',''); initResizable(true); });
 </div><!--header-->
 <div class="contents">
 
+<p>Template class for time-series signals with interpolation, extrapolation, and derivative capabilities.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Signal_8h_source.html">Signal.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSignal_1_1SignalDP.html">SignalDP</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data point structure storing time, value, and derivative.  <a href="structSignal_1_1SignalDP.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -132,40 +135,58 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b5d0a9fba3546f500fed7e2102cd9a7" id="r_a8b5d0a9fba3546f500fed7e2102cd9a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b5d0a9fba3546f500fed7e2102cd9a7">Signal</a> ()</td></tr>
+<tr class="memdesc:a8b5d0a9fba3546f500fed7e2102cd9a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor initializing with LINEAR interpolation, ZEROS extrapolation, and DIRTY derivative.  <br /></td></tr>
 <tr class="separator:a8b5d0a9fba3546f500fed7e2102cd9a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81a95abda92d3efc0bd4b4ccba77e303" id="r_a81a95abda92d3efc0bd4b4ccba77e303"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81a95abda92d3efc0bd4b4ccba77e303">Signal</a> (const <a class="el" href="classSignal.html">Signal</a> &amp;other)</td></tr>
+<tr class="memdesc:a81a95abda92d3efc0bd4b4ccba77e303"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <br /></td></tr>
 <tr class="separator:a81a95abda92d3efc0bd4b4ccba77e303"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95241f68d33194232ba1eea1747a5231" id="r_a95241f68d33194232ba1eea1747a5231"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95241f68d33194232ba1eea1747a5231">dotSignal</a> ()</td></tr>
+<tr class="memdesc:a95241f68d33194232ba1eea1747a5231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new signal representing the time derivative of this signal.  <br /></td></tr>
 <tr class="separator:a95241f68d33194232ba1eea1747a5231"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a058783faf86f369b296c50d4e72c0881" id="r_a058783faf86f369b296c50d4e72c0881"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a058783faf86f369b296c50d4e72c0881">t</a> () const</td></tr>
+<tr class="memdesc:a058783faf86f369b296c50d4e72c0881"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current time of the signal.  <br /></td></tr>
 <tr class="separator:a058783faf86f369b296c50d4e72c0881"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d222b24cb25f6f228a0c69d71d95918" id="r_a2d222b24cb25f6f228a0c69d71d95918"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9bda97fe7663f5481807259ca8bcd8cb">BaseType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d222b24cb25f6f228a0c69d71d95918">operator()</a> () const</td></tr>
+<tr class="memdesc:a2d222b24cb25f6f228a0c69d71d95918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current signal value.  <br /></td></tr>
 <tr class="separator:a2d222b24cb25f6f228a0c69d71d95918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b12b8bc1e74ddbadb67248fab16c461" id="r_a8b12b8bc1e74ddbadb67248fab16c461"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aa0094b1c69fd482de9de83b99634996a">TangentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b12b8bc1e74ddbadb67248fab16c461">dot</a> () const</td></tr>
+<tr class="memdesc:a8b12b8bc1e74ddbadb67248fab16c461"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current time derivative of the signal.  <br /></td></tr>
 <tr class="separator:a8b12b8bc1e74ddbadb67248fab16c461"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad32d0b6b6bbc54ab8bd0fa63ed3039b9" id="r_ad32d0b6b6bbc54ab8bd0fa63ed3039b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9bda97fe7663f5481807259ca8bcd8cb">BaseType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad32d0b6b6bbc54ab8bd0fa63ed3039b9">operator()</a> (const double &amp;<a class="el" href="#a058783faf86f369b296c50d4e72c0881">t</a>) const</td></tr>
+<tr class="memdesc:ad32d0b6b6bbc54ab8bd0fa63ed3039b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the signal value at a specific time using interpolation/extrapolation.  <br /></td></tr>
 <tr class="separator:ad32d0b6b6bbc54ab8bd0fa63ed3039b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8989cbb307917a9c1f6331be2a5ae4e9" id="r_a8989cbb307917a9c1f6331be2a5ae4e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aa0094b1c69fd482de9de83b99634996a">TangentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8989cbb307917a9c1f6331be2a5ae4e9">dot</a> (const double &amp;<a class="el" href="#a058783faf86f369b296c50d4e72c0881">t</a>) const</td></tr>
+<tr class="memdesc:a8989cbb307917a9c1f6331be2a5ae4e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the signal derivative at a specific time using interpolation/extrapolation.  <br /></td></tr>
 <tr class="separator:a8989cbb307917a9c1f6331be2a5ae4e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf8612dae8c835fa349c6f26201016eb" id="r_abf8612dae8c835fa349c6f26201016eb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="#a9bda97fe7663f5481807259ca8bcd8cb">BaseType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf8612dae8c835fa349c6f26201016eb">operator()</a> (const std::vector&lt; double &gt; &amp;<a class="el" href="#a058783faf86f369b296c50d4e72c0881">t</a>) const</td></tr>
+<tr class="memdesc:abf8612dae8c835fa349c6f26201016eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get signal values at multiple time points.  <br /></td></tr>
 <tr class="separator:abf8612dae8c835fa349c6f26201016eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad31a21f4a7d572da1e06e407ccacecd" id="r_aad31a21f4a7d572da1e06e407ccacecd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="#aa0094b1c69fd482de9de83b99634996a">TangentType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad31a21f4a7d572da1e06e407ccacecd">dot</a> (const std::vector&lt; double &gt; &amp;<a class="el" href="#a058783faf86f369b296c50d4e72c0881">t</a>) const</td></tr>
+<tr class="memdesc:aad31a21f4a7d572da1e06e407ccacecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get signal derivatives at multiple time points.  <br /></td></tr>
 <tr class="separator:aad31a21f4a7d572da1e06e407ccacecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af336f3d6a2d643040dff9fb5b4c20558" id="r_af336f3d6a2d643040dff9fb5b4c20558"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af336f3d6a2d643040dff9fb5b4c20558">setInterpolationMethod</a> (<a class="el" href="Signal_8h.html#aa0081e804011c551ea0f4a596a64b284">InterpolationMethod</a> method)</td></tr>
+<tr class="memdesc:af336f3d6a2d643040dff9fb5b4c20558"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the interpolation method for this signal.  <br /></td></tr>
 <tr class="separator:af336f3d6a2d643040dff9fb5b4c20558"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3be206ae717ad5e977d8a108de9b9e4" id="r_ac3be206ae717ad5e977d8a108de9b9e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3be206ae717ad5e977d8a108de9b9e4">setExtrapolationMethod</a> (<a class="el" href="Signal_8h.html#a9943b8bd1a1a1cdb774553d44c12cde4">ExtrapolationMethod</a> method)</td></tr>
+<tr class="memdesc:ac3be206ae717ad5e977d8a108de9b9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the extrapolation method for this signal.  <br /></td></tr>
 <tr class="separator:ac3be206ae717ad5e977d8a108de9b9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c25f302d3c4feaa1a4c1f6d59381d89" id="r_a8c25f302d3c4feaa1a4c1f6d59381d89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c25f302d3c4feaa1a4c1f6d59381d89">setDerivativeMethod</a> (<a class="el" href="Signal_8h.html#a35d05b0e727a39b86907d8669e9e1242">DerivativeMethod</a> method)</td></tr>
+<tr class="memdesc:a8c25f302d3c4feaa1a4c1f6d59381d89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the derivative computation method for this signal.  <br /></td></tr>
 <tr class="separator:a8c25f302d3c4feaa1a4c1f6d59381d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a914fd7f09ae0723c88fce310fd7c79fd" id="r_a914fd7f09ae0723c88fce310fd7c79fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a914fd7f09ae0723c88fce310fd7c79fd">reset</a> ()</td></tr>
+<tr class="memdesc:a914fd7f09ae0723c88fce310fd7c79fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the signal to initial state, clearing all history.  <br /></td></tr>
 <tr class="separator:a914fd7f09ae0723c88fce310fd7c79fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab91f52b80939a6c67b6863ee463b4ff0" id="r_ab91f52b80939a6c67b6863ee463b4ff0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab91f52b80939a6c67b6863ee463b4ff0">update</a> (const double &amp;_t, const <a class="el" href="#a9bda97fe7663f5481807259ca8bcd8cb">BaseType</a> &amp;_x, bool insertHistory=false)</td></tr>
+<tr class="memdesc:ab91f52b80939a6c67b6863ee463b4ff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the signal with a new value at a given time, computing derivative automatically.  <br /></td></tr>
 <tr class="separator:ab91f52b80939a6c67b6863ee463b4ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c7174c9bb20970ebb3de64687f771d8" id="r_a6c7174c9bb20970ebb3de64687f771d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c7174c9bb20970ebb3de64687f771d8">update</a> (const double &amp;_t, const <a class="el" href="#a9bda97fe7663f5481807259ca8bcd8cb">BaseType</a> &amp;_x, const <a class="el" href="#aa0094b1c69fd482de9de83b99634996a">TangentType</a> &amp;_xdot, bool insertHistory=false)</td></tr>
+<tr class="memdesc:a6c7174c9bb20970ebb3de64687f771d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the signal with a new value and derivative at a given time.  <br /></td></tr>
 <tr class="separator:a6c7174c9bb20970ebb3de64687f771d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5530308ef517fd0021f510d47c390dc0" id="r_a5530308ef517fd0021f510d47c390dc0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5530308ef517fd0021f510d47c390dc0">update</a> (const std::vector&lt; double &gt; &amp;_tHistory, const std::vector&lt; <a class="el" href="#a9bda97fe7663f5481807259ca8bcd8cb">BaseType</a> &gt; &amp;_xHistory)</td></tr>
+<tr class="memdesc:a5530308ef517fd0021f510d47c390dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the signal with a history of values, computing derivatives automatically.  <br /></td></tr>
 <tr class="separator:a5530308ef517fd0021f510d47c390dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74929b7332876f5aeddc9a05d26d3d32" id="r_a74929b7332876f5aeddc9a05d26d3d32"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a74929b7332876f5aeddc9a05d26d3d32">update</a> (const std::vector&lt; double &gt; &amp;_tHistory, const std::vector&lt; <a class="el" href="#a9bda97fe7663f5481807259ca8bcd8cb">BaseType</a> &gt; &amp;_xHistory, const std::vector&lt; <a class="el" href="#aa0094b1c69fd482de9de83b99634996a">TangentType</a> &gt; &amp;_xdotHistory)</td></tr>
+<tr class="memdesc:a74929b7332876f5aeddc9a05d26d3d32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the signal with a history of values and derivatives.  <br /></td></tr>
 <tr class="separator:a74929b7332876f5aeddc9a05d26d3d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -173,6 +194,7 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a6db70e8a2784b5596a47f2249a2627b7" id="r_a6db70e8a2784b5596a47f2249a2627b7"><td class="memItemLeft" >struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6db70e8a2784b5596a47f2249a2627b7" id="r_a6db70e8a2784b5596a47f2249a2627b7"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6db70e8a2784b5596a47f2249a2627b7">SignalDPComparator</a>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a6db70e8a2784b5596a47f2249a2627b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comparator for sorting signal data points by time.  <br /></td></tr>
 <tr class="separator:a6db70e8a2784b5596a47f2249a2627b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4c3f0098aaec52921d28cce09ff1ed4" id="r_ae4c3f0098aaec52921d28cce09ff1ed4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="Signal_8h.html#aa0081e804011c551ea0f4a596a64b284">InterpolationMethod</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4c3f0098aaec52921d28cce09ff1ed4">interpolationMethod</a></td></tr>
 <tr class="separator:ae4c3f0098aaec52921d28cce09ff1ed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,7 +218,27 @@ Friends</h2></td></tr>
 <tr class="memitem:ae5d88905516fd17257964442b0830584"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSignal.html">Signal</a>&lt; BSS, TSS &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ae5d88905516fd17257964442b0830584">operator*</a> (const <a class="el" href="classSignal.html">Signal</a>&lt; BSS, TSS &gt; &amp;l, const double &amp;r)</td></tr>
 <tr class="separator:ae5d88905516fd17257964442b0830584"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt;<br />
+class Signal&lt; BaseSignalSpec, TangentSignalSpec &gt;</div><p>Template class for time-series signals with interpolation, extrapolation, and derivative capabilities. </p>
+<p>The <a class="el" href="classSignal.html" title="Template class for time-series signals with interpolation, extrapolation, and derivative capabilities...">Signal</a> class represents a time-varying signal that stores both the value and its time derivative. It supports various interpolation methods for querying values at arbitrary time points, configurable extrapolation behavior outside the defined time range, and automatic derivative computation.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">BaseSignalSpec</td><td>Type specification for the signal values (can be scalar, vector, or manifold types). </td></tr>
+    <tr><td class="paramname">TangentSignalSpec</td><td>Type specification for the signal derivatives (typically vector types).</td></tr>
+  </table>
+  </dd>
+</dl>
+<p><b>Example usage:</b> </p><div class="fragment"><div class="line"><a class="code hl_typedef" href="Signal_8h.html#a5d3a7fde60e049b3fb16e62c397585a0">ScalardSignal</a> mySignal;</div>
+<div class="line">mySignal.<a class="code hl_function" href="#af336f3d6a2d643040dff9fb5b4c20558">setInterpolationMethod</a>(<a class="code hl_enumvalue" href="Signal_8h.html#aa0081e804011c551ea0f4a596a64b284adc101ebf31c49c2d4b80b7c6f59f22cb">InterpolationMethod::LINEAR</a>);</div>
+<div class="line">mySignal.<a class="code hl_function" href="#ab91f52b80939a6c67b6863ee463b4ff0">update</a>(1.0, 5.0, <span class="keyword">true</span>);  <span class="comment">// time=1.0, value=5.0, store in history</span></div>
+<div class="line">mySignal.<a class="code hl_function" href="#ab91f52b80939a6c67b6863ee463b4ff0">update</a>(2.0, 7.0, <span class="keyword">true</span>);  <span class="comment">// time=2.0, value=7.0, store in history</span></div>
+<div class="line"><span class="keywordtype">double</span> interpValue = mySignal(1.5);  <span class="comment">// Query interpolated value at t=1.5</span></div>
+<div class="ttc" id="aSignal_8h_html_a5d3a7fde60e049b3fb16e62c397585a0"><div class="ttname"><a href="Signal_8h.html#a5d3a7fde60e049b3fb16e62c397585a0">ScalardSignal</a></div><div class="ttdeci">ScalarSignal&lt; double &gt; ScalardSignal</div><div class="ttdef"><b>Definition</b> Signal.h:872</div></div>
+<div class="ttc" id="aSignal_8h_html_aa0081e804011c551ea0f4a596a64b284adc101ebf31c49c2d4b80b7c6f59f22cb"><div class="ttname"><a href="Signal_8h.html#aa0081e804011c551ea0f4a596a64b284adc101ebf31c49c2d4b80b7c6f59f22cb">LINEAR</a></div><div class="ttdeci">@ LINEAR</div><div class="ttdef"><b>Definition</b> Signal.h:19</div></div>
+<div class="ttc" id="aclassSignal_html_ab91f52b80939a6c67b6863ee463b4ff0"><div class="ttname"><a href="#ab91f52b80939a6c67b6863ee463b4ff0">Signal::update</a></div><div class="ttdeci">bool update(const double &amp;_t, const BaseType &amp;_x, bool insertHistory=false)</div><div class="ttdoc">Update the signal with a new value at a given time, computing derivative automatically.</div><div class="ttdef"><b>Definition</b> Signal.h:270</div></div>
+<div class="ttc" id="aclassSignal_html_af336f3d6a2d643040dff9fb5b4c20558"><div class="ttname"><a href="#af336f3d6a2d643040dff9fb5b4c20558">Signal::setInterpolationMethod</a></div><div class="ttdeci">void setInterpolationMethod(InterpolationMethod method)</div><div class="ttdoc">Set the interpolation method for this signal.</div><div class="ttdef"><b>Definition</b> Signal.h:228</div></div>
+</div><!-- fragment --> </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a9bda97fe7663f5481807259ca8bcd8cb" name="a9bda97fe7663f5481807259ca8bcd8cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9bda97fe7663f5481807259ca8bcd8cb">&#9670;&#160;</a></span>BaseType</h2>
 
@@ -255,6 +297,8 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Default constructor initializing with LINEAR interpolation, ZEROS extrapolation, and DIRTY derivative. </p>
+
 </div>
 </div>
 <a id="a81a95abda92d3efc0bd4b4ccba77e303" name="a81a95abda92d3efc0bd4b4ccba77e303"></a>
@@ -281,6 +325,14 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Copy constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The signal to copy from. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -310,6 +362,9 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get the current time derivative of the signal. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current derivative value. </dd></dl>
+
 </div>
 </div>
 <a id="a8989cbb307917a9c1f6331be2a5ae4e9" name="a8989cbb307917a9c1f6331be2a5ae4e9"></a>
@@ -336,6 +391,15 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get the signal derivative at a specific time using interpolation/extrapolation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>The time to query. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The interpolated/extrapolated derivative value at time t. </dd></dl>
 
 </div>
 </div>
@@ -364,6 +428,15 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get signal derivatives at multiple time points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Vector of time points to query. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector of interpolated/extrapolated derivative values. </dd></dl>
+
 </div>
 </div>
 <a id="a95241f68d33194232ba1eea1747a5231" name="a95241f68d33194232ba1eea1747a5231"></a>
@@ -390,6 +463,9 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Create a new signal representing the time derivative of this signal. </p>
+<dl class="section return"><dt>Returns</dt><dd>A signal containing the derivative values from this signal's history. </dd></dl>
 
 </div>
 </div>
@@ -418,6 +494,9 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get the current signal value. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current value. </dd></dl>
+
 </div>
 </div>
 <a id="ad32d0b6b6bbc54ab8bd0fa63ed3039b9" name="ad32d0b6b6bbc54ab8bd0fa63ed3039b9"></a>
@@ -444,6 +523,15 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get the signal value at a specific time using interpolation/extrapolation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>The time to query. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The interpolated/extrapolated signal value at time t. </dd></dl>
 
 </div>
 </div>
@@ -472,6 +560,15 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get signal values at multiple time points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Vector of time points to query. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector of interpolated/extrapolated signal values. </dd></dl>
+
 </div>
 </div>
 <a id="a914fd7f09ae0723c88fce310fd7c79fd" name="a914fd7f09ae0723c88fce310fd7c79fd"></a>
@@ -498,6 +595,8 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Reset the signal to initial state, clearing all history. </p>
 
 </div>
 </div>
@@ -526,6 +625,14 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Set the derivative computation method for this signal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">method</td><td>The derivative method to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ac3be206ae717ad5e977d8a108de9b9e4" name="ac3be206ae717ad5e977d8a108de9b9e4"></a>
@@ -552,6 +659,14 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Set the extrapolation method for this signal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">method</td><td>The extrapolation method to use. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -580,6 +695,14 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Set the interpolation method for this signal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">method</td><td>The interpolation method to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a058783faf86f369b296c50d4e72c0881" name="a058783faf86f369b296c50d4e72c0881"></a>
@@ -606,6 +729,9 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get the current time of the signal. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current time value. </dd></dl>
 
 </div>
 </div>
@@ -642,6 +768,17 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Update the signal with a new value at a given time, computing derivative automatically. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_t</td><td>The time of the new data point. </td></tr>
+    <tr><td class="paramname">_x</td><td>The value at time _t. </td></tr>
+    <tr><td class="paramname">insertHistory</td><td>Whether to store this data point in history for interpolation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if update was successful, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -684,6 +821,18 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Update the signal with a new value and derivative at a given time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_t</td><td>The time of the new data point. </td></tr>
+    <tr><td class="paramname">_x</td><td>The value at time _t. </td></tr>
+    <tr><td class="paramname">_xdot</td><td>The derivative at time _t. </td></tr>
+    <tr><td class="paramname">insertHistory</td><td>Whether to store this data point in history for interpolation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if update was successful, false otherwise. </dd></dl>
+
 </div>
 </div>
 <a id="a5530308ef517fd0021f510d47c390dc0" name="a5530308ef517fd0021f510d47c390dc0"></a>
@@ -714,6 +863,16 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Update the signal with a history of values, computing derivatives automatically. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_tHistory</td><td>Vector of time points. </td></tr>
+    <tr><td class="paramname">_xHistory</td><td>Vector of values corresponding to each time point. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if update was successful, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -750,6 +909,17 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Update the signal with a history of values and derivatives. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_tHistory</td><td>Vector of time points. </td></tr>
+    <tr><td class="paramname">_xHistory</td><td>Vector of values corresponding to each time point. </td></tr>
+    <tr><td class="paramname">_xdotHistory</td><td>Vector of derivatives corresponding to each time point. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if update was successful, false if vector sizes don't match. </dd></dl>
 
 </div>
 </div>
@@ -900,6 +1070,7 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Current derivative computation method. </p>
 
 </div>
 </div>
@@ -916,6 +1087,7 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Current extrapolation method. </p>
 
 </div>
 </div>
@@ -932,6 +1104,7 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Current interpolation method. </p>
 
 </div>
 </div>
@@ -946,6 +1119,8 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Comparator for sorting signal data points by time. </p>
 
 </div>
 </div>

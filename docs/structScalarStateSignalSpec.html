@@ -26,7 +26,6 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -112,6 +111,9 @@ $(function(){initNavTree('structScalarStateSignalSpec.html',''); initResizable(t
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="#a7ae52069e3aafdb7c45b14168b1ad11b">Type</a> specification for scalar state signals.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="State_8h_source.html">State.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -122,11 +124,22 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a0dc57853395e3c57d6447a23ae513b91" id="r_a0dc57853395e3c57d6447a23ae513b91"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#a7ae52069e3aafdb7c45b14168b1ad11b">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0dc57853395e3c57d6447a23ae513b91">ZeroType</a> ()</td></tr>
+<tr class="memdesc:a0dc57853395e3c57d6447a23ae513b91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns identity (zero) state.  <br /></td></tr>
 <tr class="separator:a0dc57853395e3c57d6447a23ae513b91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3878dfd1b21706364c34d09e6da37ce" id="r_ac3878dfd1b21706364c34d09e6da37ce"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#a7ae52069e3aafdb7c45b14168b1ad11b">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3878dfd1b21706364c34d09e6da37ce">NansType</a> ()</td></tr>
+<tr class="memdesc:ac3878dfd1b21706364c34d09e6da37ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns state with NaN values.  <br /></td></tr>
 <tr class="separator:ac3878dfd1b21706364c34d09e6da37ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+struct ScalarStateSignalSpec&lt; T &gt;</div><p><a class="el" href="#a7ae52069e3aafdb7c45b14168b1ad11b">Type</a> specification for scalar state signals. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Scalar type (e.g., double, float). </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a7ae52069e3aafdb7c45b14168b1ad11b" name="a7ae52069e3aafdb7c45b14168b1ad11b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ae52069e3aafdb7c45b14168b1ad11b">&#9670;&#160;</a></span>Type</h2>
 
@@ -169,6 +182,8 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Returns state with NaN values. </p>
+
 </div>
 </div>
 <a id="a0dc57853395e3c57d6447a23ae513b91" name="a0dc57853395e3c57d6447a23ae513b91"></a>
@@ -195,6 +210,8 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Returns identity (zero) state. </p>
 
 </div>
 </div>

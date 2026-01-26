@@ -26,7 +26,6 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -112,6 +111,9 @@ $(function(){initNavTree('structVectorSignalSpec.html',''); initResizable(true);
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="#ac21d15d01635665373eaf23b62f3d440">Type</a> specification for vector-valued signals.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Signal_8h_source.html">Signal.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -122,11 +124,23 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a4c535f5d5b25faa7148f8719d74693fd" id="r_a4c535f5d5b25faa7148f8719d74693fd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#ac21d15d01635665373eaf23b62f3d440">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c535f5d5b25faa7148f8719d74693fd">ZeroType</a> ()</td></tr>
+<tr class="memdesc:a4c535f5d5b25faa7148f8719d74693fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns zero vector.  <br /></td></tr>
 <tr class="separator:a4c535f5d5b25faa7148f8719d74693fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a25051bf64d2677fc511bd026b7f6a2" id="r_a3a25051bf64d2677fc511bd026b7f6a2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#ac21d15d01635665373eaf23b62f3d440">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a25051bf64d2677fc511bd026b7f6a2">NansType</a> ()</td></tr>
+<tr class="memdesc:a3a25051bf64d2677fc511bd026b7f6a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns vector filled with NaN values.  <br /></td></tr>
 <tr class="separator:a3a25051bf64d2677fc511bd026b7f6a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, size_t d&gt;<br />
+struct VectorSignalSpec&lt; T, d &gt;</div><p><a class="el" href="#ac21d15d01635665373eaf23b62f3d440">Type</a> specification for vector-valued signals. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Scalar element type (e.g., double, float). </td></tr>
+    <tr><td class="paramname">d</td><td>Dimension of the vector. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ac21d15d01635665373eaf23b62f3d440" name="ac21d15d01635665373eaf23b62f3d440"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac21d15d01635665373eaf23b62f3d440">&#9670;&#160;</a></span>Type</h2>
 
@@ -169,6 +183,8 @@ template&lt;typename T, size_t d&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Returns vector filled with NaN values. </p>
+
 </div>
 </div>
 <a id="a4c535f5d5b25faa7148f8719d74693fd" name="a4c535f5d5b25faa7148f8719d74693fd"></a>
@@ -195,6 +211,8 @@ template&lt;typename T, size_t d&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Returns zero vector. </p>
 
 </div>
 </div>

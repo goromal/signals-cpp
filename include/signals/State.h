@@ -209,45 +209,76 @@ inline std::ostream& operator<<(std::ostream& os, const ManifoldStateType<T, Man
     return os;
 }
 
+/**
+ * @brief Type specification for scalar state signals.
+ * @tparam T Scalar type (e.g., double, float).
+ */
 template<typename T>
 struct ScalarStateSignalSpec
 {
     using Type = ScalarStateType<T>;
     /**
-     * ^^^^ TODO
+     * @brief Returns identity (zero) state.
      */
     static Type ZeroType()
     {
         return Type::identity();
     }
+    /**
+     * @brief Returns state with NaN values.
+     */
     static Type NansType()
     {
         return Type::nans();
     }
 };
 
+/**
+ * @brief Type specification for vector state signals.
+ * @tparam T Scalar element type (e.g., double, float).
+ * @tparam d Dimension of the vector.
+ */
 template<typename T, size_t d>
 struct VectorStateSignalSpec
 {
     using Type = VectorStateType<T, d>;
+    /**
+     * @brief Returns identity (zero) state.
+     */
     static Type ZeroType()
     {
         return Type::identity();
     }
+    /**
+     * @brief Returns state with NaN values.
+     */
     static Type NansType()
     {
         return Type::nans();
     }
 };
 
+/**
+ * @brief Type specification for manifold state signals.
+ * @tparam T Scalar element type (e.g., double, float).
+ * @tparam ManifoldType The manifold type (e.g., SO2<double>, SE3<float>).
+ * @tparam PD Pose dimension.
+ * @tparam TD Tangent (twist) dimension.
+ */
 template<typename T, typename ManifoldType, size_t PD, size_t TD>
 struct ManifoldStateSignalSpec
 {
     using Type = ManifoldStateType<T, ManifoldType, PD, TD>;
+    /**
+     * @brief Returns identity (zero) state.
+     */
     static Type ZeroType()
     {
         return Type::identity();
     }
+    /**
+     * @brief Returns state with NaN values.
+     */
     static Type NansType()
     {
         return Type::nans();

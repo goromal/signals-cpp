@@ -26,7 +26,6 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -111,6 +110,9 @@ $(function(){initNavTree('structSignal_1_1SignalDP.html',''); initResizable(true
 </div><!--header-->
 <div class="contents">
 
+<p>Data point structure storing time, value, and derivative.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Signal_8h_source.html">Signal.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -122,7 +124,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a31d004bf32039463b33344e4c10bd5bb" id="r_a31d004bf32039463b33344e4c10bd5bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSignal.html#aa0094b1c69fd482de9de83b99634996a">TangentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31d004bf32039463b33344e4c10bd5bb">xdot</a></td></tr>
 <tr class="separator:a31d004bf32039463b33344e4c10bd5bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt;<br />
+struct Signal&lt; BaseSignalSpec, TangentSignalSpec &gt;::SignalDP</div><p>Data point structure storing time, value, and derivative. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="ac9d0651b25c9bcf14fcfc65a32fcfa86" name="ac9d0651b25c9bcf14fcfc65a32fcfa86"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac9d0651b25c9bcf14fcfc65a32fcfa86">&#9670;&#160;</a></span>t</h2>
 
@@ -136,6 +141,7 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Time stamp. </p>
 
 </div>
 </div>
@@ -152,6 +158,7 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+<p><a class="el" href="classSignal.html" title="Template class for time-series signals with interpolation, extrapolation, and derivative capabilities...">Signal</a> value at time t. </p>
 
 </div>
 </div>
@@ -168,6 +175,7 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Time derivative of signal at time t. </p>
 
 </div>
 </div>

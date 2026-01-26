@@ -26,7 +26,6 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -129,37 +128,45 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:adcb914ebe25fe14622a945801267fa7a" id="r_adcb914ebe25fe14622a945801267fa7a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adcb914ebe25fe14622a945801267fa7a">State</a> ()</td></tr>
+<tr class="memdesc:adcb914ebe25fe14622a945801267fa7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize an empty state.  <br /></td></tr>
 <tr class="separator:adcb914ebe25fe14622a945801267fa7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a097d236bc46ca02a379e2fd188fe3e97" id="r_a097d236bc46ca02a379e2fd188fe3e97"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a097d236bc46ca02a379e2fd188fe3e97">State</a> (T *arr)</td></tr>
+<tr class="memdesc:a097d236bc46ca02a379e2fd188fe3e97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize state from a pose and twist pointer array.  <br /></td></tr>
 <tr class="separator:a097d236bc46ca02a379e2fd188fe3e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa10b450dbe8a806a0b203521b4738c0c" id="r_aa10b450dbe8a806a0b203521b4738c0c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa10b450dbe8a806a0b203521b4738c0c">State</a> (const <a class="el" href="structState.html">State</a> &amp;other)</td></tr>
+<tr class="memdesc:aa10b450dbe8a806a0b203521b4738c0c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structState.html" title="Base type for all Model state representations.">State</a> copy constructor.  <br /></td></tr>
 <tr class="separator:aa10b450dbe8a806a0b203521b4738c0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af76faa98cfc18fb81afb0c86f7a0aa75" id="r_af76faa98cfc18fb81afb0c86f7a0aa75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structState.html">State</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af76faa98cfc18fb81afb0c86f7a0aa75">operator*=</a> (const double &amp;s)</td></tr>
+<tr class="memdesc:af76faa98cfc18fb81afb0c86f7a0aa75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale the state (pose and twist) by a scalar.  <br /></td></tr>
 <tr class="separator:af76faa98cfc18fb81afb0c86f7a0aa75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7764970f0c29576eac07ab57c28261be" id="r_a7764970f0c29576eac07ab57c28261be"><td class="memTemplParams" colspan="2">template&lt;typename T2&gt; </td></tr>
 <tr class="memitem:a7764970f0c29576eac07ab57c28261be"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structState.html">State</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a7764970f0c29576eac07ab57c28261be">operator+=</a> (const <a class="el" href="structState.html">State</a>&lt; T2, TwistTypeSpec, TwistDim, TwistTypeSpec, TwistDim &gt; &amp;r)</td></tr>
+<tr class="memdesc:a7764970f0c29576eac07ab57c28261be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a tangent space state (twist and derivative of twist) to the current state.  <br /></td></tr>
 <tr class="separator:a7764970f0c29576eac07ab57c28261be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a035f1f7193895463743b8ee58d75634f" id="r_a035f1f7193895463743b8ee58d75634f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structState.html">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a035f1f7193895463743b8ee58d75634f">identity</a> ()</td></tr>
+<tr class="memdesc:a035f1f7193895463743b8ee58d75634f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state to identity (zero) values across the board.  <br /></td></tr>
 <tr class="separator:a035f1f7193895463743b8ee58d75634f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e331e0ecbed1ab2a03d9b3e5a457426" id="r_a9e331e0ecbed1ab2a03d9b3e5a457426"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structState.html">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e331e0ecbed1ab2a03d9b3e5a457426">nans</a> ()</td></tr>
+<tr class="memdesc:a9e331e0ecbed1ab2a03d9b3e5a457426"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state to NaN values across the board.  <br /></td></tr>
 <tr class="separator:a9e331e0ecbed1ab2a03d9b3e5a457426"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a0a5874d4c3988770f5498c34ec508c34" id="r_a0a5874d4c3988770f5498c34ec508c34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a31bd8aa44dff5f656b2b2057c8d63821">PoseType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a5874d4c3988770f5498c34ec508c34">pose</a></td></tr>
-<tr class="memdesc:a0a5874d4c3988770f5498c34ec508c34"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO.  <br /></td></tr>
+<tr class="memdesc:a0a5874d4c3988770f5498c34ec508c34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pose type.  <br /></td></tr>
 <tr class="separator:a0a5874d4c3988770f5498c34ec508c34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f5fb4275701e71a56d2fa1fb8d54080" id="r_a3f5fb4275701e71a56d2fa1fb8d54080"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ab58b6e2fe6ea3c2777c5a8a92f6665a1">TwistType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f5fb4275701e71a56d2fa1fb8d54080">twist</a></td></tr>
+<tr class="memdesc:a3f5fb4275701e71a56d2fa1fb8d54080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Twist (derivative of Pose) type.  <br /></td></tr>
 <tr class="separator:a3f5fb4275701e71a56d2fa1fb8d54080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTypeSpec, size_t TwistDim&gt;<br />
 struct State&lt; T, PoseTypeSpec, PoseDim, TwistTypeSpec, TwistDim &gt;</div><p>Base type for all <a class="el" href="classModel.html" title="Base type for all model simulators.">Model</a> state representations. </p>
 <p>Provides a convenient union of the "pose" and "twist" (or time derivative of pose) components of a state vector and defines arithmetic operations for that union.</p>
-<p>A state is <em>not</em> a <a class="el" href="classSignal.html">Signal</a> type in itself, which is why separate <code>*Signal</code> types are derived below.</p>
+<p>A state is <em>not</em> a <a class="el" href="classSignal.html" title="Template class for time-series signals with interpolation, extrapolation, and derivative capabilities...">Signal</a> type in itself, which is why separate <code>*Signal</code> types are derived below.</p>
 <p><b>Derived types</b>:</p>
 <ul>
 <li><code>Scalar(d)<a class="el" href="structState.html" title="Base type for all Model state representations.">State</a></code> and <code>Scalar(d)StateSignal</code></li>
@@ -237,6 +244,8 @@ template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTyp
 </table>
 </div><div class="memdoc">
 
+<p>Initialize an empty state. </p>
+
 </div>
 </div>
 <a id="a097d236bc46ca02a379e2fd188fe3e97" name="a097d236bc46ca02a379e2fd188fe3e97"></a>
@@ -264,6 +273,8 @@ template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTyp
 </table>
 </div><div class="memdoc">
 
+<p>Initialize state from a pose and twist pointer array. </p>
+
 </div>
 </div>
 <a id="aa10b450dbe8a806a0b203521b4738c0c" name="aa10b450dbe8a806a0b203521b4738c0c"></a>
@@ -290,6 +301,8 @@ template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTyp
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="structState.html" title="Base type for all Model state representations.">State</a> copy constructor. </p>
 
 </div>
 </div>
@@ -319,6 +332,8 @@ template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTyp
 </table>
 </div><div class="memdoc">
 
+<p>Set the state to identity (zero) values across the board. </p>
+
 </div>
 </div>
 <a id="a9e331e0ecbed1ab2a03d9b3e5a457426" name="a9e331e0ecbed1ab2a03d9b3e5a457426"></a>
@@ -346,6 +361,8 @@ template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTyp
 </table>
 </div><div class="memdoc">
 
+<p>Set the state to NaN values across the board. </p>
+
 </div>
 </div>
 <a id="af76faa98cfc18fb81afb0c86f7a0aa75" name="af76faa98cfc18fb81afb0c86f7a0aa75"></a>
@@ -372,6 +389,8 @@ template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTyp
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Scale the state (pose and twist) by a scalar. </p>
 
 </div>
 </div>
@@ -402,6 +421,8 @@ template&lt;typename T2&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Add a tangent space state (twist and derivative of twist) to the current state. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -419,7 +440,7 @@ template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTyp
       </table>
 </div><div class="memdoc">
 
-<p>TODO. </p>
+<p>Pose type. </p>
 
 </div>
 </div>
@@ -436,6 +457,8 @@ template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTyp
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Twist (derivative of Pose) type. </p>
 
 </div>
 </div>
