@@ -1,15 +1,15 @@
 var Signal_8h =
 [
-    [ "Signal< BaseSignalSpec, TangentSignalSpec >", "classSignal.html", "classSignal" ],
-    [ "Signal< BaseSignalSpec, TangentSignalSpec >::SignalDP", "structSignal_1_1SignalDP.html", "structSignal_1_1SignalDP" ],
+    [ "Signal< T, BaseSignalSpec, TangentSignalSpec >", "classSignal.html", "classSignal" ],
+    [ "Signal< T, BaseSignalSpec, TangentSignalSpec >::SignalDP", "structSignal_1_1SignalDP.html", "structSignal_1_1SignalDP" ],
     [ "ScalarSignalSpec< T >", "structScalarSignalSpec.html", "structScalarSignalSpec" ],
     [ "VectorSignalSpec< T, d >", "structVectorSignalSpec.html", "structVectorSignalSpec" ],
-    [ "ManifoldSignalSpec< ManifoldType >", "structManifoldSignalSpec.html", "structManifoldSignalSpec" ],
+    [ "ManifoldSignalSpec< T, ManifoldType >", "structManifoldSignalSpec.html", "structManifoldSignalSpec" ],
     [ "MAKE_MANIF_SIGNAL", "Signal_8h.html#adf89e7a1e286d52fa755d04f0c087ea3", null ],
     [ "MAKE_VECTOR_SIGNAL", "Signal_8h.html#a45ef87a3bf4ac7938147e95995f76849", null ],
-    [ "ManifoldSignal", "Signal_8h.html#a278e5023dd90a58b58ce28b413ecec4a", null ],
+    [ "ManifoldSignal", "Signal_8h.html#a5eaf1b0b203f44f01882c84ee274576d", null ],
     [ "ScalardSignal", "Signal_8h.html#a5d3a7fde60e049b3fb16e62c397585a0", null ],
-    [ "ScalarSignal", "Signal_8h.html#a19e9e3fdf9dac462c6fb79ee572d2b4c", null ],
+    [ "ScalarSignal", "Signal_8h.html#abc87ae11c3a781dd43f4854fcd25fcc3", null ],
     [ "SE2dSignal", "Signal_8h.html#a27317de3cebe688fdf9b1f89e8d749ea", null ],
     [ "SE2Signal", "Signal_8h.html#a5c686d1c1e780f578c950182943ecf41", null ],
     [ "SE3dSignal", "Signal_8h.html#a13875f09fcdcc6dd114766bacc38f01b", null ],
@@ -38,7 +38,7 @@ var Signal_8h =
     [ "Vector8Signal", "Signal_8h.html#a6fe111909e599c7d732507ef08213e06", null ],
     [ "Vector9dSignal", "Signal_8h.html#acd349d949f45a7bce633414d05043cc3", null ],
     [ "Vector9Signal", "Signal_8h.html#ae78698ceb51c16ea2ffea1ea2b5507e3", null ],
-    [ "VectorSignal", "Signal_8h.html#a51a32a4dd69ee28867dba6202c812c5a", null ],
+    [ "VectorSignal", "Signal_8h.html#a1d966a75102d98f8bc945641836386b8", null ],
     [ "DerivativeMethod", "Signal_8h.html#a35d05b0e727a39b86907d8669e9e1242", [
       [ "DIRTY", "Signal_8h.html#a35d05b0e727a39b86907d8669e9e1242a6a4e132eb192a22c351397837d4c082c", null ],
       [ "FINITE_DIFF", "Signal_8h.html#a35d05b0e727a39b86907d8669e9e1242a31a5b438304c770230e3fbb9999c9c2e", null ]
@@ -53,10 +53,10 @@ var Signal_8h =
       [ "LINEAR", "Signal_8h.html#aa0081e804011c551ea0f4a596a64b284adc101ebf31c49c2d4b80b7c6f59f22cb", null ],
       [ "CUBIC_SPLINE", "Signal_8h.html#aa0081e804011c551ea0f4a596a64b284a13480ea7779c90806a9fa4ef70322ebc", null ]
     ] ],
-    [ "operator*", "Signal_8h.html#ad77fa5fab1a3e9a6ca4d7e87364003b9", null ],
-    [ "operator*", "Signal_8h.html#ae0b0bee5051aeec3c9cff9fd148d8cb5", null ],
-    [ "operator+", "Signal_8h.html#aa4dc7aa056ee91a7dc4ec540b6bc9cd3", null ],
-    [ "operator-", "Signal_8h.html#afd611b1d0ab8c1f43be72184926ec8ac", null ],
+    [ "operator*", "Signal_8h.html#abc6ca4ae108bb396ee8f8e6e49c72726", null ],
+    [ "operator*", "Signal_8h.html#ae7c5ba17f9c292f3afb995d5ca9fca64", null ],
+    [ "operator+", "Signal_8h.html#a5a26056c1f1fd07a31f62ee2f6ef454b", null ],
+    [ "operator-", "Signal_8h.html#ab3fabcc65538dee9ff663a100e5f6f5b", null ],
     [ "operator<<", "Signal_8h.html#a6a76598b459ea2e14353617de437c808", null ],
     [ "operator<<", "Signal_8h.html#a47318c97bced9b7ee828c94c1a4eeb29", null ],
     [ "operator<<", "Signal_8h.html#aeb7f6d79d7e692981221b685c0863d54", null ]

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['derivativemethod_0',['derivativeMethod',['../classSignal.html#ac0536cd4021cc4815a3dbb60c5b4f473',1,'Signal']]]
+  ['derivativemethod_0',['derivativeMethod',['../classSignal.html#af36a4cba809042e148ab6fe5e988acc7',1,'Signal']]]
 ];

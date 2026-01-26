@@ -129,6 +129,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a4729eec41bab8eb5ed7b45aa8272be4d" id="r_a4729eec41bab8eb5ed7b45aa8272be4d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#a3994948f467b39ca2dcd77d220a8cf3a">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4729eec41bab8eb5ed7b45aa8272be4d">NansType</a> ()</td></tr>
 <tr class="memdesc:a4729eec41bab8eb5ed7b45aa8272be4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns state with NaN values.  <br /></td></tr>
 <tr class="separator:a4729eec41bab8eb5ed7b45aa8272be4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa700e9b352d009941c3a81261bbec332" id="r_aa700e9b352d009941c3a81261bbec332"><td class="memItemLeft" align="right" valign="top">static T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa700e9b352d009941c3a81261bbec332">Norm</a> (const <a class="el" href="#a3994948f467b39ca2dcd77d220a8cf3a">Type</a> &amp;a)</td></tr>
+<tr class="memdesc:aa700e9b352d009941c3a81261bbec332"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the combined norm of a vector state.  <br /></td></tr>
+<tr class="separator:aa700e9b352d009941c3a81261bbec332"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T, size_t d&gt;<br />
@@ -184,6 +187,42 @@ template&lt;typename T, size_t d&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns state with NaN values. </p>
+
+</div>
+</div>
+<a id="aa700e9b352d009941c3a81261bbec332" name="aa700e9b352d009941c3a81261bbec332"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa700e9b352d009941c3a81261bbec332">&#9670;&#160;</a></span>Norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, size_t d&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static T <a class="el" href="structVectorStateSignalSpec.html">VectorStateSignalSpec</a>&lt; T, d &gt;::Norm </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a3994948f467b39ca2dcd77d220a8cf3a">Type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the combined norm of a vector state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The vector state. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The combined norm of pose and twist. </dd></dl>
 
 </div>
 </div>

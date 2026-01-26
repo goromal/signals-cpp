@@ -136,6 +136,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa10b450dbe8a806a0b203521b4738c0c" id="r_aa10b450dbe8a806a0b203521b4738c0c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa10b450dbe8a806a0b203521b4738c0c">State</a> (const <a class="el" href="structState.html">State</a> &amp;other)</td></tr>
 <tr class="memdesc:aa10b450dbe8a806a0b203521b4738c0c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structState.html" title="Base type for all Model state representations.">State</a> copy constructor.  <br /></td></tr>
 <tr class="separator:aa10b450dbe8a806a0b203521b4738c0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a718035815fa0c84ba5175b8f1e769bf5" id="r_a718035815fa0c84ba5175b8f1e769bf5"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a718035815fa0c84ba5175b8f1e769bf5">norm</a> () const</td></tr>
+<tr class="memdesc:a718035815fa0c84ba5175b8f1e769bf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the norm of all pose and twist components combined.  <br /></td></tr>
+<tr class="separator:a718035815fa0c84ba5175b8f1e769bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af76faa98cfc18fb81afb0c86f7a0aa75" id="r_af76faa98cfc18fb81afb0c86f7a0aa75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structState.html">State</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af76faa98cfc18fb81afb0c86f7a0aa75">operator*=</a> (const double &amp;s)</td></tr>
 <tr class="memdesc:af76faa98cfc18fb81afb0c86f7a0aa75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale the state (pose and twist) by a scalar.  <br /></td></tr>
 <tr class="separator:af76faa98cfc18fb81afb0c86f7a0aa75"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -362,6 +365,35 @@ template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTyp
 </div><div class="memdoc">
 
 <p>Set the state to NaN values across the board. </p>
+
+</div>
+</div>
+<a id="a718035815fa0c84ba5175b8f1e769bf5" name="a718035815fa0c84ba5175b8f1e769bf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a718035815fa0c84ba5175b8f1e769bf5">&#9670;&#160;</a></span>norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTypeSpec, size_t TwistDim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="structState.html">State</a>&lt; T, PoseTypeSpec, PoseDim, TwistTypeSpec, TwistDim &gt;::norm </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtain the norm of all pose and twist components combined. </p>
 
 </div>
 </div>

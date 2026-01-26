@@ -376,21 +376,39 @@ public:
         return true;
     }
 
+    /**
+     * @brief Get the zero (identity) value for the base signal type.
+     * @return Zero/identity element for the base type.
+     */
     static inline BaseType baseZero()
     {
         return BaseSignalSpec::ZeroType();
     }
 
+    /**
+     * @brief Get the zero (identity) value for the tangent signal type.
+     * @return Zero/identity element for the tangent type.
+     */
     static inline TangentType tangentZero()
     {
         return TangentSignalSpec::ZeroType();
     }
 
+    /**
+     * @brief Compute the norm of a base signal value.
+     * @param x The base signal value.
+     * @return The norm (magnitude) of the value.
+     */
     static inline T baseNorm(const BaseType& x)
     {
         return BaseSignalSpec::Norm(x);
     }
 
+    /**
+     * @brief Compute the norm of a tangent signal value.
+     * @param x The tangent signal value.
+     * @return The norm (magnitude) of the value.
+     */
     static inline T tangentNorm(const TangentType& x)
     {
         return TangentSignalSpec::Norm(x);
@@ -800,6 +818,11 @@ struct ScalarSignalSpec
     {
         return (T)1. / 0.;
     }
+    /**
+     * @brief Compute the norm (absolute value) of a scalar.
+     * @param a The scalar value.
+     * @return The absolute value.
+     */
     static T Norm(const Type& a)
     {
         return a;
@@ -829,6 +852,11 @@ struct VectorSignalSpec
     {
         return Type::Constant(std::numeric_limits<T>::quiet_NaN());
     }
+    /**
+     * @brief Compute the Euclidean norm of a vector.
+     * @param a The vector.
+     * @return The Euclidean norm.
+     */
     static T Norm(const Type& a)
     {
         return a.norm();
@@ -857,6 +885,11 @@ struct ManifoldSignalSpec
     {
         return Type::nans();
     }
+    /**
+     * @brief Compute the norm of a manifold element via its logarithmic map.
+     * @param a The manifold element.
+     * @return The norm of the logarithmic map.
+     */
     static T Norm(const Type& a)
     {
         return ManifoldType::Log(a).norm();

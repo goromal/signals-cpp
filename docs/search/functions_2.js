@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hasparams_0',['hasParams',['../classModel.html#a4f059d658bfda1665bf44a36b7aaf8e5',1,'Model']]]
+  ['gettimedelta_0',['getTimeDelta',['../namespacesignal__utils.html#ad7667542f893604d059a5d0022d2890c',1,'signal_utils']]]
 ];

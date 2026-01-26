@@ -60,7 +60,7 @@ var searchData=
   ['vector9signal_57',['Vector9Signal',['../Signal_8h.html#ae78698ceb51c16ea2ffea1ea2b5507e3',1,'Signal.h']]],
   ['vector9state_58',['Vector9State',['../State_8h.html#af1297813c5b5754edb4cf75ca0875849',1,'State.h']]],
   ['vector9statesignal_59',['Vector9StateSignal',['../State_8h.html#a9ab7680e24d1538be50e761b8a8ecb21',1,'State.h']]],
-  ['vectorsignal_60',['VectorSignal',['../Signal_8h.html#a51a32a4dd69ee28867dba6202c812c5a',1,'Signal.h']]],
-  ['vectorstatesignal_61',['VectorStateSignal',['../State_8h.html#a214bd9926c3d8a2bb83b9b471744775b',1,'State.h']]],
+  ['vectorsignal_60',['VectorSignal',['../Signal_8h.html#a1d966a75102d98f8bc945641836386b8',1,'Signal.h']]],
+  ['vectorstatesignal_61',['VectorStateSignal',['../State_8h.html#aedd5365cce1e7570480adcb6fc9bc9a3',1,'State.h']]],
   ['vectorstatetype_62',['VectorStateType',['../State_8h.html#a60d0230d5788084bb8f559f4561d4d96',1,'State.h']]]
 ];

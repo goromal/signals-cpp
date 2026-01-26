@@ -1,4 +1,4 @@
 var structManifoldSignalSpec =
 [
-    [ "Type", "structManifoldSignalSpec.html#ae6292debacd46f629429d03cf7e9a342", null ]
+    [ "Type", "structManifoldSignalSpec.html#a7e215846bd092774400152872700ea9c", null ]
 ];

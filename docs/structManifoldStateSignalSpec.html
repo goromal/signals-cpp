@@ -118,7 +118,7 @@ $(function(){initNavTree('structManifoldStateSignalSpec.html',''); initResizable
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aef8d411c012125303e1faa1d66b35c1c" id="r_aef8d411c012125303e1faa1d66b35c1c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef8d411c012125303e1faa1d66b35c1c">Type</a> = <a class="el" href="State_8h.html#a73655df4c5d92f1cf1cf69d5fa057753">ManifoldStateType</a>&lt;T, ManifoldType, PD, TD&gt;</td></tr>
+<tr class="memitem:aef8d411c012125303e1faa1d66b35c1c" id="r_aef8d411c012125303e1faa1d66b35c1c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef8d411c012125303e1faa1d66b35c1c">Type</a> = <a class="el" href="State_8h.html#ae84c77b92399f1b8cc2cf14bb5b2d4ee">ManifoldStateType</a>&lt;T, ManifoldType, PD, TD&gt;</td></tr>
 <tr class="separator:aef8d411c012125303e1faa1d66b35c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -129,6 +129,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a7542075f653a7e8fba76702499936b17" id="r_a7542075f653a7e8fba76702499936b17"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#aef8d411c012125303e1faa1d66b35c1c">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7542075f653a7e8fba76702499936b17">NansType</a> ()</td></tr>
 <tr class="memdesc:a7542075f653a7e8fba76702499936b17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns state with NaN values.  <br /></td></tr>
 <tr class="separator:a7542075f653a7e8fba76702499936b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1940016ea13e87980d659f5e7510cef1" id="r_a1940016ea13e87980d659f5e7510cef1"><td class="memItemLeft" align="right" valign="top">static T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1940016ea13e87980d659f5e7510cef1">Norm</a> (const <a class="el" href="#aef8d411c012125303e1faa1d66b35c1c">Type</a> &amp;a)</td></tr>
+<tr class="memdesc:a1940016ea13e87980d659f5e7510cef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the combined norm of a manifold state.  <br /></td></tr>
+<tr class="separator:a1940016ea13e87980d659f5e7510cef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename ManifoldType, size_t PD, size_t TD&gt;<br />
@@ -152,7 +155,7 @@ struct ManifoldStateSignalSpec&lt; T, ManifoldType, PD, TD &gt;</div><p><a class
 template&lt;typename T, typename ManifoldType, size_t PD, size_t TD&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="structManifoldStateSignalSpec.html">ManifoldStateSignalSpec</a>&lt; T, ManifoldType, PD, TD &gt;::Type = <a class="el" href="State_8h.html#a73655df4c5d92f1cf1cf69d5fa057753">ManifoldStateType</a>&lt;T, ManifoldType, PD, TD&gt;</td>
+          <td class="memname">using <a class="el" href="structManifoldStateSignalSpec.html">ManifoldStateSignalSpec</a>&lt; T, ManifoldType, PD, TD &gt;::Type = <a class="el" href="State_8h.html#ae84c77b92399f1b8cc2cf14bb5b2d4ee">ManifoldStateType</a>&lt;T, ManifoldType, PD, TD&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -186,6 +189,42 @@ template&lt;typename T, typename ManifoldType, size_t PD, size_t TD&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns state with NaN values. </p>
+
+</div>
+</div>
+<a id="a1940016ea13e87980d659f5e7510cef1" name="a1940016ea13e87980d659f5e7510cef1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1940016ea13e87980d659f5e7510cef1">&#9670;&#160;</a></span>Norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename ManifoldType, size_t PD, size_t TD&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static T <a class="el" href="structManifoldStateSignalSpec.html">ManifoldStateSignalSpec</a>&lt; T, ManifoldType, PD, TD &gt;::Norm </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#aef8d411c012125303e1faa1d66b35c1c">Type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the combined norm of a manifold state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The manifold state. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The combined norm of pose and twist. </dd></dl>
 
 </div>
 </div>

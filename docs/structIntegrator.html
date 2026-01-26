@@ -117,14 +117,14 @@ $(function(){initNavTree('structIntegrator.html',''); initResizable(true); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ab3bebaa347f6019f3d2da2b2bcee5918" id="r_ab3bebaa347f6019f3d2da2b2bcee5918"><td class="memTemplParams" colspan="2">template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </td></tr>
-<tr class="memitem:ab3bebaa347f6019f3d2da2b2bcee5918"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ab3bebaa347f6019f3d2da2b2bcee5918">integrate</a> (<a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const <a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;tf, const bool &amp;insertIntoHistory=false)</td></tr>
-<tr class="memdesc:ab3bebaa347f6019f3d2da2b2bcee5918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate a signal from the current time to the specified end time.  <br /></td></tr>
-<tr class="separator:ab3bebaa347f6019f3d2da2b2bcee5918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8266e6bf3abd90d83fa7eb6b9270c0c4" id="r_a8266e6bf3abd90d83fa7eb6b9270c0c4"><td class="memTemplParams" colspan="2">template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </td></tr>
-<tr class="memitem:a8266e6bf3abd90d83fa7eb6b9270c0c4"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a8266e6bf3abd90d83fa7eb6b9270c0c4">integrate</a> (<a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const <a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;tf, const double &amp;dt, const bool &amp;insertIntoHistory=false)</td></tr>
-<tr class="memdesc:a8266e6bf3abd90d83fa7eb6b9270c0c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate a signal from the current time to the specified end time, chunked up into smaller integration increments.  <br /></td></tr>
-<tr class="separator:a8266e6bf3abd90d83fa7eb6b9270c0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a263c92051eee31afcb6ddede4cc0f501" id="r_a263c92051eee31afcb6ddede4cc0f501"><td class="memTemplParams" colspan="2">template&lt;typename T, typename BaseSignalSpec, typename TangentSignalSpec&gt; </td></tr>
+<tr class="memitem:a263c92051eee31afcb6ddede4cc0f501"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a263c92051eee31afcb6ddede4cc0f501">integrate</a> (<a class="el" href="classSignal.html">Signal</a>&lt; T, BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const <a class="el" href="classSignal.html">Signal</a>&lt; T, TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;tf, const bool &amp;insertIntoHistory=false)</td></tr>
+<tr class="memdesc:a263c92051eee31afcb6ddede4cc0f501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate a signal from the current time to the specified end time.  <br /></td></tr>
+<tr class="separator:a263c92051eee31afcb6ddede4cc0f501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e5ed56fea1f9dbe95b35d509432095b" id="r_a2e5ed56fea1f9dbe95b35d509432095b"><td class="memTemplParams" colspan="2">template&lt;typename T, typename BaseSignalSpec, typename TangentSignalSpec&gt; </td></tr>
+<tr class="memitem:a2e5ed56fea1f9dbe95b35d509432095b"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a2e5ed56fea1f9dbe95b35d509432095b">integrate</a> (<a class="el" href="classSignal.html">Signal</a>&lt; T, BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const <a class="el" href="classSignal.html">Signal</a>&lt; T, TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp; &gt; &gt; &gt; &gt; &gt; &gt; &gt; master tf, const double &amp;dt, const bool &amp;insertIntoHistory=false)</td></tr>
+<tr class="memdesc:a2e5ed56fea1f9dbe95b35d509432095b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate a signal from the current time to the specified end time, chunked up into smaller integration increments.  <br /></td></tr>
+<tr class="separator:a2e5ed56fea1f9dbe95b35d509432095b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename IntegratorType&gt;<br />
@@ -137,15 +137,15 @@ struct Integrator&lt; IntegratorType &gt;</div><p>Base type for all integrators.
 <li><code><a class="el" href="Integration_8h.html#a3ac408f7f30b4b1b5b218e5d48eca5ed">SimpsonIntegrator</a></code> </li>
 </ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab3bebaa347f6019f3d2da2b2bcee5918" name="ab3bebaa347f6019f3d2da2b2bcee5918"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3bebaa347f6019f3d2da2b2bcee5918">&#9670;&#160;</a></span>integrate() <span class="overload">[1/2]</span></h2>
+<a id="a2e5ed56fea1f9dbe95b35d509432095b" name="a2e5ed56fea1f9dbe95b35d509432095b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e5ed56fea1f9dbe95b35d509432095b">&#9670;&#160;</a></span>integrate() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename IntegratorType&gt; </div>
 <div class="memtemplate">
-template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
+template&lt;typename T, typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -153,72 +153,22 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         <tr>
           <td class="memname">static bool <a class="el" href="structIntegrator.html">Integrator</a>&lt; IntegratorType &gt;::integrate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>xInt</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classSignal.html">Signal</a>&lt; T, BaseSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>xInt</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classSignal.html">Signal</a>&lt; T, TangentSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;</td>          <td class="paramname"><span class="paramname"><em>tf</em></span>, </td>
+          <td class="paramtype">const double &amp; &gt; &gt; &gt; &gt; &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const bool &amp;</td>          <td class="paramname"><span class="paramname"><em>insertIntoHistory</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Integrate a signal from the current time to the specified end time. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">xInt</td><td>The output signal representing the integration. </td></tr>
-    <tr><td class="paramname">x</td><td>The input signal to be integrated. </td></tr>
-    <tr><td class="paramname">tf</td><td>The time to integrate to. Ideally the delta from the current time is small. </td></tr>
-    <tr><td class="paramname">insertIntoHistory</td><td>Whether to store the result in xInt's memory. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Whether the integration was successful. </dd></dl>
-
-</div>
-</div>
-<a id="a8266e6bf3abd90d83fa7eb6b9270c0c4" name="a8266e6bf3abd90d83fa7eb6b9270c0c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8266e6bf3abd90d83fa7eb6b9270c0c4">&#9670;&#160;</a></span>integrate() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename IntegratorType&gt; </div>
-<div class="memtemplate">
-template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool <a class="el" href="structIntegrator.html">Integrator</a>&lt; IntegratorType &gt;::integrate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>xInt</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double &amp;</td>          <td class="paramname"><span class="paramname"><em>tf</em></span>, </td>
+          <td class="paramtype">master</td>          <td class="paramname"><span class="paramname"><em>tf</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -245,6 +195,61 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
     <tr><td class="paramname">x</td><td>The input signal to be integrated. </td></tr>
     <tr><td class="paramname">tf</td><td>The time to integrate to. </td></tr>
     <tr><td class="paramname">dt</td><td>Time delta length by which to chunk up the integrations. Ideally this is small. </td></tr>
+    <tr><td class="paramname">insertIntoHistory</td><td>Whether to store the result in xInt's memory. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the integration was successful. </dd></dl>
+
+</div>
+</div>
+<a id="a263c92051eee31afcb6ddede4cc0f501" name="a263c92051eee31afcb6ddede4cc0f501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a263c92051eee31afcb6ddede4cc0f501">&#9670;&#160;</a></span>integrate() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntegratorType&gt; </div>
+<div class="memtemplate">
+template&lt;typename T, typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="structIntegrator.html">Integrator</a>&lt; IntegratorType &gt;::integrate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSignal.html">Signal</a>&lt; T, BaseSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>xInt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classSignal.html">Signal</a>&lt; T, TangentSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;</td>          <td class="paramname"><span class="paramname"><em>tf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;</td>          <td class="paramname"><span class="paramname"><em>insertIntoHistory</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Integrate a signal from the current time to the specified end time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xInt</td><td>The output signal representing the integration. </td></tr>
+    <tr><td class="paramname">x</td><td>The input signal to be integrated. </td></tr>
+    <tr><td class="paramname">tf</td><td>The time to integrate to. Ideally the delta from the current time is small. </td></tr>
     <tr><td class="paramname">insertIntoHistory</td><td>Whether to store the result in xInt's memory. </td></tr>
   </table>
   </dd>

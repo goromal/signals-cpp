@@ -241,6 +241,11 @@ struct ScalarStateSignalSpec
     {
         return Type::nans();
     }
+    /**
+     * @brief Compute the combined norm of a scalar state.
+     * @param a The scalar state.
+     * @return The combined norm of pose and twist.
+     */
     static T Norm(const Type& a)
     {
         return a.norm();
@@ -270,6 +275,11 @@ struct VectorStateSignalSpec
     {
         return Type::nans();
     }
+    /**
+     * @brief Compute the combined norm of a vector state.
+     * @param a The vector state.
+     * @return The combined norm of pose and twist.
+     */
     static T Norm(const Type& a)
     {
         return a.norm();
@@ -301,6 +311,11 @@ struct ManifoldStateSignalSpec
     {
         return Type::nans();
     }
+    /**
+     * @brief Compute the combined norm of a manifold state.
+     * @param a The manifold state.
+     * @return The combined norm of pose and twist.
+     */
     static T Norm(const Type& a)
     {
         return a.norm();

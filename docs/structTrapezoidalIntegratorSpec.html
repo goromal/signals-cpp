@@ -117,21 +117,21 @@ $(function(){initNavTree('structTrapezoidalIntegratorSpec.html',''); initResizab
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a38c21a876135bae55c62ec43c3a18a86" id="r_a38c21a876135bae55c62ec43c3a18a86"><td class="memTemplParams" colspan="2">template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </td></tr>
-<tr class="memitem:a38c21a876135bae55c62ec43c3a18a86"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a38c21a876135bae55c62ec43c3a18a86">integrate</a> (<a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const <a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;t0, const double &amp;tf, const bool &amp;insertIntoHistory)</td></tr>
-<tr class="memdesc:a38c21a876135bae55c62ec43c3a18a86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trapezoidal integration implementation.  <br /></td></tr>
-<tr class="separator:a38c21a876135bae55c62ec43c3a18a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5527a1385da3194b2d2bbe2968a8526d" id="r_a5527a1385da3194b2d2bbe2968a8526d"><td class="memTemplParams" colspan="2">template&lt;typename T, typename BaseSignalSpec, typename TangentSignalSpec&gt; </td></tr>
+<tr class="memitem:a5527a1385da3194b2d2bbe2968a8526d"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a5527a1385da3194b2d2bbe2968a8526d">integrate</a> (<a class="el" href="classSignal.html">Signal</a>&lt; T, BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const <a class="el" href="classSignal.html">Signal</a>&lt; T, TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;t0, const double &amp;tf, const bool &amp;insertIntoHistory)</td></tr>
+<tr class="memdesc:a5527a1385da3194b2d2bbe2968a8526d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trapezoidal integration implementation.  <br /></td></tr>
+<tr class="separator:a5527a1385da3194b2d2bbe2968a8526d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Specification for numerically integrating a black box function using the Trapezoidal method. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a38c21a876135bae55c62ec43c3a18a86" name="a38c21a876135bae55c62ec43c3a18a86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38c21a876135bae55c62ec43c3a18a86">&#9670;&#160;</a></span>integrate()</h2>
+<a id="a5527a1385da3194b2d2bbe2968a8526d" name="a5527a1385da3194b2d2bbe2968a8526d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5527a1385da3194b2d2bbe2968a8526d">&#9670;&#160;</a></span>integrate()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
+template&lt;typename T, typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -139,12 +139,12 @@ template&lt;typename BaseSignalSpec, typename TangentSignalSpec&gt; </div>
         <tr>
           <td class="memname">static bool TrapezoidalIntegratorSpec::integrate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classSignal.html">Signal</a>&lt; BaseSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>xInt</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classSignal.html">Signal</a>&lt; T, BaseSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>xInt</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classSignal.html">Signal</a>&lt; TangentSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classSignal.html">Signal</a>&lt; T, TangentSignalSpec, TangentSignalSpec &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
