@@ -48,6 +48,14 @@ BOOST_AUTO_TEST_CASE(TestLinearInterpolation)
     BOOST_CHECK_CLOSE(q(-0.5).z(), 0., 1e-8);
 }
 
+BOOST_AUTO_TEST_CASE(TestNorms)
+{
+    SO3d     q = SO3d::identity();
+    Vector3d v(3., 4., 0.);
+    BOOST_CHECK_CLOSE(SO3dSignal::baseNorm(q), 0.0, 1e-8);
+    BOOST_CHECK_CLOSE(SO3dSignal::tangentNorm(v), 5.0, 1e-8);
+}
+
 BOOST_AUTO_TEST_CASE(TestDirtyDerivative)
 {
     Vector2dSignal v;
