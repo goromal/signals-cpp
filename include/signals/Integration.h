@@ -154,12 +154,12 @@ struct SimpsonIntegratorSpec
      *
      * \f$\frac{x(t_0)+4x((t_0+t_f)/2)+x(t_f)}{6}\Delta t\f$
      */
-    template<typename BaseSignalSpec, typename TangentSignalSpec>
-    static bool integrate(Signal<BaseSignalSpec, TangentSignalSpec>&          xInt,
-                          const Signal<TangentSignalSpec, TangentSignalSpec>& x,
-                          const double&                                       t0,
-                          const double&                                       tf,
-                          const bool&                                         insertIntoHistory)
+    template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
+    static bool integrate(Signal<T, BaseSignalSpec, TangentSignalSpec>&          xInt,
+                          const Signal<T, TangentSignalSpec, TangentSignalSpec>& x,
+                          const double&                                          t0,
+                          const double&                                          tf,
+                          const bool&                                            insertIntoHistory)
     {
         double dt = tf - t0;
         return xInt.update(tf,
