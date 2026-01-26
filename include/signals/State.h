@@ -3,25 +3,69 @@
 
 using namespace Eigen;
 
+/**
+ * @brief Base type for all Model state representations.
+ *
+ * Provides a convenient union of the "pose" and "twist" (or time derivative of pose) components of a state vector and
+ * defines arithmetic operations for that union.
+ *
+ * A state is *not* a Signal type in itself, which is why separate `*Signal` types are derived below.
+ *
+ * **Derived types**:
+ *
+ * - `Scalar(d)State` and `Scalar(d)StateSignal`
+ * - `Vector1(d)State` and `Vector1(d)StateSignal`
+ * - `Vector2(d)State` and `Vector2(d)StateSignal`
+ * - `Vector3(d)State` and `Vector3(d)StateSignal`
+ * - `Vector4(d)State` and `Vector4(d)StateSignal`
+ * - `Vector5(d)State` and `Vector5(d)StateSignal`
+ * - `Vector6(d)State` and `Vector6(d)StateSignal`
+ * - `Vector7(d)State` and `Vector7(d)StateSignal`
+ * - `Vector8(d)State` and `Vector8(d)StateSignal`
+ * - `Vector9(d)State` and `Vector9(d)StateSignal`
+ * - `Vector10(d)State` and `Vector10(d)StateSignal`
+ * - `SO2(d)State` and `SO2(d)StateSignal`
+ * - `SO3(d)State` and `SO3(d)StateSignal`
+ * - `SE2(d)State` and `SE2(d)StateSignal`
+ * - `SE3(d)State` and `SE3(d)StateSignal`
+ */
 template<typename T, typename PoseTypeSpec, size_t PoseDim, typename TwistTypeSpec, size_t TwistDim>
 struct State
 {
     using PoseType  = typename PoseTypeSpec::Type;
     using TwistType = typename TwistTypeSpec::Type;
 
-    PoseType  pose;
+    /**
+     * @brief Pose type.
+     */
+    PoseType pose;
+    /**
+     * @brief Twist (derivative of Pose) type.
+     */
     TwistType twist;
 
+    /**
+     * @brief Initialize an empty state.
+     */
     State() {}
 
+    /**
+     * @brief Initialize state from a pose and twist pointer array.
+     */
     State(T* arr) : pose(arr), twist(arr + PoseDim) {}
 
+    /**
+     * @brief State copy constructor.
+     */
     State(const State& other)
     {
         this->pose  = other.pose;
         this->twist = other.twist;
     }
 
+    /**
+     * @brief Set the state to identity (zero) values across the board.
+     */
     static State identity()
     {
         State x;
@@ -30,6 +74,20 @@ struct State
         return x;
     }
 
+    /**
+     * @brief Set the state to NaN values across the board.
+     */
+    static State nans()
+    {
+        State x;
+        x.pose  = PoseTypeSpec::NansType();
+        x.twist = TwistTypeSpec::NansType();
+        return x;
+    }
+
+    /**
+     * @brief Obtain the norm of all pose and twist components combined.
+     */
     T norm() const
     {
         const T poseNorm  = PoseTypeSpec::Norm(pose);
@@ -37,6 +95,9 @@ struct State
         return std::sqrt(poseNorm * poseNorm + twistNorm * twistNorm);
     }
 
+    /**
+     * @brief Scale the state (pose and twist) by a scalar.
+     */
     State& operator*=(const double& s)
     {
         pose *= s;
@@ -44,6 +105,9 @@ struct State
         return *this;
     }
 
+    /**
+     * @brief Add a tangent space state (twist and derivative of twist) to the current state.
+     */
     template<typename T2>
     State& operator+=(const State<T2, TwistTypeSpec, TwistDim, TwistTypeSpec, TwistDim>& r)
     {
@@ -53,6 +117,9 @@ struct State
     }
 };
 
+/**
+ * @brief Add a tangent space state (twist and derivative of twist) to the current state.
+ */
 template<typename T, typename PTS, size_t PD, typename TTS, size_t TD>
 State<T, PTS, PD, TTS, TD> operator+(const State<T, PTS, PD, TTS, TD>& l, const State<T, TTS, TD, TTS, TD>& r)
 {
@@ -62,6 +129,9 @@ State<T, PTS, PD, TTS, TD> operator+(const State<T, PTS, PD, TTS, TD>& l, const 
     return lpr;
 }
 
+/**
+ * @brief Subtract a tangent space state (twist and derivative of twist) from the current state.
+ */
 template<typename T, typename PTS, size_t PD, typename TTS, size_t TD>
 State<T, TTS, TD, TTS, TD> operator-(const State<T, PTS, PD, TTS, TD>& l, const State<T, PTS, PD, TTS, TD>& r)
 {
@@ -71,6 +141,9 @@ State<T, TTS, TD, TTS, TD> operator-(const State<T, PTS, PD, TTS, TD>& l, const 
     return lmr;
 }
 
+/**
+ * @brief Scale the state (pose and twist) by a scalar.
+ */
 template<typename T, typename PTS, size_t PD, typename TTS, size_t TD>
 State<T, PTS, PD, TTS, TD> operator*(const double& l, const State<T, PTS, PD, TTS, TD>& r)
 {
@@ -80,6 +153,9 @@ State<T, PTS, PD, TTS, TD> operator*(const double& l, const State<T, PTS, PD, TT
     return lr;
 }
 
+/**
+ * @brief Scale the state (pose and twist) by a scalar.
+ */
 template<typename T, typename PTS, size_t PD, typename TTS, size_t TD>
 State<T, PTS, PD, TTS, TD> operator*(const State<T, PTS, PD, TTS, TD>& l, const double& r)
 {
@@ -99,6 +175,9 @@ inline std::ostream& operator<<(std::ostream& os, const ScalarStateType<T>& x)
     return os;
 }
 
+/**
+ * @brief Scale the state (pose and twist) by a scalar.
+ */
 template<typename T>
 ScalarStateType<T> operator/(const ScalarStateType<T>& l, const double& r)
 {
@@ -118,6 +197,9 @@ inline std::ostream& operator<<(std::ostream& os, const VectorStateType<T, d>& x
     return os;
 }
 
+/**
+ * @brief Scale the state (pose and twist) by a scalar.
+ */
 template<typename T, size_t d>
 VectorStateType<T, d> operator/(const VectorStateType<T, d>& l, const double& r)
 {
@@ -137,85 +219,103 @@ inline std::ostream& operator<<(std::ostream& os, const ManifoldStateType<T, Man
     return os;
 }
 
-template<typename T>
-using ScalarState = ScalarStateType<T>;
-template<typename T>
-using Vector1State = VectorStateType<T, 1>;
-template<typename T>
-using Vector2State = VectorStateType<T, 2>;
-template<typename T>
-using Vector3State = VectorStateType<T, 3>;
-template<typename T>
-using Vector4State = VectorStateType<T, 4>;
-template<typename T>
-using Vector5State = VectorStateType<T, 5>;
-template<typename T>
-using Vector6State = VectorStateType<T, 6>;
-template<typename T>
-using Vector7State = VectorStateType<T, 7>;
-template<typename T>
-using Vector8State = VectorStateType<T, 8>;
-template<typename T>
-using Vector9State = VectorStateType<T, 9>;
-template<typename T>
-using Vector10State = VectorStateType<T, 10>;
-template<typename T>
-using SO2State = ManifoldStateType<T, SO2<T>, 2, 1>;
-template<typename T>
-using SO3State = ManifoldStateType<T, SO3<T>, 4, 3>;
-template<typename T>
-using SE2State = ManifoldStateType<T, SE2<T>, 4, 3>;
-template<typename T>
-using SE3State = ManifoldStateType<T, SE3<T>, 7, 6>;
-
+/**
+ * @brief Type specification for scalar state signals.
+ * @tparam T Scalar type (e.g., double, float).
+ */
 template<typename T>
 struct ScalarStateSignalSpec
 {
     using Type = ScalarStateType<T>;
+    /**
+     * @brief Returns identity (zero) state.
+     */
     static Type ZeroType()
     {
         return Type::identity();
     }
+    /**
+     * @brief Returns state with NaN values.
+     */
     static Type NansType()
     {
-        return Type::identity(); // TODO fix
+        return Type::nans();
     }
+    /**
+     * @brief Compute the combined norm of a scalar state.
+     * @param a The scalar state.
+     * @return The combined norm of pose and twist.
+     */
     static T Norm(const Type& a)
     {
         return a.norm();
     }
 };
 
+/**
+ * @brief Type specification for vector state signals.
+ * @tparam T Scalar element type (e.g., double, float).
+ * @tparam d Dimension of the vector.
+ */
 template<typename T, size_t d>
 struct VectorStateSignalSpec
 {
     using Type = VectorStateType<T, d>;
+    /**
+     * @brief Returns identity (zero) state.
+     */
     static Type ZeroType()
     {
         return Type::identity();
     }
+    /**
+     * @brief Returns state with NaN values.
+     */
     static Type NansType()
     {
-        return Type::identity(); // TODO fix
+        return Type::nans();
     }
+    /**
+     * @brief Compute the combined norm of a vector state.
+     * @param a The vector state.
+     * @return The combined norm of pose and twist.
+     */
     static T Norm(const Type& a)
     {
         return a.norm();
     }
 };
 
+/**
+ * @brief Type specification for manifold state signals.
+ * @tparam T Scalar element type (e.g., double, float).
+ * @tparam ManifoldType The manifold type (e.g., SO2<double>, SE3<float>).
+ * @tparam PD Pose dimension.
+ * @tparam TD Tangent (twist) dimension.
+ */
 template<typename T, typename ManifoldType, size_t PD, size_t TD>
 struct ManifoldStateSignalSpec
 {
     using Type = ManifoldStateType<T, ManifoldType, PD, TD>;
+    /**
+     * @brief Returns identity (zero) state.
+     */
     static Type ZeroType()
     {
         return Type::identity();
     }
+    /**
+     * @brief Returns state with NaN values.
+     */
     static Type NansType()
     {
-        return Type::identity(); // TODO fix
+        return Type::nans();
     }
+    /**
+     * @brief Compute the combined norm of a manifold state.
+     * @param a The manifold state.
+     * @return The combined norm of pose and twist.
+     */
     static T Norm(const Type& a)
     {
         return a.norm();
@@ -253,64 +353,37 @@ inline std::ostream& operator<<(std::ostream& os, const ManifoldStateSignal<T, M
     return os;
 }
 
-template<typename T>
-using Vector1StateSignal = VectorStateSignal<T, 1>;
-template<typename T>
-using Vector2StateSignal = VectorStateSignal<T, 2>;
-template<typename T>
-using Vector3StateSignal = VectorStateSignal<T, 3>;
-template<typename T>
-using Vector4StateSignal = VectorStateSignal<T, 4>;
-template<typename T>
-using Vector5StateSignal = VectorStateSignal<T, 5>;
-template<typename T>
-using Vector6StateSignal = VectorStateSignal<T, 6>;
-template<typename T>
-using Vector7StateSignal = VectorStateSignal<T, 7>;
-template<typename T>
-using Vector8StateSignal = VectorStateSignal<T, 8>;
-template<typename T>
-using Vector9StateSignal = VectorStateSignal<T, 9>;
-template<typename T>
-using Vector10StateSignal = VectorStateSignal<T, 10>;
-template<typename T>
-using SO2StateSignal = ManifoldStateSignal<T, SO2<T>, 2, 1>;
-template<typename T>
-using SO3StateSignal = ManifoldStateSignal<T, SO3<T>, 4, 3>;
-template<typename T>
-using SE2StateSignal = ManifoldStateSignal<T, SE2<T>, 4, 3>;
-template<typename T>
-using SE3StateSignal = ManifoldStateSignal<T, SE3<T>, 7, 6>;
+#define MAKE_VECTOR_STATES(Dimension)                                                                                  \
+    template<typename T>                                                                                               \
+    using Vector##Dimension##State = VectorStateType<T, Dimension>;                                                    \
+    template<typename T>                                                                                               \
+    using Vector##Dimension##StateSignal = VectorStateSignal<T, Dimension>;                                            \
+    typedef Vector##Dimension##State<double>       Vector##Dimension##dState;                                          \
+    typedef Vector##Dimension##StateSignal<double> Vector##Dimension##dStateSignal;
 
-// TODO Macro-ize all these types of declarations and put them in Signals.h?
-typedef ScalarState<double>   ScalardState;
-typedef Vector1State<double>  Vector1dState;
-typedef Vector2State<double>  Vector2dState;
-typedef Vector3State<double>  Vector3dState;
-typedef Vector4State<double>  Vector4dState;
-typedef Vector5State<double>  Vector5dState;
-typedef Vector6State<double>  Vector6dState;
-typedef Vector7State<double>  Vector7dState;
-typedef Vector8State<double>  Vector8dState;
-typedef Vector9State<double>  Vector9dState;
-typedef Vector10State<double> Vector10dState;
-typedef SO2State<double>      SO2dState;
-typedef SO3State<double>      SO3dState;
-typedef SE2State<double>      SE2dState;
-typedef SE3State<double>      SE3dState;
+#define MAKE_MANIF_STATES(Manif, Dimension, TangentDimension)                                                          \
+    template<typename T>                                                                                               \
+    using Manif##State = ManifoldStateType<T, Manif<T>, Dimension, TangentDimension>;                                  \
+    template<typename T>                                                                                               \
+    using Manif##StateSignal = ManifoldStateSignal<T, Manif<T>, Dimension, TangentDimension>;                          \
+    typedef Manif##State<double>       Manif##dState;                                                                  \
+    typedef Manif##StateSignal<double> Manif##dStateSignal;
 
-typedef ScalarStateSignal<double>   ScalardStateSignal;
-typedef Vector1StateSignal<double>  Vector1dStateSignal;
-typedef Vector2StateSignal<double>  Vector2dStateSignal;
-typedef Vector3StateSignal<double>  Vector3dStateSignal;
-typedef Vector4StateSignal<double>  Vector4dStateSignal;
-typedef Vector5StateSignal<double>  Vector5dStateSignal;
-typedef Vector6StateSignal<double>  Vector6dStateSignal;
-typedef Vector7StateSignal<double>  Vector7dStateSignal;
-typedef Vector8StateSignal<double>  Vector8dStateSignal;
-typedef Vector9StateSignal<double>  Vector9dStateSignal;
-typedef Vector10StateSignal<double> Vector10dStateSignal;
-typedef SO2StateSignal<double>      SO2dStateSignal;
-typedef SO3StateSignal<double>      SO3dStateSignal;
-typedef SE2StateSignal<double>      SE2dStateSignal;
-typedef SE3StateSignal<double>      SE3dStateSignal;
+template<typename T>
+using ScalarState = ScalarStateType<T>;
+typedef ScalarState<double>       ScalardState;
+typedef ScalarStateSignal<double> ScalardStateSignal;
+MAKE_VECTOR_STATES(1)
+MAKE_VECTOR_STATES(2)
+MAKE_VECTOR_STATES(3)
+MAKE_VECTOR_STATES(4)
+MAKE_VECTOR_STATES(5)
+MAKE_VECTOR_STATES(6)
+MAKE_VECTOR_STATES(7)
+MAKE_VECTOR_STATES(8)
+MAKE_VECTOR_STATES(9)
+MAKE_VECTOR_STATES(10)
+MAKE_MANIF_STATES(SO2, 2, 1)
+MAKE_MANIF_STATES(SO3, 4, 3)
+MAKE_MANIF_STATES(SE2, 4, 3)
+MAKE_MANIF_STATES(SE3, 7, 6)

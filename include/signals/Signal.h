@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <limits>
 #include <Eigen/Core>
 #include <SO2.h>
 #include <SO3.h>
@@ -9,26 +10,54 @@
 
 using namespace Eigen;
 
+/**
+ * @brief Methods for interpolating signal values between discrete time points.
+ */
 enum InterpolationMethod
 {
-    ZERO_ORDER_HOLD,
-    LINEAR,
-    CUBIC_SPLINE
+    ZERO_ORDER_HOLD, /**< Hold the previous value constant until the next data point. */
+    LINEAR,          /**< Linearly interpolate between adjacent data points. */
+    CUBIC_SPLINE     /**< Use cubic spline interpolation for smooth transitions. */
 };
 
+/**
+ * @brief Methods for extrapolating signal values outside the defined time range.
+ */
 enum ExtrapolationMethod
 {
-    NANS,
-    ZEROS,
-    CLOSEST
+    NANS,    /**< Return NaN (Not a Number) values outside the defined range. */
+    ZEROS,   /**< Return zero values outside the defined range. */
+    CLOSEST  /**< Return the closest boundary value (first or last data point). */
 };
 
+/**
+ * @brief Methods for computing numerical derivatives of signals.
+ */
 enum DerivativeMethod
 {
-    DIRTY,
-    FINITE_DIFF
+    DIRTY,       /**< Use a discrete-time dirty derivative filter for smoothing. */
+    FINITE_DIFF  /**< Use simple finite difference approximation. */
 };
 
+/**
+ * @brief Template class for time-series signals with interpolation, extrapolation, and derivative capabilities.
+ *
+ * The Signal class represents a time-varying signal that stores both the value and its time derivative.
+ * It supports various interpolation methods for querying values at arbitrary time points, configurable
+ * extrapolation behavior outside the defined time range, and automatic derivative computation.
+ *
+ * @tparam BaseSignalSpec Type specification for the signal values (can be scalar, vector, or manifold types).
+ * @tparam TangentSignalSpec Type specification for the signal derivatives (typically vector types).
+ *
+ * **Example usage:**
+ * ```cpp
+ * ScalardSignal mySignal;
+ * mySignal.setInterpolationMethod(InterpolationMethod::LINEAR);
+ * mySignal.update(1.0, 5.0, true);  // time=1.0, value=5.0, store in history
+ * mySignal.update(2.0, 7.0, true);  // time=2.0, value=7.0, store in history
+ * double interpValue = mySignal(1.5);  // Query interpolated value at t=1.5
+ * ```
+ */
 template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
 class Signal
 {
@@ -36,13 +65,19 @@ public:
     using BaseType    = typename BaseSignalSpec::Type;
     using TangentType = typename TangentSignalSpec::Type;
 
+    /**
+     * @brief Data point structure storing time, value, and derivative.
+     */
     struct SignalDP
     {
-        double      t;
-        BaseType    x;
-        TangentType xdot;
+        double      t;     /**< Time stamp. */
+        BaseType    x;     /**< Signal value at time t. */
+        TangentType xdot;  /**< Time derivative of signal at time t. */
     };
 
+    /**
+     * @brief Comparator for sorting signal data points by time.
+     */
     struct
     {
         bool operator()(SignalDP a, SignalDP b) const
@@ -51,10 +86,13 @@ public:
         }
     } SignalDPComparator;
 
-    InterpolationMethod interpolationMethod;
-    ExtrapolationMethod extrapolationMethod;
-    DerivativeMethod    derivativeMethod;
+    InterpolationMethod interpolationMethod;  /**< Current interpolation method. */
+    ExtrapolationMethod extrapolationMethod;  /**< Current extrapolation method. */
+    DerivativeMethod    derivativeMethod;     /**< Current derivative computation method. */
 
+    /**
+     * @brief Default constructor initializing with LINEAR interpolation, ZEROS extrapolation, and DIRTY derivative.
+     */
     Signal()
     {
         interpolationMethod = InterpolationMethod::LINEAR;
@@ -63,6 +101,10 @@ public:
         reset();
     }
 
+    /**
+     * @brief Copy constructor.
+     * @param other The signal to copy from.
+     */
     Signal(const Signal& other)
     {
         this->interpolationMethod = other.interpolationMethod;
@@ -75,6 +117,10 @@ public:
         this->needsSort_          = other.needsSort_;
     }
 
+    /**
+     * @brief Create a new signal representing the time derivative of this signal.
+     * @return A signal containing the derivative values from this signal's history.
+     */
     Signal<T, TangentSignalSpec, TangentSignalSpec> dotSignal()
     {
         Signal<T, TangentSignalSpec, TangentSignalSpec> signalDot;
@@ -98,31 +144,58 @@ public:
     template<typename S, typename BSS, typename TSS>
     friend Signal<S, BSS, TSS> operator*(const Signal<S, BSS, TSS>& l, const double& r);
 
+    /**
+     * @brief Get the current time of the signal.
+     * @return The current time value.
+     */
     double t() const
     {
         return t_;
     }
 
+    /**
+     * @brief Get the current signal value.
+     * @return The current value.
+     */
     BaseType operator()() const
     {
         return x_;
     }
 
+    /**
+     * @brief Get the current time derivative of the signal.
+     * @return The current derivative value.
+     */
     TangentType dot() const
     {
         return xdot_;
     }
 
+    /**
+     * @brief Get the signal value at a specific time using interpolation/extrapolation.
+     * @param t The time to query.
+     * @return The interpolated/extrapolated signal value at time t.
+     */
     BaseType operator()(const double& t) const
     {
         return xAt(t);
     }
 
+    /**
+     * @brief Get the signal derivative at a specific time using interpolation/extrapolation.
+     * @param t The time to query.
+     * @return The interpolated/extrapolated derivative value at time t.
+     */
     TangentType dot(const double& t) const
     {
         return xDotAt(t);
     }
 
+    /**
+     * @brief Get signal values at multiple time points.
+     * @param t Vector of time points to query.
+     * @return Vector of interpolated/extrapolated signal values.
+     */
     std::vector<BaseType> operator()(const std::vector<double>& t) const
     {
         std::vector<BaseType> xInterp;
@@ -133,6 +206,11 @@ public:
         return xInterp;
     }
 
+    /**
+     * @brief Get signal derivatives at multiple time points.
+     * @param t Vector of time points to query.
+     * @return Vector of interpolated/extrapolated derivative values.
+     */
     std::vector<TangentType> dot(const std::vector<double>& t) const
     {
         std::vector<TangentType> xDotInterp;
@@ -143,21 +221,36 @@ public:
         return xDotInterp;
     }
 
+    /**
+     * @brief Set the interpolation method for this signal.
+     * @param method The interpolation method to use.
+     */
     void setInterpolationMethod(InterpolationMethod method)
     {
         interpolationMethod = method;
     }
 
+    /**
+     * @brief Set the extrapolation method for this signal.
+     * @param method The extrapolation method to use.
+     */
     void setExtrapolationMethod(ExtrapolationMethod method)
     {
         extrapolationMethod = method;
     }
 
+    /**
+     * @brief Set the derivative computation method for this signal.
+     * @param method The derivative method to use.
+     */
     void setDerivativeMethod(DerivativeMethod method)
     {
         derivativeMethod = method;
     }
 
+    /**
+     * @brief Reset the signal to initial state, clearing all history.
+     */
     void reset()
     {
         t_    = -1.0;
@@ -167,6 +260,13 @@ public:
         needsSort_ = false;
     }
 
+    /**
+     * @brief Update the signal with a new value at a given time, computing derivative automatically.
+     * @param _t The time of the new data point.
+     * @param _x The value at time _t.
+     * @param insertHistory Whether to store this data point in history for interpolation.
+     * @return true if update was successful, false otherwise.
+     */
     bool update(const double& _t, const BaseType& _x, bool insertHistory = false)
     {
         TangentType _xdot;
@@ -177,6 +277,14 @@ public:
         return update(_t, _x, _xdot, insertHistory);
     }
 
+    /**
+     * @brief Update the signal with a new value and derivative at a given time.
+     * @param _t The time of the new data point.
+     * @param _x The value at time _t.
+     * @param _xdot The derivative at time _t.
+     * @param insertHistory Whether to store this data point in history for interpolation.
+     * @return true if update was successful, false otherwise.
+     */
     bool update(const double& _t, const BaseType& _x, const TangentType& _xdot, bool insertHistory = false)
     {
         t_    = _t;
@@ -201,6 +309,12 @@ public:
         return true;
     }
 
+    /**
+     * @brief Update the signal with a history of values, computing derivatives automatically.
+     * @param _tHistory Vector of time points.
+     * @param _xHistory Vector of values corresponding to each time point.
+     * @return true if update was successful, false otherwise.
+     */
     bool update(const std::vector<double>& _tHistory, const std::vector<BaseType>& _xHistory)
     {
         size_t nTH = _tHistory.size();
@@ -229,6 +343,13 @@ public:
         return true;
     }
 
+    /**
+     * @brief Update the signal with a history of values and derivatives.
+     * @param _tHistory Vector of time points.
+     * @param _xHistory Vector of values corresponding to each time point.
+     * @param _xdotHistory Vector of derivatives corresponding to each time point.
+     * @return true if update was successful, false if vector sizes don't match.
+     */
     bool update(const std::vector<double>&      _tHistory,
                 const std::vector<BaseType>&    _xHistory,
                 const std::vector<TangentType>& _xdotHistory)
@@ -255,21 +376,39 @@ public:
         return true;
     }
 
+    /**
+     * @brief Get the zero (identity) value for the base signal type.
+     * @return Zero/identity element for the base type.
+     */
     static inline BaseType baseZero()
     {
         return BaseSignalSpec::ZeroType();
     }
 
+    /**
+     * @brief Get the zero (identity) value for the tangent signal type.
+     * @return Zero/identity element for the tangent type.
+     */
     static inline TangentType tangentZero()
     {
         return TangentSignalSpec::ZeroType();
     }
 
+    /**
+     * @brief Compute the norm of a base signal value.
+     * @param x The base signal value.
+     * @return The norm (magnitude) of the value.
+     */
     static inline T baseNorm(const BaseType& x)
     {
         return BaseSignalSpec::Norm(x);
     }
 
+    /**
+     * @brief Compute the norm of a tangent signal value.
+     * @param x The tangent signal value.
+     * @return The norm (magnitude) of the value.
+     */
     static inline T tangentNorm(const TangentType& x)
     {
         return TangentSignalSpec::Norm(x);
@@ -563,6 +702,12 @@ private:
     }
 };
 
+/**
+ * @brief Add a tangent signal to a base signal.
+ * @param l The left-hand side signal (base type).
+ * @param r The right-hand side signal (tangent type) to add.
+ * @return A new signal with r added to l's values and derivatives.
+ */
 template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
 Signal<T, BaseSignalSpec, TangentSignalSpec> operator+(const Signal<T, BaseSignalSpec, TangentSignalSpec>&    l,
                                                        const Signal<T, TangentSignalSpec, TangentSignalSpec>& r)
@@ -578,6 +723,12 @@ Signal<T, BaseSignalSpec, TangentSignalSpec> operator+(const Signal<T, BaseSigna
     return lpr;
 }
 
+/**
+ * @brief Subtract one signal from another, producing a tangent signal.
+ * @param l The left-hand side signal.
+ * @param r The right-hand side signal to subtract.
+ * @return A new tangent signal representing the difference l - r.
+ */
 template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
 Signal<T, TangentSignalSpec, TangentSignalSpec> operator-(const Signal<T, BaseSignalSpec, TangentSignalSpec>& l,
                                                           const Signal<T, BaseSignalSpec, TangentSignalSpec>& r)
@@ -603,6 +754,12 @@ Signal<T, TangentSignalSpec, TangentSignalSpec> operator-(const Signal<T, BaseSi
     return lmr;
 }
 
+/**
+ * @brief Multiply a signal by a scalar from the left.
+ * @param l The scalar multiplier.
+ * @param r The signal to multiply.
+ * @return A new signal with all values and derivatives scaled by l.
+ */
 template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
 Signal<T, BaseSignalSpec, TangentSignalSpec> operator*(const double&                                       l,
                                                        const Signal<T, BaseSignalSpec, TangentSignalSpec>& r)
@@ -618,6 +775,12 @@ Signal<T, BaseSignalSpec, TangentSignalSpec> operator*(const double&            
     return lr;
 }
 
+/**
+ * @brief Multiply a signal by a scalar from the right.
+ * @param l The signal to multiply.
+ * @param r The scalar multiplier.
+ * @return A new signal with all values and derivatives scaled by r.
+ */
 template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
 Signal<T, BaseSignalSpec, TangentSignalSpec> operator*(const Signal<T, BaseSignalSpec, TangentSignalSpec>& l,
                                                        const double&                                       r)
@@ -633,54 +796,100 @@ Signal<T, BaseSignalSpec, TangentSignalSpec> operator*(const Signal<T, BaseSigna
     return lr;
 }
 
+/**
+ * @brief Type specification for scalar-valued signals.
+ * @tparam T Scalar type (e.g., double, float).
+ */
 template<typename T>
 struct ScalarSignalSpec
 {
     using Type = T;
+    /**
+     * @brief Returns zero value for the scalar type.
+     */
     static Type ZeroType()
     {
         return (T)0.0;
     }
+    /**
+     * @brief Returns NaN value for the scalar type.
+     */
     static Type NansType()
     {
         return (T)1. / 0.;
     }
+    /**
+     * @brief Compute the norm (absolute value) of a scalar.
+     * @param a The scalar value.
+     * @return The absolute value.
+     */
     static T Norm(const Type& a)
     {
         return a;
     }
 };
 
+/**
+ * @brief Type specification for vector-valued signals.
+ * @tparam T Scalar element type (e.g., double, float).
+ * @tparam d Dimension of the vector.
+ */
 template<typename T, size_t d>
 struct VectorSignalSpec
 {
     using Type = Matrix<T, d, 1>;
+    /**
+     * @brief Returns zero vector.
+     */
     static Type ZeroType()
     {
         return Type::Zero();
     }
+    /**
+     * @brief Returns vector filled with NaN values.
+     */
     static Type NansType()
     {
-        return Type::Zero(); // TODO fix
+        return Type::Constant(std::numeric_limits<T>::quiet_NaN());
     }
+    /**
+     * @brief Compute the Euclidean norm of a vector.
+     * @param a The vector.
+     * @return The Euclidean norm.
+     */
     static T Norm(const Type& a)
     {
         return a.norm();
     }
 };
 
+/**
+ * @brief Type specification for manifold-valued signals (e.g., SO2, SO3, SE2, SE3).
+ * @tparam ManifoldType The manifold type (e.g., SO2<double>, SE3<float>).
+ */
 template<typename T, typename ManifoldType>
 struct ManifoldSignalSpec
 {
     using Type = ManifoldType;
+    /**
+     * @brief Returns identity element of the manifold.
+     */
     static Type ZeroType()
     {
         return Type::identity();
     }
+    /**
+     * @brief Returns manifold element with NaN values.
+     */
     static Type NansType()
     {
-        return Type::identity(); // TODO fix
+        return Type::nans();
     }
+    /**
+     * @brief Compute the norm of a manifold element via its logarithmic map.
+     * @param a The manifold element.
+     * @return The norm of the logarithmic map.
+     */
     static T Norm(const Type& a)
     {
         return ManifoldType::Log(a).norm();
@@ -717,47 +926,28 @@ inline std::ostream& operator<<(std::ostream& os, const ManifoldSignal<T, Manifo
     return os;
 }
 
-template<typename T>
-using Vector1Signal = VectorSignal<T, 1>;
-template<typename T>
-using Vector2Signal = VectorSignal<T, 2>;
-template<typename T>
-using Vector3Signal = VectorSignal<T, 3>;
-template<typename T>
-using Vector4Signal = VectorSignal<T, 4>;
-template<typename T>
-using Vector5Signal = VectorSignal<T, 5>;
-template<typename T>
-using Vector6Signal = VectorSignal<T, 6>;
-template<typename T>
-using Vector7Signal = VectorSignal<T, 7>;
-template<typename T>
-using Vector8Signal = VectorSignal<T, 8>;
-template<typename T>
-using Vector9Signal = VectorSignal<T, 9>;
-template<typename T>
-using Vector10Signal = VectorSignal<T, 10>;
-template<typename T>
-using SO2Signal = ManifoldSignal<T, SO2<T>, 1>;
-template<typename T>
-using SO3Signal = ManifoldSignal<T, SO3<T>, 3>;
-template<typename T>
-using SE2Signal = ManifoldSignal<T, SE2<T>, 3>;
-template<typename T>
-using SE3Signal = ManifoldSignal<T, SE3<T>, 6>;
+#define MAKE_VECTOR_SIGNAL(Dimension)                                                                                  \
+    template<typename T>                                                                                               \
+    using Vector##Dimension##Signal = VectorSignal<T, Dimension>;                                                      \
+    typedef Vector##Dimension##Signal<double> Vector##Dimension##dSignal;
 
-typedef ScalarSignal<double>   ScalardSignal;
-typedef Vector1Signal<double>  Vector1dSignal;
-typedef Vector2Signal<double>  Vector2dSignal;
-typedef Vector3Signal<double>  Vector3dSignal;
-typedef Vector4Signal<double>  Vector4dSignal;
-typedef Vector5Signal<double>  Vector5dSignal;
-typedef Vector6Signal<double>  Vector6dSignal;
-typedef Vector7Signal<double>  Vector7dSignal;
-typedef Vector8Signal<double>  Vector8dSignal;
-typedef Vector9Signal<double>  Vector9dSignal;
-typedef Vector10Signal<double> Vector10dSignal;
-typedef SO2Signal<double>      SO2dSignal;
-typedef SO3Signal<double>      SO3dSignal;
-typedef SE2Signal<double>      SE2dSignal;
-typedef SE3Signal<double>      SE3dSignal;
+#define MAKE_MANIF_SIGNAL(Manif, Dimension)                                                                            \
+    template<typename T>                                                                                               \
+    using Manif##Signal = ManifoldSignal<T, Manif<T>, Dimension>;                                                      \
+    typedef Manif##Signal<double> Manif##dSignal;
+
+typedef ScalarSignal<double> ScalardSignal;
+MAKE_VECTOR_SIGNAL(1)
+MAKE_VECTOR_SIGNAL(2)
+MAKE_VECTOR_SIGNAL(3)
+MAKE_VECTOR_SIGNAL(4)
+MAKE_VECTOR_SIGNAL(5)
+MAKE_VECTOR_SIGNAL(6)
+MAKE_VECTOR_SIGNAL(7)
+MAKE_VECTOR_SIGNAL(8)
+MAKE_VECTOR_SIGNAL(9)
+MAKE_VECTOR_SIGNAL(10)
+MAKE_MANIF_SIGNAL(SO2, 1)
+MAKE_MANIF_SIGNAL(SO3, 3)
+MAKE_MANIF_SIGNAL(SE2, 3)
+MAKE_MANIF_SIGNAL(SE3, 6)

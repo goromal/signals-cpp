@@ -3,6 +3,10 @@
 
 namespace signal_utils
 {
+/**
+ * @internal
+ * This function is for internal use for the Model and Integrator classes.
+ */
 inline bool
 getTimeDelta(double& dt, const double& t0, const double& tf, const double& dt_max = std::numeric_limits<double>::max())
 {

@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['identity_0',['identity',['../structState.html#a035f1f7193895463743b8ee58d75634f',1,'State']]],
+  ['integrate_1',['integrate',['../structIntegrator.html#a263c92051eee31afcb6ddede4cc0f501',1,'Integrator::integrate(Signal&lt; T, BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const Signal&lt; T, TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp;tf, const bool &amp;insertIntoHistory=false)'],['../structIntegrator.html#a2e5ed56fea1f9dbe95b35d509432095b',1,'Integrator::integrate(Signal&lt; T, BaseSignalSpec, TangentSignalSpec &gt; &amp;xInt, const Signal&lt; T, TangentSignalSpec, TangentSignalSpec &gt; &amp;x, const double &amp; &gt; &gt; &gt; &gt; &gt; &gt; &gt; master tf, const double &amp;dt, const bool &amp;insertIntoHistory=false)'],['../structEulerIntegratorSpec.html#a29b0d734872c468790a910096e2146e7',1,'EulerIntegratorSpec::integrate()'],['../structTrapezoidalIntegratorSpec.html#a5527a1385da3194b2d2bbe2968a8526d',1,'TrapezoidalIntegratorSpec::integrate()'],['../structSimpsonIntegratorSpec.html#a6194da52902a391e4a9b251c05e6abf2',1,'SimpsonIntegratorSpec::integrate()']]]
+];
