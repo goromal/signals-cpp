@@ -52,7 +52,7 @@ struct Integrator
     template<typename T, typename BaseSignalSpec, typename TangentSignalSpec>
     static bool integrate(Signal<T, BaseSignalSpec, TangentSignalSpec>&          xInt,
                           const Signal<T, TangentSignalSpec, TangentSignalSpec>& x,
-                          const double&                           >>>>>>> master               tf,
+                          const double&                                          tf,
                           const double&                                          dt,
                           const bool&                                            insertIntoHistory = false)
     {
